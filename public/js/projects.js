@@ -12,20 +12,16 @@ function initializePage() {
 	$(".project").click(function (e) {
 		e.preventDefault();
 		var id = $(this).attr('id');
-		collapseProjects();
 		expandProject(id);
 	});
 }
 
 function expandProject(id) {
 	var elem = $("#" + id + ".description");
-	
-	elem.show();
-	elem.animate({height : '200px'}, 200);
+	elem.toggle(400);
 }
 
 function collapseProjects() {
 	var elem = $(".description");
-	elem.hide();
-	elem.css('height', '0px');
+	elem.fadeOut();
 }

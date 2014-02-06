@@ -19,22 +19,26 @@
   <body>
 	<!-- this is a comment in HTML -->
 	<div class="container">
-		<p><a href="/">&laquo; Back</a></p>
-    <div class="jumbotron">
-  		<h1>My Projects</h1>
-      <p>click on a project to see more info</p>
-		</div>
-
-    {{#each projects}}
-      <div class="project" id="{{id}}">
-        <a href="#" class="thumbnail no_underline">
-          <h3>{{name}}</h3>
-          <p class="due_date">Due: {{dueDate}}</p>
-          <p class="description" id="{{id}}">{{description}}</p>
-        </a>
+		
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <span class="navbar-brand"><a href="/">&laquo; Back</a></span>
+        <span class="navbar-brand" style="float:right;">My Projects</span>
       </div>
-    {{/each}}
+    </nav>
 
+    <div class="projects">
+      {{#each projects}}
+        <div class="project" id="{{id}}">
+          <a href="#" class="thumbnail no_underline">
+            <h3>{{name}}</h3>
+            <p class="due_date">Due: {{dueDate}}</p>
+            <p class="description" id="{{id}}">{{description}}</p>
+          </a>
+        </div>
+      {{/each}}
+    </div>
+    
     <p><a href="/">&laquo; Back</a></p>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
