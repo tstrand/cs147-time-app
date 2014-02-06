@@ -1,0 +1,27 @@
+.todo-card {
+	padding: 10px;
+    margin-bottom: 5px;
+    border-radius:10px;
+}
+
+.subtask {
+	background-color: #d9edf7;
+}
+
+.task {
+	background-color: #dff0d8;
+}
+
+.meeting {
+    background-color: #fcf8e3;
+}
+
+.type-name {
+    float: right;
+    color: #bbb;
+    font-size: 12px;
+}
+
+.project-name {
+    font-size: 12px;
+}
