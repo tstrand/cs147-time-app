@@ -2,45 +2,39 @@
 	"projects": [
 		{
 			"id": 1,
-			"name": "Doug Engelbart",
+			"name": "Example Project",
 			"description": "In ancient manuscripts, another means to divide sentences in into paragraphs was a line break (newline) followed by an initial at the beginning of the next paragraph. An initial is an oversize capital letter, sometimes outdented beyond the margin of text. This style can be seen, for example, in the original Old English manuscript of Beowulf. Outdenting is still used in English typography, though not commonly.[4] Initials and rubrication were used in the Gutenberg Bible, the first major book to be printed rather than hand-written.",
-			"dueDate": "2/14/2014",
-			"imageURL": "http://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Douglas_Engelbart_in_2008.jpg/972px-Douglas_Engelbart_in_2008.jpg"			
+			"dueDate": "2/14/2014",		
 		},
 		{
 			"id": 2,
-			"name": "Ivan Sutherland",
-			"description": "Great at sketching",
-			"dueDate": "2/14/2014",
-			"imageURL": "http://upload.wikimedia.org/wikipedia/commons/5/5c/Ivan_Sutherland_at_CHM.jpg"			
+			"name": "Example Project",
+			"description": "In ancient manuscripts, another means to divide sentences in into paragraphs was a line break (newline) followed by an initial at the beginning of the next paragraph. An initial is an oversize capital letter, sometimes outdented beyond the margin of text. This style can be seen, for example, in the original Old English manuscript of Beowulf. Outdenting is still used in English typography, though not commonly.[4] Initials and rubrication were used in the Gutenberg Bible, the first major book to be printed rather than hand-written.",
+			"dueDate": "2/14/2014",		
 		},
 		{
 			"id": 3,
-			"name": "Lucy Suchman",
-			"description": "Loves Trukese navigators",
-			"dueDate": "2/14/2014",
-			"imageURL": "http://upload.wikimedia.org/wikipedia/commons/d/df/Lucy_Suchman.jpeg"			
+			"name": "Example Project",
+			"description": "In ancient manuscripts, another means to divide sentences in into paragraphs was a line break (newline) followed by an initial at the beginning of the next paragraph. An initial is an oversize capital letter, sometimes outdented beyond the margin of text. This style can be seen, for example, in the original Old English manuscript of Beowulf. Outdenting is still used in English typography, though not commonly.[4] Initials and rubrication were used in the Gutenberg Bible, the first major book to be printed rather than hand-written.",
+			"dueDate": "2/14/2014",		
 		},
 		{
 			"id": 4,
-			"name": "Vannevar Bush",
-			"description": "Has stellar associative memory",
-			"dueDate": "2/14/2014",
-			"imageURL": "http://upload.wikimedia.org/wikipedia/commons/e/ea/Vannevar_Bush_portrait.jpg"			
+			"name": "Example Project",
+			"description": "In ancient manuscripts, another means to divide sentences in into paragraphs was a line break (newline) followed by an initial at the beginning of the next paragraph. An initial is an oversize capital letter, sometimes outdented beyond the margin of text. This style can be seen, for example, in the original Old English manuscript of Beowulf. Outdenting is still used in English typography, though not commonly.[4] Initials and rubrication were used in the Gutenberg Bible, the first major book to be printed rather than hand-written.",
+			"dueDate": "2/14/2014",		
 		},
 		{
 			"id": 5,
-			"name": "Grace Hopper",
-			"description": "Only friend with a Navy ship named after them",
-			"dueDate": "2/14/2014",
-			"imageURL": "http://www.personal.psu.edu/djd5202/gHop.jpg"
+			"name": "Example Project",
+			"description": "In ancient manuscripts, another means to divide sentences in into paragraphs was a line break (newline) followed by an initial at the beginning of the next paragraph. An initial is an oversize capital letter, sometimes outdented beyond the margin of text. This style can be seen, for example, in the original Old English manuscript of Beowulf. Outdenting is still used in English typography, though not commonly.[4] Initials and rubrication were used in the Gutenberg Bible, the first major book to be printed rather than hand-written.",
+			"dueDate": "2/14/2014",		
 		},
 		{
 			"id": 6,
-			"name": "Allen Newell",
-			"description": "Really into psychology",
-			"dueDate": "2/14/2014",
-			"imageURL": "http://www.nap.edu/html/biomems/photo/anewell.JPG"
+			"name": "Example Project",
+			"description": "In ancient manuscripts, another means to divide sentences in into paragraphs was a line break (newline) followed by an initial at the beginning of the next paragraph. An initial is an oversize capital letter, sometimes outdented beyond the margin of text. This style can be seen, for example, in the original Old English manuscript of Beowulf. Outdenting is still used in English typography, though not commonly.[4] Initials and rubrication were used in the Gutenberg Bible, the first major book to be printed rather than hand-written.",
+			"dueDate": "2/14/2014",		
 		}
 	]
 }
