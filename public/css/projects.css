@@ -1,0 +1,13 @@
+.project {
+	margin-bottom: -29px;
+	box-shadow: 0 0 25px #AAAA9C;
+	border-radius: 21px;
+}
+
+.no_underline {
+	text-decoration: none;	
+}
+
+.no_underline:hover {
+	text-decoration: none;	
+}

@@ -7,6 +7,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="/css/introHCI.css" rel="stylesheet">
+    <link href="/css/projects.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,50 +19,23 @@
   <body>
 	<!-- this is a comment in HTML -->
 	<div class="container">
-		<div class="jumbotron">
+		<p><a href="/">&laquo; Back</a></p>
+    <div class="jumbotron">
   		<h1>My Projects</h1>
+      <p>click on a project to see more info</p>
 		</div>
 
     {{#each projects}}
       <div class="project" id="{{id}}">
-        <a href="project/{{id}}" class="thumbnail">
+        <a href="project/{{id}}" class="thumbnail no_underline">
           <h3>{{name}}</h3>
+          <p>Due: {{dueDate}}</p>
           <p>{{description}}</p>
-          <p>{{dueDate}}</p>
         </a>
       </div>
     {{/each}}
 
-
-    <div class="row">
-      <div class="col-md-6">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>User</td>
-              <th>Salient need</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Schoolteacher</td>
-              <td>Wants to know what music students are listening to so he can integrate it into his lessons.</td>
-            </tr>
-            <tr>
-              <td>Student 5th grade</td>
-              <td>Desire to be seen as a tastemaker for her friends. Hears about new music from older sister in middle school.</td>
-            </tr>  
-          </tbody>          
-        </table>
-      </div>
-      <div class="col-md-6">
-        <img src="http://lorempixel.com/g/520/150/technics" alt="Lorem Pixel image" class="img">
-      </div>
-    </div>
-
-		<p>Sed vitae ultricies magna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce pulvinar sapien eget lacus volutpat suscipit. Duis bibendum condimentum sapien, quis vulputate turpis ultricies sit amet. Quisque sollicitudin vitae ipsum vel scelerisque. Aliquam facilisis eros eros, in ultricies erat aliquam nec. Suspendisse nec egestas arcu. Sed nec malesuada turpis. Proin eu lorem sed mauris bibendum consectetur sit amet mattis arcu. Aliquam porta ligula in nulla ullamcorper, at pulvinar diam porta.</p>
-
-    <p><a href="index.html">Back &raquo;</a></p>
+    <p><a href="/">&laquo; Back</a></p>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
