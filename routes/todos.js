@@ -10,6 +10,7 @@ exports.viewTodos = function(req, res) { 
         "dueDate": "2014-02-13",
         "parent": 3,
         "done": false,
+        "notes": "This is a note field to add more details. This will show when you press show details and hide when you press hide."
       },
       {
         "id": 2,
@@ -19,6 +20,8 @@ exports.viewTodos = function(req, res) { 
         "dueDate": "2014-02-14",
         "parent": 3,
         "done": false,
+        "notes": "This is a note field to add more details. This will show when you press show details and hide when you press hide."
+
       },
       {
         "id": 5,
@@ -27,6 +30,7 @@ exports.viewTodos = function(req, res) { 
         "name": "engineering meeting",
         "dueDate": "2014-02-14 17:00",
         "done": false,
+        "notes": "This is a note field to add more details. This will show when you press show details and hide when you press hide."
       },
       {
         "id": 3,
@@ -35,6 +39,7 @@ exports.viewTodos = function(req, res) { 
         "name": "Example Task 1",
         "dueDate": "2014-02-15",
         "done": false,
+        "notes": "This is a note field to add more details. This will show when you press show details and hide when you press hide."
       },
       {
         "id": 4,
@@ -43,6 +48,7 @@ exports.viewTodos = function(req, res) { 
         "name": "Example Task Long Name Long Name Long Name",
         "dueDate": "2014-02-17",
         "done": false,
+        "notes": "This is a note field to add more details. This will show when you press show details and hide when you press hide."
       },
   	]
   });

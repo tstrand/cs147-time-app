@@ -1,6 +1,6 @@
 .todo-card {
 	padding: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
     border-radius:10px;
 }
 
@@ -18,10 +18,35 @@
 
 .type-name {
     float: right;
-    color: #bbb;
+    color: #777;
     font-size: 12px;
 }
 
 .project-name {
     font-size: 12px;
+    color: #555;
+}
+
+.detail-button {
+    float: right;
+    font-size: 12px;
+}
+
+.detail-button:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.notes-field {
+    padding: 5px;
+}
+
+.notes-title {
+    font-size: 12px;
+    color: #777;
+}
+
+.notes-text {
+    font-size: 13px;
+    margin: 0px;
 }

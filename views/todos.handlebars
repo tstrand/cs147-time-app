@@ -16,7 +16,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body style="padding-top:70px;">
+  <body style="padding-top:65px;">
 	<!-- this is a comment in HTML -->
 	<div class="container">
 
@@ -31,15 +31,18 @@
     <div class="todo-card {{type}}">
       <span class="project-name">{{project}}</span><span class="type-name">{{type}}</span>
       <p class="task-name">{{name}}</p>
-      <span class="duedate">{{dueDate}}</span>
+      <span class="duedate">due by {{dueDate}}</span><a id="{{type}}{{id}}" class="detail-button">details &raquo;</a>
+      <div id="detail{{type}}{{id}}" class="notes-field" style="display:none;">
+        <span class="notes-title">notes</span>
+        <p class="notes-text">{{notes}}</p>
+      </div>
     </div>
     {{/each}}
-
-    <p><a href="/">&laquo; Back</a></p>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/todo.js"></script>
   </body>
 </html>
