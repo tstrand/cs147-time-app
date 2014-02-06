@@ -11,3 +11,14 @@
 .no_underline:hover {
 	text-decoration: none;	
 }
+
+.due_date {
+	font-size: 20px;
+}
+
+.description {
+	height: 0px;
+	display: none;
+	margin-left: 10px;
+	margin-right: 10px;
+}
