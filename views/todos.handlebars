@@ -22,8 +22,15 @@
 
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
-        <span class="navbar-brand"><a href="/">&laquo; Back</a></span>
-        <span class="navbar-brand" style="float:right;">My Todos</span>
+        <div class="navbar-header">
+          <span class="navbar-brand"><a href="/">&laquo; Home</a></span>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/todos">My Todos</a></li>
+            <li><a href="/projects">My Projects</a></li>
+          </ul>
+        </div>
       </div>
     </nav>
 
@@ -35,6 +42,7 @@
       <div id="detail{{type}}{{id}}" class="notes-field" style="display:none;">
         <span class="notes-title">notes</span>
         <p class="notes-text">{{notes}}</p>
+        <a href="project/{{projectId}}">View project</a>
       </div>
     </div>
     {{/each}}
