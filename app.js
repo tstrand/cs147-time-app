@@ -7,6 +7,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
+var partials = require('express-partials');
 
 var index = require('./routes/index');
 var projects = require('./routes/projects');
@@ -32,6 +33,7 @@ app.use(express.cookieParser('Intro HCI secret key'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(partials());
 
 // development only
 if ('development' == app.get('env')) {

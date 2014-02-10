@@ -1,6 +1,7 @@
 exports.viewTodos = function(req, res) { 
   var name = req.params.name; 
   res.render('todos', {
+    "pageName": "My Agenda",
   	"todos":[
       {
         "id": 1,
