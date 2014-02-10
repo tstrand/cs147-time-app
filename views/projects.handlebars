@@ -4,10 +4,11 @@
     <title>My Projects</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
+    <link href="/css/projects.css" rel="stylesheet">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="/css/introHCI.css" rel="stylesheet">
-    <link href="/css/projects.css" rel="stylesheet">
+    <link href="/css/todo.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,16 +44,23 @@
 
     <div class="projects">
       {{#each projects}}
-        <div class="project" id="{{id}}">
-          <a href="#" class="thumbnail no_underline">
-            <h3>{{name}}</h3>
-            <p class="due_date">Due: {{dueDate}}</p>
-            <p class="description" id="{{id}}">{{description}}</p>
-          </a>
-        </div>
+        <a id="{{id}}" class="thumbnail project">
+          <h3 class="project_title">{{name}}</h3>
+          <div class="duedate_title">Due Date:</div><span class="duedate_text">{{dueDate}}</span><div id="{{id}}" class="detail-button">view project &raquo;</div>
+          <div class="more_info" id="{{id}}">
+            <div class="description" id="{{id}}">
+              <div class="description_title">Description:</div>
+              <div class="description_text">{{description}}</div>
+             </div>
+            
+            <div class="collaborators" id="{{id}}">
+              <div class="collaborators_title">Members:</div>
+              <div class="collaborators_text">{{collaborators}}</div>
+            </div>
+          </div>
+        </a>
       {{/each}}
     </div>
-    
     <p><a href="/">&laquo; Back</a></p>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

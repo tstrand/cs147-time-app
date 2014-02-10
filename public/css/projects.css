@@ -3,26 +3,71 @@
 }
 
 .project {
-	margin-bottom: -29px;
-	box-shadow: 0 0 25px #AAAA9C;
-	border-radius: 21px;
+	margin-bottom: -10px !important;
+	box-shadow: 0 0 10px #AAAA9C !important;
+	border-top-left-radius: 10px !important;
+	border-top-right-radius: 10px !important;
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+	min-height: 100px;
+	text-decoration: none;
 }
 
-.no_underline {
+.project:hover {
 	text-decoration: none;	
+	cursor: pointer;
 }
 
-.no_underline:hover {
-	text-decoration: none;	
+.project_title {
+	margin-top: 15px;
+	margin-bottom: 10px;
 }
 
-.due_date {
-	font-size: 20px;
+
+.more_info {
+	display: none;
+	text-align: left;
+	margin-bottom: 20px;
+	margin-top: 10px;
 }
 
 .description {
-	display: none;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: 30px;
+	min-height: 30px;
+}
+
+.duedate_title {
+	display: inline-block;
+	float: left;
+	width: 20%;
+}
+
+.description_text {
+}
+
+.description_title {
+	display: inline-block;
+	float: left;
+	width: 20%;
+}
+
+.description_text {
+	display: inline-block;
+	float: left;
+	width: 70%;
+}
+
+.collaborators {
+	min-height: 30px;
+}
+
+.collaborators_title {
+	display: inline-block;
+	float: left;
+	width: 20%;
+}
+
+.collaborators_text {
+	display: inline-block;
+	float: left;
+	width: 70%;
 }
