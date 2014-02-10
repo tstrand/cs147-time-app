@@ -39,11 +39,38 @@ if ('development' == app.get('env')) {
 }
 
 // Add routes here
+
+function checkAuth(req, res, next) {
+  if (!req.session.user_id) {
+    res.send('You are not authorized to view this page');
+  } else {
+    next();
+  }
+}
+
+// login routes
+app.post('/login', function (req, res) {
+  var post = req.body;
+  if (post.username == 'john' && post.password == '1234') {
+    req.session.user_id = post.username;
+    res.redirect('/');
+  } else {
+    res.send('Bad user/pass');
+  }
+});
+
+app.get('/logout', function (req, res) {
+  delete req.session.user_id;
+  res.redirect('/');
+});      
+
 app.get('/', index.view);
-app.get('/projects', projects.viewProjects);
-app.get('/todos', todos.viewTodos);
-app.get('/create', create.createProject);
-app.get('/project/:projectId', project.viewProject);
+app.get('/projects', checkAuth, projects.viewProjects);
+app.get('/todos', checkAuth, todos.viewTodos);
+app.get('/create', checkAuth, create.createProject);
+app.get('/project/:projectId', checkAuth, project.viewProject);
+
+
 // Example route
 // app.get('/users', user.list);
 
