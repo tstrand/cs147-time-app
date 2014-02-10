@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- placeholder for project viewing page -->
 
 <html>
 <head>
@@ -18,20 +19,32 @@
     <![endif]-->        
 </head>
 
-<body>
+<body style="padding-top:65px;">
 	<div class="container">
 		<!-- h1 through h6 are headers. The higher the number, the smaller the header -->
 		<!-- p means paragraph -->
-		<div class="jumbotron">
-			<h1>Our Time App</h1>
-			<p>by Mark, John, and Tyler</p>
-		</div>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-link">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">&laquo; Home</a>
+        </div>
 
-		<div>
-			<a href="projects" class="btn btn-primary btn-lg btn-block" style="margin-bottom:10px;">My Projects</a>
-            <a href="todos" class="btn btn-default btn-lg btn-block" style="margin-bottom:10px;">My Todos</a>
-            <a href="create" class="btn btn-info btn-lg btn-block" style="margin-bottom:10px;">Create New Project</a>
-		</div>
+        <div class="collapse navbar-collapse" id="collapse-link">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/todos">My Todos</a></li>
+            <li><a href="/projects">My Projects</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {{projectId}}
 
 	</div>
 
