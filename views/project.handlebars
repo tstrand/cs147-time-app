@@ -8,7 +8,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
-	<link href="/css/introHCI.css" rel="stylesheet">
+	<link href="/css/todo.css" rel="stylesheet">
+    <link href="/css/introHCI.css" rel="stylesheet">
 	<!-- this is a comment in HTML -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -19,15 +20,42 @@
     <![endif]-->        
 </head>
 
-<body style="padding-top:65px;">
+<body>
 	<div class="container">
 		{{>navbar}}
 
-    {{projectId}}
+    <h3 class="page-header">{{pageName}}</h3>
+
+    {{#each tasks}}
+    <div class="todo-card task">
+      <span class="project-name">{{project}}</span><span class="type-name">task</span>
+      <p class="task-name">{{name}}</p>
+      <span class="duedate">due by {{dueDate}}</span><a id="{{type}}{{id}}" class="detail-button">details &raquo;</a>
+      <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+        <span class="notes-title">notes</span>
+        <p class="notes-text">{{notes}}</p>
+        <a href="projects/{{projectId}}">View project</a>
+      </div>
+    </div>
+    {{/each}}
+
+    {{#each meetings}}
+    <div class="todo-card meeting">
+      <span class="project-name">{{project}}</span><span class="type-name">meeting</span>
+      <p class="task-name">{{name}}</p>
+      <span class="duedate">due by {{dueDate}}</span><a id="{{type}}{{id}}" class="detail-button">details &raquo;</a>
+      <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
+        <span class="notes-title">notes</span>
+        <p class="notes-text">{{notes}}</p>
+        <a href="projects/{{projectId}}">View project</a>
+      </div>
+    </div>
+    {{/each}}
 
 	</div>
 
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/todo.js"></script>
 </body>
 </html>

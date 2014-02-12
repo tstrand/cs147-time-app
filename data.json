@@ -42,5 +42,61 @@
 			"dueDate": "2/14/2014",
 			"members" : "john, mark, tyler"
 		}
+	],
+	"tasks":[
+      {
+        "id": 1,
+        "project_id": 1,
+        "name": "Example subask 1",
+        "dueDate": "2014-02-13",
+        "notes": "A much shorter note",
+        "parent": -1,
+        "done": false,
+        "members": [1, 2],
+        "progress": 3
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "name": "Example task 2",
+        "dueDate": "2014-02-13",
+        "notes": "A much shorter note",
+        "parent": -1,
+        "done": false,
+        "members": [1, 2],
+        "progress": 3
+      }
+  	],
+  	"meetings":[
+      {
+        "id": 1,
+        "project_id": 1,
+        "name": "Meeting 1",
+        "datetime": "2014-02-13 07:00:00",
+        "notes": "A much shorter note",
+        "members": [1, 2]
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "name": "Meeting 1",
+        "datetime": "2014-02-13 07:00:00",
+        "notes": "A much shorter note",
+        "members": [1, 2]
+      }
+  	],
+  	"users": [
+		{
+			"id": 1,
+			"name": "Tyler Strand",
+			"username": "tyler",
+			"password": "pass"
+		},
+		{
+			"id": 2,
+			"name": "John Han",
+			"username": "john",
+			"password": "1234"
+		}
 	]
 }
