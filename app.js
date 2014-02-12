@@ -69,7 +69,7 @@ app.get('/', index.view);
 app.get('/projects', checkAuth, projects.viewProjects);
 app.get('/todos', checkAuth, todos.viewTodos);
 app.get('/create', checkAuth, create.createProject);
-app.get('/project/:projectId', checkAuth, project.viewProject);
+app.get('/projects/:projectId', checkAuth, projects.viewProjects);
 
 // Example route
 // app.get('/users', user.list);
