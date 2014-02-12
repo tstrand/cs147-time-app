@@ -13,7 +13,6 @@ var index = require('./routes/index');
 var projects = require('./routes/projects');
 var todos = require('./routes/todos');
 var create = require('./routes/create');
-var project = require('./routes/project');
 // Example route
 // var user = require('./routes/user');
 
@@ -71,7 +70,6 @@ app.get('/projects', checkAuth, projects.viewProjects);
 app.get('/todos', checkAuth, todos.viewTodos);
 app.get('/create', checkAuth, create.createProject);
 app.get('/project/:projectId', checkAuth, project.viewProject);
-
 
 // Example route
 // app.get('/users', user.list);
