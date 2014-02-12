@@ -7,6 +7,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
+var partials = require('express-partials');
 
 var index = require('./routes/index');
 var projects = require('./routes/projects');
@@ -30,6 +31,7 @@ app.use(express.cookieParser('Intro HCI secret key'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(partials());
 
 // development only
 if ('development' == app.get('env')) {
@@ -37,12 +39,38 @@ if ('development' == app.get('env')) {
 }
 
 // Add routes here
+
+function checkAuth(req, res, next) {
+  if (!req.session.user_id) {
+    res.send('You are not authorized to view this page');
+  } else {
+    next();
+  }
+}
+
+// login routes
+app.post('/login', function (req, res) {
+  var post = req.body;
+  if (post.username == 'john' && post.password == '1234') {
+    req.session.user_id = post.username;
+    res.redirect('/');
+  } else {
+    res.send('Bad user/pass');
+  }
+});
+
+app.get('/logout', function (req, res) {
+  delete req.session.user_id;
+  res.redirect('/');
+});      
+
 app.get('/', index.view);
-app.get('/projects', projects.viewProjects);
-app.get('/todos', todos.viewTodos);
-app.get('/new-project', projects.newProject);
-app.get('/create-project', projects.createProject);
-app.get('/projects/:projectId', projects.viewProjects);
+app.get('/projects', checkAuth, projects.viewProjects);
+app.get('/todos', checkAuth, todos.viewTodos);
+app.get('/new-project', checkAuth, projects.newProject);
+app.get('/create-project', checkAuth, projects.createProject);
+app.get('/projects/:projectId', checkAuth, projects.viewProjects);
+
 // Example route
 // app.get('/users', user.list);
 
