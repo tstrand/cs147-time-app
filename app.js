@@ -13,6 +13,7 @@ var index = require('./routes/index');
 var projects = require('./routes/projects');
 var todos = require('./routes/todos');
 var create = require('./routes/create');
+var createtask = require('./routes/createTask');
 // Example route
 // var user = require('./routes/user');
 
@@ -70,6 +71,7 @@ app.get('/projects', checkAuth, projects.viewProjects);
 app.get('/todos', checkAuth, todos.viewTodos);
 app.get('/create', checkAuth, create.createProject);
 app.get('/projects/:projectId', checkAuth, projects.viewProjects);
+app.get('/createtask', checkAuth, createtask.createTaskMeeting);
 
 // Example route
 // app.get('/users', user.list);
