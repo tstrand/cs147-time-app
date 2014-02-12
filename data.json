@@ -5,42 +5,42 @@
 			"name": "Example Project",
 			"description": "This is our main project in cs147 this quarter",
 			"dueDate": "2/14/2014",
-			"collaborators" : ["john", "mark", "tyler"]
+			"members" : "john, mark, tyler"
 		},
 		{
 			"id": 2,
 			"name": "Example Project",
 			"description": "This is our main project in cs147 this quarter",
 			"dueDate": "2/14/2014",
-			"collaborators" : ["john", "mark", "tyler"]
+			"members" : "john, mark, tyler"
 		},
 		{
 			"id": 3,
 			"name": "Example Project",
 			"description": "This is our main project in cs147 this quarter",
 			"dueDate": "2/14/2014",
-			"collaborators" : ["john", "mark", "tyler"]
+			"members" : "john, mark, tyler"
 		},
 		{
 			"id": 4,
 			"name": "Example Project",
 			"description": "This is our main project in cs147 this quarter",
 			"dueDate": "2/14/2014",	
-			"collaborators" : ["john", "mark", "tyler"]
+			"members" : "john, mark, tyler"
 		},
 		{
 			"id": 5,
 			"name": "Example Project",
 			"description": "This is our main project in cs147 this quarter",
 			"dueDate": "2/14/2014",	
-			"collaborators" : ["john", "mark", "tyler"]
+			"members" : "john, mark, tyler"
 		},
 		{
 			"id": 6,
 			"name": "Example Project",
 			"description": "This is our main project in cs147 this quarter",
 			"dueDate": "2/14/2014",
-			"collaborators" : ["john", "mark", "tyler"]
+			"members" : "john, mark, tyler"
 		}
 	]
 }

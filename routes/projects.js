@@ -9,3 +9,20 @@ exports.viewProjects = function(req, res) { 
 		res.render('projects', data);
 	}
 };
+
+exports.newProject = function(req, res) {
+	res.render('newProject');
+}
+
+exports.createProject = function(req, res) {    
+	var project = {
+		"id": Math.floor(Math.random() * 1000) + 10,
+		"name": req.query.name,
+		"dueDate": req.query.duedate,
+		"description": 	req.query.description,
+		"members": req.query.members	
+	};
+	console.log(project);
+	data["projects"].push(project);
+	res.render('projects', data);
+ }

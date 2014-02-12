@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="/css/datepicker.css" rel="stylesheet">
 	<link href="/css/introHCI.css" rel="stylesheet">
 	<!-- this is a comment in HTML -->
 
@@ -30,11 +31,37 @@
       </div>
     </nav>
 
-    <a href="project/sampleId" class="btn btn-info btn-lg" style="margin-bottom:10px;">Create</a>
+    <form role="form" method="get" action="/create-project">
+  		<div class="form-group">
+    		<label for="name">Title</label>
+    		<input type="text" class="form-control" id="name" name="name" placeholder="Enter project name" required>
+  		</div>
+  		<div class="form-group">
+    		<label for="duedate">Due Date</label>
+    		<input type="text" id="duedate" name="duedate" class="form-control datepicker" placeholder="Select a date" required>
+  		</div>
+  		<div class="form-group">
+    		<label for="description">Description</label>
+    		<textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter a brief description of your project" required></textarea>
+  		</div>
+  		<div class="form-group">
+    		<label for="members">Members</label>
+    		<textarea class="form-control" id="members" name="members" rows="3" placeholder="Enter a list of members" required></textarea>
+  		</div>
+
+	    <button type="submit" class="btn btn-info btn-lg right_button">Create</button>
+    	<button class="btn btn info btn-small right_button" type="button">Cancel</button>
+    	
+	</form>
 
 	</div>
 
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap-datepicker.js"></script>
+	<script src="/js/projects.js"></script>
+	<script>
+		$('.datepicker').datepicker();
+	</script>
 </body>
 </html>
