@@ -69,7 +69,8 @@ app.get('/logout', function (req, res) {
 app.get('/', index.view);
 app.get('/projects', checkAuth, projects.viewProjects);
 app.get('/todos', checkAuth, todos.viewTodos);
-app.get('/create', checkAuth, create.createProject);
+app.get('/new-project', checkAuth, projects.newProject);
+app.get('/create-project', checkAuth, projects.createProject);
 app.get('/projects/:projectId', checkAuth, projects.viewProjects);
 app.get('/createtask', checkAuth, createtask.createTaskMeeting);
 

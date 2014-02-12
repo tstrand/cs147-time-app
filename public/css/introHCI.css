@@ -33,3 +33,17 @@
 .project a {
      text-align: center;
 }
+
+.right_button {
+     float: right;
+     vertical-align: bottom;
+     margin-left: 10px;
+}
+
+.page-header {
+     margin-bottom: 30px;
+}
+
+body {
+     padding-top: 40px;
+}

@@ -17,16 +17,11 @@ function initializePage() {
 	$(".project").click(function (e) {
 		e.preventDefault();
 		var id = $(this).attr('id');
-		expandProject(id);
+		toggleProject(id);
 	});
 }
 
-function expandProject(id) {
+function toggleProject(id) {
 	var elem = $("#" + id + ".more_info");
 	elem.toggle(400);
-}
-
-function collapseProjects() {
-	var elem = $(".description");
-	elem.fadeOut();
 }

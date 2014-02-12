@@ -1,5 +1,4 @@
 .projects {
-	margin-top: 100px;
 }
 
 .project {
@@ -23,25 +22,25 @@
 	margin-bottom: 10px;
 }
 
-
-.more_info {
-	display: none;
-	text-align: left;
-	margin-bottom: 20px;
-	margin-top: 10px;
-}
-
-.description {
-	min-height: 30px;
-}
-
 .duedate_title {
 	display: inline-block;
 	float: left;
 	width: 20%;
 }
 
-.description_text {
+.duedate_text {
+}
+
+.more_info {
+	display: none;
+	text-align: left;
+	margin-bottom: 20px;
+}
+
+.description {
+	min-height: 30px;
+	overflow-y: auto;
+	margin-top: 10px;
 }
 
 .description_title {
@@ -56,17 +55,19 @@
 	width: 70%;
 }
 
-.collaborators {
+.members {
 	min-height: 30px;
+	overflow-y: auto;
+	margin-top: 10px;
 }
 
-.collaborators_title {
+.members_title {
 	display: inline-block;
 	float: left;
 	width: 20%;
 }
 
-.collaborators_text {
+.members_text {
 	display: inline-block;
 	float: left;
 	width: 70%;
