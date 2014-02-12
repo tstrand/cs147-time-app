@@ -20,5 +20,25 @@ function initializePage() {
 			$(this).html("details &raquo;");			
 		}
 
-	})
+	});
+
+	$("#task-box-button").click(function(e) {
+		e.preventDefault();
+		$("#task-box").toggle(400);
+		if ($("#task-box-button").html() == "collapse") {
+			$("#task-box-button").html("expand");
+		} else {
+			$("#task-box-button").html("collapse");
+		}
+	});
+
+	$("#meeting-box-button").click(function(e) {
+		e.preventDefault();
+		$("#meeting-box").toggle(400);
+		if ($("#meeting-box-button").html() == "collapse") {
+			$("#meeting-box-button").html("expand");
+		} else {
+			$("#meeting-box-button").html("collapse");
+		}
+	});
 }
