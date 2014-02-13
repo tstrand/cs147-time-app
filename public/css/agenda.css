@@ -4,12 +4,20 @@
     border-radius:10px;
 }
 
+.todo-card:hover {
+    cursor: pointer;
+}
+
 .subtask {
 	background-color: #d9edf7;
 }
 
 .task {
 	background-color: #dff0d8;
+}
+
+.completed {
+    background-color: #e7e7e7;
 }
 
 .meeting {
@@ -59,3 +67,13 @@
 .type-title {
     font-weight: bold;
 }
+
+.subtask_table {
+    margin-left: 20px;
+}
+
+.subtask_checkbox {
+    margin-right: 5px !important;
+}
+
+

@@ -9,17 +9,28 @@ $(document).ready(function() {
  * Function that is called when the document is ready.
  */
 function initializePage() {
-	$(".detail-button").click(function(e) {
+	$(".todo-card").click(function(e) {
 		e.preventDefault();
 		console.log(this.id);
 
 		$("#detail" + this.id).toggle(400);
-		if ($(this).html() == "details »") {
-			$(this).html("hide &laquo;");
-		} else {
-			$(this).html("details &raquo;");			
-		}
+	});
 
+	$(".detail-button").click(function (e) {
+		e.stopPropagation();
+		var id = $(this).attr('id');
+		document.location.href='/projects/' + id;
+	});
+
+	$(".subtask_checkbox").click(function(e) {
+		e.stopPropagation();
+
+		var subtask = $("#subtask" + this.id);
+		if(this.checked) {
+			subtask.css("text-decoration", "line-through");
+		} else {
+			subtask.css("text-decoration", "none");
+		}
 	});
 
 	$("#task-box-button").click(function(e) {
@@ -41,4 +52,6 @@ function initializePage() {
 			$("#meeting-box-button").html("collapse");
 		}
 	});
+
+
 }

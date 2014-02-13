@@ -44,6 +44,11 @@
      margin-bottom: 30px;
 }
 
+.header_edit {
+     float: right;
+     font-size: 14px;
+}
+
 body {
      padding-top: 40px;
 }

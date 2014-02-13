@@ -1,0 +1,82 @@
+<!doctype html>
+<!-- placeholder for project creation page -->
+
+<html>
+<head>
+	<title>HCI Project</title>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="/css/datepicker.css" rel="stylesheet">
+	<link href="/css/main.css" rel="stylesheet">
+	<!-- this is a comment in HTML -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->        
+</head>
+
+<body>
+	<div class="container">
+    {{>navbar}}
+
+    <h3 class="page-header">{{pageName}}</h3>
+
+    {{#if edit}}
+    <form role="form" method="get" action="/projects/save/{{id}}">
+    {{else}}
+    <form role="form" method="get" action="/projects/save">
+    {{/if}}
+  		<div class="form-group">
+    		<label for="name">Title</label>
+        {{#if edit}}
+    		  <input type="text" class="form-control" id="name" name="name" placeholder="Enter project name" value="{{name}}" required>
+        {{else}}
+          <input type="text" class="form-control" id="name" name="name" placeholder="Enter project name" required>
+        {{/if}}
+  		</div>
+  		<div class="form-group">
+    		<label for="duedate">Due Date</label>
+    		{{#if edit}}
+          <input type="text" id="duedate" name="duedate" class="form-control datepicker" placeholder="Select a date" value="{{dueDate}}" required>
+        {{else}}
+          <input type="text" id="duedate" name="duedate" class="form-control datepicker" placeholder="Select a date" required>
+        {{/if}}
+  		</div>
+  		<div class="form-group">
+    		<label for="description">Description</label>
+    		{{#if edit}}
+          <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter a brief description of your project" required>{{description}}</textarea>
+        {{else}}
+          <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter a brief description of your project" required></textarea>
+        {{/if}}
+  		</div>
+  		<div class="form-group">
+    		<label for="members">Members</label>
+        {{#if edit}}
+          <textarea class="form-control" id="members" name="members" rows="3" placeholder="Enter a list of members" required>{{members}}</textarea>
+        {{else}}
+          <textarea class="form-control" id="members" name="members" rows="3" placeholder="Enter a list of members" required></textarea>
+        {{/if}}
+  		</div>
+
+      <button type="submit" class="btn btn-info btn-lg right_button">Save</button>
+    	<button class="btn btn info btn-small right_button" type="button">Cancel</button>
+    	
+	</form>
+
+	</div>
+
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap-datepicker.js"></script>
+	<script src="/js/projects.js"></script>
+	<script>
+		$('.datepicker').datepicker();
+	</script>
+</body>
+</html>
