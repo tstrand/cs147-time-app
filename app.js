@@ -49,9 +49,10 @@ app.post('/create_user', auth.createUser);
 app.get('/projects', auth.checkAuth, projects.viewProjects);
 app.get('/todos', auth.checkAuth, todos.viewTodos);
 app.get('/new-project', auth.checkAuth, projects.newProject);
+// may need to change it to post
 app.get('/create-project', auth.checkAuth, projects.createProject);
 app.get('/projects/:projectId', auth.checkAuth, projects.viewProjects);
-app.get('/createtask', auth.checkAuth, createtask.createTaskMeeting);
+app.get('/createtask/:projectId', auth.checkAuth, createtask.createTaskMeeting);
 
 // Example route
 // app.get('/users', user.list);
