@@ -12,6 +12,9 @@ var partials = require('express-partials');
 var index = require('./routes/index');
 var projects = require('./routes/projects');
 var todos = require('./routes/todos');
+var createtask = require('./routes/createTask');
+var auth = require('./routes/auth');
+
 // Example route
 // var user = require('./routes/user');
 
@@ -39,37 +42,16 @@ if ('development' == app.get('env')) {
 }
 
 // Add routes here
-
-function checkAuth(req, res, next) {
-  if (!req.session.user_id) {
-    res.send('You are not authorized to view this page');
-  } else {
-    next();
-  }
-}
-
-// login routes
-app.post('/login', function (req, res) {
-  var post = req.body;
-  if (post.username == 'john' && post.password == '1234') {
-    req.session.user_id = post.username;
-    res.redirect('/');
-  } else {
-    res.send('Bad user/pass');
-  }
-});
-
-app.get('/logout', function (req, res) {
-  delete req.session.user_id;
-  res.redirect('/');
-});      
-
 app.get('/', index.view);
-app.get('/projects', checkAuth, projects.viewProjects);
-app.get('/todos', checkAuth, todos.viewTodos);
-app.get('/new-project', checkAuth, projects.newProject);
-app.get('/create-project', checkAuth, projects.createProject);
-app.get('/projects/:projectId', checkAuth, projects.viewProjects);
+app.post('/login', auth.userLogin);
+app.get('/logout', auth.userLogout);
+app.post('/create_user', auth.createUser);     
+app.get('/projects', auth.checkAuth, projects.viewProjects);
+app.get('/todos', auth.checkAuth, todos.viewTodos);
+app.get('/new-project', auth.checkAuth, projects.newProject);
+app.get('/create-project', auth.checkAuth, projects.createProject);
+app.get('/projects/:projectId', auth.checkAuth, projects.viewProjects);
+app.get('/createtask', auth.checkAuth, createtask.createTaskMeeting);
 
 // Example route
 // app.get('/users', user.list);

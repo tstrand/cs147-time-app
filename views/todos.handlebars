@@ -25,30 +25,40 @@
 
     <h3 class="page-header">{{pageName}}</h3>
 
-    {{#each tasks}}
-    <div class="todo-card task">
-      <span class="project-name">{{project}}</span><span class="type-name">task</span>
-      <p class="task-name">{{name}}</p>
-      <span class="duedate">due by {{dueDate}}</span><a id="{{type}}{{id}}" class="detail-button">details &raquo;</a>
-      <div id="detailtask{{id}}" class="notes-field" style="display:none;">
-        <span class="notes-title">notes</span>
-        <p class="notes-text">{{notes}}</p>
-        <a href="projects/{{projectId}}">View project</a>
+    <span class="type-title">tasks</span>
+    <a id="task-box-button" class="collapse-button">collapse</a>
+    <div id="task-box">
+      {{#each tasks}}
+      <div class="todo-card task">
+        <span class="project-name">{{project}}</span><span class="type-name">task</span>
+        <p class="task-name">{{name}}</p>
+        <span class="duedate">due by {{dueDate}}</span><a id="task{{id}}" class="detail-button">details &raquo;</a>
+        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          <a href="projects/{{project_id}}">View project</a>
+        </div>
       </div>
+      {{/each}}
     </div>
-    {{/each}}
-    {{#each meetings}}
-    <div class="todo-card meeting">
-      <span class="project-name">{{project}}</span><span class="type-name">meeting</span>
-      <p class="task-name">{{name}}</p>
-      <span class="duedate">due by {{dueDate}}</span><a id="{{type}}{{id}}" class="detail-button">details &raquo;</a>
-      <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
-        <span class="notes-title">notes</span>
-        <p class="notes-text">{{notes}}</p>
-        <a href="projects/{{projectId}}">View project</a>
+
+    <br>
+    <span class="type-title">meetings</span>
+    <a id="meeting-box-button" class="collapse-button">collapse</a>
+    <div id="meeting-box">
+      {{#each meetings}}
+      <div class="todo-card meeting">
+        <span class="project-name">{{project}}</span><span class="type-name">meeting</span>
+        <p class="task-name">{{name}}</p>
+        <span class="duedate">{{datetime}}</span><a id="meeting{{id}}" class="detail-button">details &raquo;</a>
+        <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          <a href="projects/{{project_id}}">View project</a>
+        </div>
       </div>
+      {{/each}}
     </div>
-    {{/each}}
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>

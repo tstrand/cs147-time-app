@@ -37,6 +37,11 @@
     text-decoration: none;
 }
 
+.collapse-button {
+    float: right;
+    font-size: 12px;
+}
+
 .notes-field {
     padding: 5px;
 }
@@ -49,4 +54,8 @@
 .notes-text {
     font-size: 13px;
     margin: 0px;
+}
+
+.type-title {
+    font-weight: bold;
 }
