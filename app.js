@@ -11,7 +11,7 @@ var partials = require('express-partials');
 
 var index = require('./routes/index');
 var projects = require('./routes/projects');
-var todos = require('./routes/todos');
+var agenda = require('./routes/agenda');
 var createtask = require('./routes/createTask');
 var auth = require('./routes/auth');
 
@@ -47,10 +47,12 @@ app.post('/login', auth.userLogin);
 app.get('/logout', auth.userLogout);
 app.post('/create_user', auth.createUser);     
 app.get('/projects', auth.checkAuth, projects.viewProjects);
-app.get('/todos', auth.checkAuth, todos.viewTodos);
-app.get('/new-project', auth.checkAuth, projects.newProject);
-app.get('/create-project', auth.checkAuth, projects.createProject);
+app.get('/agenda', auth.checkAuth, agenda.viewAgenda);
+app.get('/projects/create', auth.checkAuth, projects.createProject);
+app.get('/projects/save', auth.checkAuth, projects.saveProject);
+app.get('/projects/save/:projectId', auth.checkAuth, projects.saveProject);
 app.get('/projects/:projectId', auth.checkAuth, projects.viewProjects);
+app.get('/projects/edit/:projectId', auth.checkAuth, projects.editProject);
 app.get('/createtask', auth.checkAuth, createtask.createTaskMeeting);
 
 // Example route

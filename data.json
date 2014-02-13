@@ -51,7 +51,7 @@
         "dueDate": "2014-02-6",
         "notes": "prototying stage",
         "parent": -1,
-        "done": false,
+        "done": true,
         "members": [1, 2, 3],
         "progress": 3
       },

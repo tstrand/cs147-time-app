@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My Todos</title>
+    <title>My Agenda</title>
     <!-- no zooming on mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/css/todo.css" rel="stylesheet">
-    <link href="/css/introHCI.css" rel="stylesheet">
+    <link href="/css/agenda.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,14 +29,13 @@
     <a id="task-box-button" class="collapse-button">collapse</a>
     <div id="task-box">
       {{#each tasks}}
-      <div class="todo-card task">
+      <div class="todo-card task" id="task{{id}}">
         <span class="project-name">{{project}}</span><span class="type-name">task</span>
         <p class="task-name">{{name}}</p>
-        <span class="duedate">due by {{dueDate}}</span><a id="task{{id}}" class="detail-button">details &raquo;</a>
+        <span class="duedate">due by {{dueDate}}</span><a class="detail-button" id="{{project_id}}">View project &raquo;</a>
         <div id="detailtask{{id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
-          <a href="projects/{{project_id}}">View project</a>
         </div>
       </div>
       {{/each}}
@@ -47,10 +46,10 @@
     <a id="meeting-box-button" class="collapse-button">collapse</a>
     <div id="meeting-box">
       {{#each meetings}}
-      <div class="todo-card meeting">
+      <div class="todo-card meeting" id="meeting{{id}}">
         <span class="project-name">{{project}}</span><span class="type-name">meeting</span>
         <p class="task-name">{{name}}</p>
-        <span class="duedate">{{datetime}}</span><a id="meeting{{id}}" class="detail-button">details &raquo;</a>
+        <span class="duedate">{{datetime}}</span><a class="detail-button" id="{{project_id}}">View project &raquo;</a>
         <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
@@ -64,6 +63,6 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/todo.js"></script>
+    <script src="/js/agenda.js"></script>
   </body>
 </html>

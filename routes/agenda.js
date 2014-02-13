@@ -1,6 +1,6 @@
 var data = require('../data.json');
 
-exports.viewTodos = function(req, res) { 
+exports.viewAgenda = function(req, res) { 
   var name = req.params.name; 
 
   // filter my tasks
@@ -25,5 +25,5 @@ exports.viewTodos = function(req, res) { 
   }
 
   mydata["pageName"] = "My Agenda";
-  res.render('todos', mydata);
+  res.render('agenda', mydata);
 };
