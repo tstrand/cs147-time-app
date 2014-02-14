@@ -59,8 +59,21 @@ exports.viewProjects = function(req, res) { 
 
 		res.render('project', object);
 	} else {
-		data["pageName"] = "My Projects";
-		res.render('projects', data);
+		// just show user's projects
+		var mydata = {}
+		mydata["projects"] = [];
+		for (var i=0; i<data["projects"].length; i++) {
+		    for (var j=0; j<data["projects"][i]["members"].length; j++) {
+			    if (req.session.user_id == data["projects"][i]["members"][j] ||
+			        req.session.username == data["projects"][i]["members"][j]) {
+			        mydata["projects"].push(data["projects"][i]);
+			        break;
+			    }
+			}
+		}
+
+		mydata["pageName"] = "My Projects";
+		res.render('projects', mydata);
 	}
 };
 
@@ -87,12 +100,18 @@ exports.saveProject = function(req, res) {
 	var id = req.params.projectId; 
 	var edit = id ? true : false;
 	if(!edit) var id = Math.floor(Math.random() * 1000) + 10;
+
+	// now member is an array of username
+	var members = []
+	for (var i in req.query.members.split(",")) {
+		members.push(req.query.members.split(",")[i].trim());
+	}
 	var project = {
 		"id": id,
 		"name": req.query.name,
 		"dueDate": req.query.duedate,
 		"description": 	req.query.description,
-		"members": req.query.members	
+		"members": members	
 	};
 	if(edit) {
 		for(var i = 0; i < data["projects"].length; i++) {

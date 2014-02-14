@@ -28,77 +28,90 @@
     <h3 class="page-header">
       {{pageName}}
       <a href="/projects/edit/{{id}}" class="header_edit">edit</a>
+      <a href="/create/{{id}}" class="header_edit">+task/meeting</a>
     </h3>
 
     <span class="type-title">tasks</span>
-    {{#each tasks}}
-    <div class="todo-card task" id="task{{id}}">
-      <span class="project-name">{{project}}</span><span class="type-name">task</span>
-      <p class="task-name">{{name}}</p>
-      <span class="duedate">due by {{dueDate}}</span>
-      <div id="detailtask{{id}}" class="notes-field" style="display:none;">
-        <span class="notes-title">notes</span>
-        <p class="notes-text">{{notes}}</p>
-        <span class="notes-title">subtasks</span>
-        <table class="subtask_table">
-        {{#each subtasks}}
-          <tr>
-            {{#if done}}
-              <td><input class="subtask_checkbox" type="checkbox" id="{{id}}" checked></td>
-              <td id="subtask{{id}}" style="text-decoration: line-through">{{name}}</td>
-            {{else}}
-              <td><input class="subtask_checkbox" type="checkbox" id="{{id}}"></td>
-              <td id="subtask{{id}}">{{name}}</td>
-            {{/if}}
-          </tr>
-        {{/each}}
-        </table>
+    <a id="task-box-button" class="collapse-button">collapse</a>
+    <div id="task-box">
+      {{#each tasks}}
+      <div class="todo-card task" id="task{{id}}">
+        <span class="project-name">{{project}}</span><span class="type-name">task</span>
+        <p class="task-name">{{name}}</p>
+        <span class="duedate">due by {{dueDate}}</span>
+        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          <span class="notes-title">subtasks</span>
+          <table class="subtask_table">
+          {{#each subtasks}}
+            <tr>
+              {{#if done}}
+                <td><input class="subtask_checkbox" type="checkbox" id="{{id}}" checked></td>
+                <td id="subtask{{id}}" style="text-decoration: line-through">{{name}}</td>
+              {{else}}
+                <td><input class="subtask_checkbox" type="checkbox" id="{{id}}"></td>
+                <td id="subtask{{id}}">{{name}}</td>
+              {{/if}}
+            </tr>
+          {{/each}}
+          </table>
+        </div>
       </div>
+      {{/each}}
     </div>
-    {{/each}}
 
     <br>
     <span class="type-title">meetings</span>
-    {{#each meetings}}
-    <div class="todo-card meeting" id="meeting{{id}}">
-      <span class="project-name">{{project}}</span><span class="type-name">meeting</span>
-      <p class="task-name">{{name}}</p>
-      <span class="duedate">due by {{dueDate}}</span>
-      <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
-        <span class="notes-title">notes</span>
-        <p class="notes-text">{{notes}}</p>
+    <a id="meeting-box-button" class="collapse-button">collapse</a>
+    <div id="meeting-box">
+      {{#each meetings}}
+      <div class="todo-card meeting" id="meeting{{id}}">
+        <span class="project-name">{{project}}</span><span class="type-name">meeting</span>
+        <p class="task-name">{{name}}</p>
+        <span class="duedate">due by {{datetime}}</span>
+        <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          <span class="notes-title">attendees</span>
+          <p class="notes-text">{{members}}</p>
+        </div>
       </div>
+      {{/each}}
     </div>
-    {{/each}}
 
     <br>
     <span class="type-title">completed</span>
-    {{#each completed_tasks}}
-    <div class="todo-card completed" id="task{{id}}">
-      <span class="project-name">{{project}}</span><span class="type-name">task</span>
-      <p class="task-name">{{name}}</p>
-      <span class="duedate">due by {{dueDate}}</span>
-      <div id="detailtask{{id}}" class="notes-field" style="display:none;">
-        <span class="notes-title">notes</span>
-        <p class="notes-text">{{notes}}</p>
-        <span class="notes-title">subtasks</span>
-        <table class="subtask_table">
-        {{#each subtasks}}
-          <tr>
-            <td><input class="subtask_checkbox" type="checkbox" id="{{id}}" checked></td>
-            <td id="subtask{{id}}" style="text-decoration: line-through">{{name}}</td>
-          </tr>
-        {{/each}}
-        </table>
+    <a id="completed-box-button" class="collapse-button">collapse</a>
+    <div id="completed-box">
+      {{#each completed_tasks}}
+      <div class="todo-card completed" id="task{{id}}">
+        <span class="project-name">{{project}}</span><span class="type-name">task</span>
+        <p class="task-name">{{name}}</p>
+        <span class="duedate">{{dueDate}}</span>
+        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          <span class="notes-title">subtasks</span>
+          <table class="subtask_table">
+          {{#each subtasks}}
+            <tr>
+              <td><input class="subtask_checkbox" type="checkbox" id="{{id}}" checked></td>
+              <td id="subtask{{id}}" style="text-decoration: line-through">{{name}}</td>
+            </tr>
+          {{/each}}
+          </table>
+        </div>
       </div>
+      {{/each}}
     </div>
-    {{/each}}
     
     <br/>
     <br/>
 	</div>
 
-	<script src="https://code.jquery.com/jquery.js"></script>
+	<!--<script src="https://code.jquery.com/jquery.js"></script>-->
+  <script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/agenda.js"></script>
 </body>

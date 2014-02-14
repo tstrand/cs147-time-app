@@ -8,7 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/css/bootstrap.min.css" rel="stylesheet">
   <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/css/datepicker.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/createtask.css" rel="stylesheet">
   <!-- this is a comment in HTML -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -23,9 +25,9 @@
   <div class="container">
     <!-- h1 through h6 are headers. The higher the number, the smaller the header -->
     <!-- p means paragraph -->
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
-        <span class="navbar-brand"><a href="/">&laquo; Back</a></span>
+        <!--<span class="navbar-brand"><a href="/">&laquo; Back</a></span>-->
         <span class="navbar-brand" style="float:right;">Create Task/Meeting</span>
       </div>
     </nav>
@@ -41,17 +43,123 @@
       </label>
     </div>
 
-    <div id="creatingMeeting">
-      <form>
-        <input type="datetime" class="form-control" placeholder="Text input">
+    <div id="createMeeting" style="display:none;">
+      <form method="post" action="/create/meeting">
+        <div class="form-group">
+          <label>name</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="name" required>
+        </div>
+        <div class="form-group">
+          <label>date</label>
+          <input type="text" id="duedate" name="duedate" class="form-control datepicker" placeholder="select a date" required>
+        </div>
+        <div class="form-group">
+          <label>time</label><br/>
+          <select id="meeting-hour" name="hour">
+            <option value="00">0</option>
+            <option value="01">1</option>
+            <option value="02">2</option>
+            <option value="03">3</option>
+            <option value="04">4</option>
+            <option value="05">5</option>
+            <option value="06">6</option>
+            <option value="07">7</option>
+            <option value="08">8</option>
+            <option value="09">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+          </select>
+          :
+          <select id="meeting-min" name="min">
+            <option value="00">00</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>notes</label>
+          <textarea type="text" id="notes" name="notes" class="form-control" placeholder="notes"></textarea>
+        </div>
+        <div class="form-group">
+          <label>attendees</label>
+          <input type="text" id="attendees" name="attendees" class="form-control" placeholder="(ex, john,tyler,mark)">
+          <input type="hidden" id="projecId" name="projectId" value="{{projectId}}">
+        </div>
+
+        <div class="form-group">
+          <a class="btn btn-default" href="/projects/{{projectId}}">Cancel</a>
+          <button type="submit" class="btn btn-info">Create</button>
+        </div>
       </form>
     </div>
 
-    <a href="project/sampleId" class="btn btn-info btn-lg" style="margin-bottom:10px;">Create</a>
+    <div id="createTask">
+      <form method="post" action="/create/task">
+        <div class="form-group">
+          <label>name</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="name" required>
+        </div>
+        <div class="form-group">
+          <label>due date</label>
+          <input type="text" id="duedate" name="duedate" class="form-control datepicker" placeholder="select a date" required>
+        </div>
+        <div class="form-group">
+          <label>notes</label>
+          <textarea type="text" id="notes" name="notes" class="form-control" placeholder="notes"></textarea>
+        </div>
+        <div class="form-group">
+          <label>subtasks (max # 5)</label>
+          <input type="text" id="subtask1" name="subtask1" class="form-control" placeholder="subtask 1"></input>
+          assign subtask 1 to
+          <input type="text" id="assigned1" name="assigned1" class="form-control" placeholder="ex) john, tyler">
+          <br/>
+          <input type="text" id="subtask2" name="subtask2" class="form-control" placeholder="subtask 2"></input>
+          assign subtask 2 to
+          <input type="text" id="assigned2" name="assigned2" class="form-control" placeholder="ex) john, tyler">
+          <br/>
+          <input type="text" id="subtask3" name="subtask3" class="form-control" placeholder="subtask 3"></input>
+          assign subtask 3 to
+          <input type="text" id="assigned3" name="assigned3" class="form-control" placeholder="ex) john, tyler">
+          <br/>
+          <input type="text" id="subtask4" name="subtask4" class="form-control" placeholder="subtask 4"></input>
+          assign subtask 4 to
+          <input type="text" id="assigned4" name="assigned4" class="form-control" placeholder="ex) john, tyler">
+          <br/>
+          <input type="text" id="subtask5" name="subtask5" class="form-control" placeholder="subtask 5"></input>
+          assign subtask 5 to
+          <input type="text" id="assigned5" name="assigned5" class="form-control" placeholder="ex) john, tyler">
+          <input type="hidden" id="projecId" name="projectId" value="{{projectId}}">
+        </div>
+
+        <div class="form-group">
+          <a class="btn btn-default" href="/projects/{{projectId}}">Cancel</a>
+          <button type="submit" class="btn btn-info">Create</button>
+        </div>
+      </form>
+    </div>
 
   </div>
 
-  <script src="https://code.jquery.com/jquery.js"></script>
+  <!--<script src="https://code.jquery.com/jquery.js"></script>-->
+  <script src="/js/jquery.js"></script>
   <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/bootstrap-datepicker.js"></script>
+  <script src="/js/createtask.js"></script>
+  <script>
+    $('.datepicker').datepicker();
+  </script>
 </body>
 </html>
