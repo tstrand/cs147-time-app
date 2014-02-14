@@ -53,5 +53,16 @@ function initializePage() {
 		}
 	});
 
+	$("#completed-box-button").click(function(e) {
+		e.preventDefault();
+		$("#completed-box").toggle(400);
+		if ($("#completed-box-button").html() == "collapse") {
+			$("#completed-box-button").html("expand");
+		} else {
+			$("#completed-box-button").html("collapse");
+		}
+	});
+
+
 
 }

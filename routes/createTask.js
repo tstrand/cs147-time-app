@@ -11,7 +11,6 @@ exports.createMeeting = function(req, res) {
 	for (var i in req.body.attendees.split(",")) {
 		members.push(req.body.attendees.split(",")[i].trim());
 	}
-	console.log(req.body.hour);
 	var newMeeting = {
 		"id": Math.floor(Math.random() * 1000) + 10,
 		"project_id": req.body.projectId,

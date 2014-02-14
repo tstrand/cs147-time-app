@@ -53,14 +53,16 @@
         <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
-          <a href="projects/{{project_id}}">View project</a>
+          <span class="notes-title">attendees</span>
+          <p class="notes-text">{{members}}</p>
         </div>
       </div>
       {{/each}}
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <!--<script src="https://code.jquery.com/jquery.js"></script>-->
+    <script src="/js/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/agenda.js"></script>
