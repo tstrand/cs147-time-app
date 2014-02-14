@@ -27,8 +27,31 @@ exports.viewAgenda = function(req, res) { 
     }
   }
 
-  // getting parent task
-  //for (var i=0; i<mydata["tasks"]; i++)
+  
+  for (var i=0; i<mydata["tasks"].length; i++) {
+    // getting parent task
+    for (var j=0; j<data["tasks"].length; j++) {
+      if (data["tasks"][j]["id"] == mydata["tasks"][i]["parent"]) {
+        mydata["tasks"][i]["parent_name"] = data["tasks"][j]["name"];
+        break;
+      }
+    }
+    //getting project name
+    for (var j=0; j<data["projects"].length; j++) {
+      if (data["projects"][j]["id"] == mydata["tasks"][i]["project_id"]) {
+        mydata["tasks"][i]["project_name"] = data["projects"][j]["name"];
+      }
+    }
+  }
+
+  for (var i=0; i<mydata["meetings"].length; i++) {
+    //getting project name
+    for (var j=0; j<data["projects"].length; j++) {
+      if (data["projects"][j]["id"] == mydata["meetings"][i]["project_id"]) {
+        mydata["meetings"][i]["project_name"] = data["projects"][j]["name"];
+      }
+    }
+  }
 
   mydata["pageName"] = "My Agenda";
   res.render('agenda', mydata);

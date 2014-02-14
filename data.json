@@ -5,14 +5,14 @@
 			"name": "CS147 project",
 			"description": "This is our main project in cs147 this quarter",
 			"dueDate": "2/14/2014",
-			"members" : [1,2,3]
+			"members" : ["john","tyler","mark"]
 		},
 		{
 			"id": 2,
 			"name": "Example Project",
 			"description": "This is our main project in cs147 this quarter",
 			"dueDate": "2/14/2014",
-			"members" : [1,2,3]
+			"members" : ["john","tyler","mark"]
 		},
 		{
 			"id": 3,

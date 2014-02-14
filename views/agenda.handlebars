@@ -34,8 +34,14 @@
         <p class="task-name">{{name}}</p>
         <span class="duedate">due by {{dueDate}}</span><a class="detail-button" id="{{project_id}}">View project &raquo;</a>
         <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+          <span class="notes-title">part of task</span>
+          <p class="notes-text">{{parent_name}}</p>
+          <span class="notes-title">project</span>
+          <p class="notes-text">{{project_name}}</p>
+          {{#if notes}}
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
+          {{/if}}
         </div>
       </div>
       {{/each}}
@@ -51,10 +57,14 @@
         <p class="task-name">{{name}}</p>
         <span class="duedate">{{datetime}}</span><a class="detail-button" id="{{project_id}}">View project &raquo;</a>
         <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
-          <span class="notes-title">notes</span>
-          <p class="notes-text">{{notes}}</p>
+          <span class="notes-title">project</span>
+          <p class="notes-text">{{project_name}}</p>
           <span class="notes-title">attendees</span>
           <p class="notes-text">{{members}}</p>
+          {{#if notes}}
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          {{/if}}
         </div>
       </div>
       {{/each}}

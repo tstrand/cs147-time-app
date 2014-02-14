@@ -100,14 +100,14 @@
         </div>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-info">Create</button>
           <a class="btn btn-default" href="/projects/{{projectId}}">Cancel</a>
+          <button type="submit" class="btn btn-info">Create</button>
         </div>
       </form>
     </div>
 
     <div id="createTask">
-      <form method="post" actino="/">
+      <form method="post" action="/create/task">
         <div class="form-group">
           <label>name</label>
           <input type="text" id="name" name="name" class="form-control" placeholder="name" required>
@@ -120,10 +120,33 @@
           <label>notes</label>
           <textarea type="text" id="notes" name="notes" class="form-control" placeholder="notes"></textarea>
         </div>
-        
+        <div class="form-group">
+          <label>subtasks (max # 5)</label>
+          <input type="text" id="subtask1" name="subtask1" class="form-control" placeholder="subtask 1"></input>
+          assign subtask 1 to
+          <input type="text" id="assigned1" name="assigned1" class="form-control" placeholder="ex) john, tyler">
+          <br/>
+          <input type="text" id="subtask2" name="subtask2" class="form-control" placeholder="subtask 2"></input>
+          assign subtask 2 to
+          <input type="text" id="assigned2" name="assigned2" class="form-control" placeholder="ex) john, tyler">
+          <br/>
+          <input type="text" id="subtask3" name="subtask3" class="form-control" placeholder="subtask 3"></input>
+          assign subtask 3 to
+          <input type="text" id="assigned3" name="assigned3" class="form-control" placeholder="ex) john, tyler">
+          <br/>
+          <input type="text" id="subtask4" name="subtask4" class="form-control" placeholder="subtask 4"></input>
+          assign subtask 4 to
+          <input type="text" id="assigned4" name="assigned4" class="form-control" placeholder="ex) john, tyler">
+          <br/>
+          <input type="text" id="subtask5" name="subtask5" class="form-control" placeholder="subtask 5"></input>
+          assign subtask 5 to
+          <input type="text" id="assigned5" name="assigned5" class="form-control" placeholder="ex) john, tyler">
+          <input type="hidden" id="projecId" name="projectId" value="{{projectId}}">
+        </div>
 
         <div class="form-group">
           <a class="btn btn-default" href="/projects/{{projectId}}">Cancel</a>
+          <button type="submit" class="btn btn-info">Create</button>
         </div>
       </form>
     </div>
