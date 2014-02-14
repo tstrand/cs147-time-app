@@ -9,7 +9,8 @@ exports.viewAgenda = function(req, res) { 
   mydata["meetings"] = [];
   for (var i=0; i<data["tasks"].length; i++) {
   	for (var j=0; j<data["tasks"][i]["members"].length; j++) {
-      if (req.session.user_id == data["tasks"][i]["members"][j]) {
+      if (req.session.user_id == data["tasks"][i]["members"][j] ||
+          req.session.username == data["tasks"][i]["members"][j]) {
         mydata["tasks"].push(data["tasks"][i]);
         break;
       }
@@ -17,7 +18,8 @@ exports.viewAgenda = function(req, res) { 
   }
   for (var i=0; i<data["meetings"].length; i++) {
     for (var j=0; j<data["meetings"][i]["members"].length; j++) {
-      if (req.session.user_id == data["meetings"][i]["members"][j]) {
+      if (req.session.user_id == data["meetings"][i]["members"][j] ||
+          req.session.username == data["meetings"][i]["members"][j]) {
         mydata["meetings"].push(data["meetings"][i]);
         break;
       }

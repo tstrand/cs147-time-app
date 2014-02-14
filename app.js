@@ -53,8 +53,9 @@ app.get('/projects/save', auth.checkAuth, projects.saveProject);
 app.get('/projects/save/:projectId', auth.checkAuth, projects.saveProject);
 app.get('/projects/:projectId', auth.checkAuth, projects.viewProjects);
 app.get('/projects/edit/:projectId', auth.checkAuth, projects.editProject);
-app.get('/createtask', auth.checkAuth, createtask.createTaskMeeting);
-app.get('/createtask/:projectId', auth.checkAuth, createtask.createTaskMeeting);
+app.get('/create', auth.checkAuth, createtask.createTaskMeeting);
+app.get('/create/:projectId', auth.checkAuth, createtask.createTaskMeeting);
+app.post('/create/meeting', auth.checkAuth, createtask.createMeeting);
 
 // Example route
 // app.get('/users', user.list);

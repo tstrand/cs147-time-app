@@ -28,6 +28,7 @@
     <h3 class="page-header">
       {{pageName}}
       <a href="/projects/edit/{{id}}" class="header_edit">edit</a>
+      <a href="/create/{{id}}" class="header_edit">+task/meeting</a>
     </h3>
 
     <span class="type-title">tasks</span>
@@ -63,10 +64,12 @@
     <div class="todo-card meeting" id="meeting{{id}}">
       <span class="project-name">{{project}}</span><span class="type-name">meeting</span>
       <p class="task-name">{{name}}</p>
-      <span class="duedate">due by {{dueDate}}</span>
+      <span class="duedate">due by {{datetime}}</span>
       <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
         <span class="notes-title">notes</span>
         <p class="notes-text">{{notes}}</p>
+        <span class="notes-title">attendees</span>
+        <p class="notes-text">{{members}}</p>
       </div>
     </div>
     {{/each}}
@@ -98,7 +101,8 @@
     <br/>
 	</div>
 
-	<script src="https://code.jquery.com/jquery.js"></script>
+	<!--<script src="https://code.jquery.com/jquery.js"></script>-->
+  <script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/agenda.js"></script>
 </body>
