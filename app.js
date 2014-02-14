@@ -52,6 +52,7 @@ app.get('/projects/create', auth.checkAuth, projects.createProject);
 app.get('/projects/save', auth.checkAuth, projects.saveProject);
 app.get('/projects/save/:projectId', auth.checkAuth, projects.saveProject);
 app.get('/projects/:projectId', auth.checkAuth, projects.viewProjects);
+app.get('/projects/:projectId/tasks/:taskId', auth.checkAuth, createtask.viewTask);
 app.get('/projects/edit/:projectId', auth.checkAuth, projects.editProject);
 app.get('/create', auth.checkAuth, createtask.createTaskMeeting);
 app.get('/create/:projectId', auth.checkAuth, createtask.createTaskMeeting);

@@ -35,12 +35,12 @@
     color: #555;
 }
 
-.detail-button {
+.detail-button, .task-button {
     float: right;
     font-size: 12px;
 }
 
-.detail-button:hover {
+.detail-button:hover, .task-button:hover {
     cursor: pointer;
     text-decoration: none;
 }

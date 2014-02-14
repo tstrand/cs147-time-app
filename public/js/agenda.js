@@ -22,6 +22,12 @@ function initializePage() {
 		document.location.href='/projects/' + id;
 	});
 
+	$(".task-button").click(function (e) {
+		e.stopPropagation();
+		var id = $(this).attr('id');
+		document.location.href='/projects/' + id;
+	});
+
 	$(".subtask_checkbox").click(function(e) {
 		e.stopPropagation();
 

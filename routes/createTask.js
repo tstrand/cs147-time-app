@@ -1,5 +1,32 @@
 var data = require('../data.json');
 
+exports.viewTask = function(req, res) {
+	var projectId = req.params.projectId; 
+  	var taskId = req.params.taskId;
+	var object;
+	for(var i = 0; i < data["tasks"].length; i++) {
+		if(data["tasks"][i]["id"] == taskId) {
+			object = data["tasks"][i];
+			break; 
+		}
+	}
+	var subtasks = [];
+	for(var i = 0; i < data["tasks"].length; i++) {
+		if(data["tasks"][i]["parent"] == taskId) {
+			subtasks.push(data["tasks"][i]);
+		}
+	}
+	object["subtasks"] = subtasks;
+	//getting project name
+    for (var j=0; j<data["projects"].length; j++) {
+      if (data["projects"][j]["id"] == projectId) {
+        object["project_name"] = data["projects"][j]["name"];
+        break;
+      }
+    }
+	res.render('task', object);
+}
+
 exports.createTaskMeeting = function(req, res) {
 	var projectId = req.params.projectId; 
   	if (!projectId) res.redirect('/projects');
