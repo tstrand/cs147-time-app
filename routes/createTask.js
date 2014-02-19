@@ -30,7 +30,23 @@ exports.viewTask = function(req, res) {
 exports.createTaskMeeting = function(req, res) {
 	var projectId = req.params.projectId; 
   	if (!projectId) res.redirect('/projects');
-	res.render('createTask', {"projectId":projectId});
+
+  	var object = {}
+  	object["projectId"] = projectId;
+  	for (var j=0; j<data["projects"].length; j++) {
+      if (data["projects"][j]["id"] == projectId) {
+        object["project_members"] = data["projects"][j]["members"];
+        break;
+      }
+    }
+	res.render('createTask', object);
+}
+
+exports.editTask = function(req, res) {
+	var projectId = req.params.projectId;
+	var id = req.params.id;
+	// TODO: implement edit Task and edit Meeting
+	//res.render('createTask', )
 }
 
 exports.createMeeting = function(req, res) {

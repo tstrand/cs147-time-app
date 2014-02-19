@@ -73,7 +73,7 @@
         "dueDate": "2014-02-14",
         "notes": "",
         "parent": 1,
-        "done": false,
+        "done": true,
         "members": [1,2,3],
         "progress": 3
       },
@@ -84,7 +84,7 @@
         "dueDate": "2014-02-14",
         "notes": "",
         "parent": 1,
-        "done": false,
+        "done": true,
         "members": [3],
         "progress": 3
       },

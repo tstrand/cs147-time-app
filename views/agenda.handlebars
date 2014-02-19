@@ -29,6 +29,7 @@
     <a id="task-box-button" class="collapse-button">collapse</a>
     <div id="task-box">
       {{#each tasks}}
+      {{#unless done}}
       <div class="todo-card task" id="task{{id}}">
         <span class="project-name">{{project}}</span>
         <p class="task-name"><input class="subtask_checkbox" type="checkbox" id="{{id}}">{{name}}</p>
@@ -44,6 +45,7 @@
           {{/if}}
         </div>
       </div>
+      {{/unless}}
       {{/each}}
     </div>
 
@@ -67,6 +69,31 @@
           {{/if}}
         </div>
       </div>
+      {{/each}}
+    </div>
+
+    <br>
+    <span class="type-title">completed</span>
+    <a id="completed-box-button" class="collapse-button">collapse</a>
+    <div id="completed-box">
+      {{#each tasks}}
+      {{#if done}}
+      <div class="todo-card completed" id="task{{id}}">
+        <span class="project-name">{{project}}</span>
+        <p class="task-name" id="subtask{{id}}" style="text-decoration: line-through"><input class="subtask_checkbox" type="checkbox" id="{{id}}" checked>{{name}}</p>
+        <span class="duedate">due by {{dueDate}}</span><a class="detail-button" id="{{project_id}}">View project &raquo;</a>
+        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+          <span class="notes-title">part of task</span>
+          <p class="notes-text">{{parent_name}}<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a></p>
+          <span class="notes-title">project</span>
+          <p class="notes-text">{{project_name}}</p>
+          {{#if notes}}
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          {{/if}}
+        </div>
+      </div>
+      {{/if}}
       {{/each}}
     </div>
 

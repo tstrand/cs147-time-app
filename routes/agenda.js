@@ -7,6 +7,7 @@ exports.viewAgenda = function(req, res) { 
   mydata = {};
   mydata["tasks"] = [];
   mydata["meetings"] = [];
+  mydata["completedSubtasks"] = []
   for (var i=0; i<data["tasks"].length; i++) {
   	for (var j=0; j<data["tasks"][i]["members"].length; j++) {
       if ((req.session.user_id == data["tasks"][i]["members"][j] ||
