@@ -23,20 +23,35 @@
 }
 
 .duedate_title{
-	text-align: center;
-	font-weight: bold;
+	text-align: right;
+	text-transform: lowercase;
+	width: 80px;
+	margin-right: 10px;
 }
 
 .duedate_text{
 	font-style: italic;
+	font-weight: bold;
 }
 
 .description_title{
-	text-align: center;
+	text-align: right;
+	text-transform: lowercase;
+	width: 80px;
+	margin-right: 10px;
+}
+
+.description_text{
 	font-weight: bold;
 }
 
 .members_title{
-	text-align: center;
+	text-align: right;
+	text-transform: lowercase;
+	width: 80px;
+	margin-right: 10px;
+}
+
+.members_text{
 	font-weight: bold;
 }
