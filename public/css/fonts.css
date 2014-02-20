@@ -1,0 +1,57 @@
+.task-name{
+	text-transform: uppercase;
+	font-size: 17px;
+	font-weight: bold;
+}
+
+.duedate{
+	font-style: italic;
+}
+
+.notes-text{
+	font-family: "Arial", sans-serif;
+	text-indent: 20px;
+	font-size: 14px;
+}
+
+.notes-title{
+	text-transform: uppercase;
+}
+
+.project_title{
+	text-transform: uppercase;
+}
+
+.duedate_title{
+	text-align: right;
+	text-transform: lowercase;
+	width: 80px;
+	margin-right: 10px;
+}
+
+.duedate_text{
+	font-style: italic;
+	font-weight: bold;
+}
+
+.description_title{
+	text-align: right;
+	text-transform: lowercase;
+	width: 80px;
+	margin-right: 10px;
+}
+
+.description_text{
+	font-weight: bold;
+}
+
+.members_title{
+	text-align: right;
+	text-transform: lowercase;
+	width: 80px;
+	margin-right: 10px;
+}
+
+.members_text{
+	font-weight: bold;
+}
