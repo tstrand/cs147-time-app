@@ -28,11 +28,20 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <!--<span class="navbar-brand"><a href="/">&laquo; Back</a></span>-->
-        <span class="navbar-brand" style="float:right;">Create Task/Meeting</span>
+        {{#if taskedit}}
+        <span class="navbar-brand" style="float:right;">Edit Task</span>
+        {{else}}
+          {{#if meetingedit}}
+          <span class="navbar-brand" style="float:right;">Edit Meeting</span>
+          {{else}}
+          <span class="navbar-brand" style="float:right;">Create Task/Meeting</span>
+          {{/if}}
+        {{/if}}
       </div>
     </nav>
 
     <div>
+      {{#if create}}
       <label class="radio-inline">
         <input type="radio" name="taskmeeting" id="taskRadio" value="task" checked>
         Task
@@ -41,21 +50,29 @@
         <input type="radio" name="taskmeeting" id="meetingRadio" value="meeting">
         Meeting        
       </label>
+      {{/if}}
     </div>
 
+    {{#if meetingedit}}
+    <div id="createMeeting">
+    {{else}}
     <div id="createMeeting" style="display:none;">
+    {{/if}}
       <form method="post" action="/create/meeting">
+        <input type="hidden" id="id" name="id" value="{{id}}">
         <div class="form-group">
           <label>name</label>
-          <input type="text" id="name" name="name" class="form-control" placeholder="name" required>
+          <input type="text" id="name" name="name" class="form-control" placeholder="name" value="{{name}}" required>
         </div>
         <div class="form-group">
           <label>date</label>
-          <input type="text" id="duedate" name="duedate" class="form-control datepicker" placeholder="select a date" required>
+          <input type="text" id="duedate" name="duedate" class="form-control datepicker" placeholder="select a date" value="{{date}}" required>
         </div>
         <div class="form-group">
+          <input type="hidden" id="hour" value="{{hour}}">
+          <input type="hidden" id="min" value="{{min}}">
           <label>time</label><br/>
-          <select id="meeting-hour" name="hour">
+          <select id="meeting-hour" name="hour" value="04">
             <option value="00">0</option>
             <option value="01">1</option>
             <option value="02">2</option>
@@ -91,40 +108,48 @@
         </div>
         <div class="form-group">
           <label>notes</label>
-          <textarea type="text" id="notes" name="notes" class="form-control" placeholder="notes"></textarea>
+          <textarea type="text" id="notes" name="notes" class="form-control" placeholder="notes">{{notes}}</textarea>
         </div>
         <div class="form-group">
           <label>attendees</label>
           <br/>
           {{#each project_members}}
             <input class="attendee_checkbox" type="checkbox" value="{{this}}">
-            {{this}}
-            &nbsp;
+            <span style="margin-right:5px;">{{this}}</span>
           {{/each}}
-          <input type="hidden" id="attendees" name="attendees" class="form-control" placeholder="(ex, john,tyler,mark)">
+          <input type="hidden" id="attendees" name="attendees" class="form-control" placeholder="(ex, john,tyler,mark)" value="{{members}}">
           <input type="hidden" id="projecId" name="projectId" value="{{projectId}}">
         </div>
 
         <div class="form-group">
           <a class="btn btn-default" href="/projects/{{projectId}}">Cancel</a>
+          {{#if create}}
           <button type="submit" class="btn btn-info">Create</button>
+          {{else}}
+          <button type="submit" class="btn btn-info">Save</button>
+          {{/if}}
         </div>
       </form>
     </div>
 
+    {{#if meetingedit}}
+    <div id="createTask" style="display:none;">
+    {{else}}
     <div id="createTask">
+    {{/if}}
       <form method="post" action="/create/task">
+        <input type="hidden" id="id" name="id" value="{{id}}">
         <div class="form-group">
           <label>name</label>
-          <input type="text" id="name" name="name" class="form-control" placeholder="name" required>
+          <input type="text" id="name" name="name" class="form-control" placeholder="name" value="{{name}}" required>
         </div>
         <div class="form-group">
           <label>due date</label>
-          <input type="text" id="duedate" name="duedate" class="form-control datepicker" placeholder="select a date" required>
+          <input type="text" id="duedate" name="duedate" class="form-control datepicker" placeholder="select a date" value="{{dueDate}}" required>
         </div>
         <div class="form-group">
           <label>notes</label>
-          <textarea type="text" id="notes" name="notes" class="form-control" placeholder="notes"></textarea>
+          <textarea type="text" id="notes" name="notes" class="form-control" placeholder="notes">{{notes}}</textarea>
         </div>
         <div class="form-group">
           <label>checklist (max # 5)</label>
@@ -133,57 +158,68 @@
             <a id="add_item" class="btn btn-sm btn-info">add item</a>
           </div>
           <div id="st1" class="checklist_items">
-            <input type="text" id="subtask1" name="subtask1" class="form-control" placeholder="item 1"></input>
+            <input type="text" id="subtask1" name="subtask1" class="form-control" placeholder="item 1" value="{{item1.name}}"></input>
             assign item 1 to
-            <input type="hidden" id="assigned1" name="assigned1" class="form-control" placeholder="ex) john, tyler">
+            <input type="hidden" id="assigned1" name="assigned1" class="form-control" placeholder="ex) john, tyler" value="{{item1.members}}">
             {{#each project_members}}
               <input class="assignee_checkbox1" type="checkbox" value="{{this}}">
-              {{this}}
-              &nbsp;
+              <span style="margin-right:5px;">{{this}}</span>
             {{/each}}
             <br/>
           </div>
+          {{#if item2}}
+          <div id="st2" class="checklist_items">
+          {{else}}
           <div id="st2" style="display:none;" class="checklist_items">
-            <input type="text" id="subtask2" name="subtask2" class="form-control" placeholder="item 2"></input>
+          {{/if}}
+            <input type="text" id="subtask2" name="subtask2" class="form-control" placeholder="item 2" value="{{item2.name}}"></input>
             assign item 2 to
-            <input type="hidden" id="assigned2" name="assigned2" class="form-control" placeholder="ex) john, tyler">
+            <input type="hidden" id="assigned2" name="assigned2" class="form-control" placeholder="ex) john, tyler" value="{{item2.members}}">
             {{#each project_members}}
               <input class="assignee_checkbox2" type="checkbox" value="{{this}}">
-              {{this}}
-              &nbsp;
+              <span style="margin-right:5px;">{{this}}</span>
             {{/each}}
             <br/>
           </div>
+          {{#if item3}}
+          <div id="st3" class="checklist_items">
+          {{else}}
           <div id="st3" style="display:none;" class="checklist_items">
-            <input type="text" id="subtask3" name="subtask3" class="form-control" placeholder="item 3"></input>
+          {{/if}}
+            <input type="text" id="subtask3" name="subtask3" class="form-control" placeholder="item 3" value="{{item3.name}}"></input>
             assign item 3 to
-            <input type="hidden" id="assigned3" name="assigned3" class="form-control" placeholder="ex) john, tyler">
+            <input type="hidden" id="assigned3" name="assigned3" class="form-control" placeholder="ex) john, tyler" value="{{item3.members}}">
             {{#each project_members}}
               <input class="assignee_checkbox3" type="checkbox" value="{{this}}">
-              {{this}}
-              &nbsp;
+              <span style="margin-right:5px;">{{this}}</span>
             {{/each}}
             <br/>
           </div>
+          {{#if item4}}
+          <div id="st4" class="checklist_items">
+          {{else}}
           <div id="st4" style="display:none;" class="checklist_items">
-            <input type="text" id="subtask4" name="subtask4" class="form-control" placeholder="item 4"></input>
+          {{/if}}
+            <input type="text" id="subtask4" name="subtask4" class="form-control" placeholder="item 4" value="{{item4.name}}"></input>
             assign item 4 to
-            <input type="hidden" id="assigned4" name="assigned4" class="form-control" placeholder="ex) john, tyler">
+            <input type="hidden" id="assigned4" name="assigned4" class="form-control" placeholder="ex) john, tyler" value="{{item4.members}}">
             {{#each project_members}}
               <input class="assignee_checkbox4" type="checkbox" value="{{this}}">
-              {{this}}
-              &nbsp;
+              <span style="margin-right:5px;">{{this}}</span>
             {{/each}}
             <br/>
           </div>
+          {{#if item5}}
+          <div id="st5" class="checklist_items">
+          {{else}}
           <div id="st5" style="display:none;" class="checklist_items">
-            <input type="text" id="subtask5" name="subtask5" class="form-control" placeholder="item 5"></input>
+          {{/if}}
+            <input type="text" id="subtask5" name="subtask5" class="form-control" placeholder="item 5" value="{{item5.name}}"></input>
             assign item 5 to
-            <input type="hidden" id="assigned5" name="assigned5" class="form-control" placeholder="ex) john, tyler">
+            <input type="hidden" id="assigned5" name="assigned5" class="form-control" placeholder="ex) john, tyler" value="{{item5.members}}">
             {{#each project_members}}
               <input class="assignee_checkbox5" type="checkbox" value="{{this}}">
-              {{this}}
-              &nbsp;
+              <span style="margin-right:5px;">{{this}}</span>
             {{/each}}
           </div>
 
@@ -192,7 +228,11 @@
 
         <div class="form-group">
           <a class="btn btn-default" href="/projects/{{projectId}}">Cancel</a>
+          {{#if create}}
           <button type="submit" class="btn btn-info">Create</button>
+          {{else}}
+          <button type="submit" class="btn btn-info">Save</button>
+          {{/if}}
         </div>
       </form>
     </div>

@@ -4,6 +4,9 @@ var maxNumItem = 5;
 
 $(document).ready(function() {
 	initializePage();
+	if ($("#id").val()) {
+		populateForEdit();
+	}
 })
 
 function initializePage() {
@@ -66,5 +69,36 @@ function initializePage() {
 			usr_string = usr_string.slice(0, usr_string.length - 1);
 		}
 		$("#attendees").val(usr_string);
+	})
+}
+
+function populateForEdit() {
+	/* for task */
+	var counter = 0;
+	for (var i=1; i<maxNumItem + 1; i++) {
+		(function(i) {
+			var members = $("#assigned" + i).val();
+			if (members) counter++;
+			var membersList = members.split(",");
+			$(".assignee_checkbox" + i).each(function() {
+				if (membersList.indexOf($(this).next().text()) != -1) {
+					this.checked = true;
+				}
+			})
+		})(i);
+	}
+	numItem = counter;
+
+	/* for meeting */
+	$("#meeting-hour").val($("#hour").val());
+	$("meeting-min").val($("#min").val());
+	var members = $("#attendees").val();
+	var membersList = members.split(",");
+	console.log(membersList)
+	$(".attendee_checkbox").each(function() {
+		if (membersList.indexOf($(this).next().text()) != -1) {
+			this.checked = true;
+			console.log(this);
+		}
 	})
 }

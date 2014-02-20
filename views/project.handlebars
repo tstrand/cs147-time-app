@@ -56,7 +56,7 @@
             </tr>
           {{/each}}
           </table>
-          <a class="task-button" href="#">edit</a>
+          <a class="task-button" href="/edit/task/{{project_id}}/{{id}}">edit</a>
         </div>
       </div>
       {{/each}}
@@ -76,7 +76,7 @@
           <p class="notes-text">{{notes}}</p>
           <span class="notes-title">attendees</span>
           <p class="notes-text">{{members}}</p>
-          <a class="task-button" href="#">edit</a>
+          <a class="task-button" href="/edit/meeting/{{project_id}}/{{id}}">edit</a>
         </div>
       </div>
       {{/each}}
@@ -103,6 +103,7 @@
             </tr>
           {{/each}}
           </table>
+          <a class="task-button" href="/edit/task/{{project_id}}/{{id}}">edit</a>
         </div>
       </div>
       {{/each}}
