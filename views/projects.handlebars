@@ -9,6 +9,7 @@
     <link href="/css/main.css" rel="stylesheet">
     <link href="/css/projects.css" rel="stylesheet">
     <link href="/css/agenda.css" rel="stylesheet">
+    <link href="/css/fonts.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,14 +30,14 @@
       {{#each projects}}
         <a id="{{id}}" class="thumbnail project">
           <h3 class="project_title">{{name}}</h3>
-          <div class="duedate_title">Due Date:</div><span class="duedate_text">{{dueDate}}</span><div id="{{id}}" class="detail-button">view project &raquo;</div>
+          <div class="duedate_title">Due Date</div><span class="duedate_text">{{dueDate}}</span><div id="{{id}}" class="detail-button">view project &raquo;</div>
           <div class="more_info" id="{{id}}">
             <div class="description" id="{{id}}">
-              <div class="description_title">Description:</div>
+              <div class="description_title">Description</div>
               <div class="description_text">{{description}}</div>
             </div>
             <div class="members" id="{{id}}">
-              <div class="members_title">Members:</div>
+              <div class="members_title">Members</div>
               <div class="members_text">{{members}}</div>
             </div>
           </div>
