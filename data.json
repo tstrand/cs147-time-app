@@ -49,10 +49,16 @@
         "project_id": 1,
         "name": "Prototyping",
         "dueDate": "2014-02-6",
+        "duration": -1,
         "notes": "prototying stage",
         "parent": -1,
+<<<<<<< HEAD
         "done": true,
         "members": ["john","tyler","mark"],
+=======
+        "done": 0,
+        "members": [1, 2, 3],
+>>>>>>> fdeb064c22fa757cc219af2bd303ba596e92516a
         "progress": 3
       },
       {
@@ -60,10 +66,16 @@
         "project_id": 1,
         "name": "meat on the bones",
         "dueDate": "2014-02-14",
+        "duration": 5,
         "notes": "A much shorter note",
         "parent": -1,
+<<<<<<< HEAD
         "done": false,
         "members": ["john","tyler","mark"],
+=======
+        "done": 0,
+        "members": [1, 2, 3],
+>>>>>>> fdeb064c22fa757cc219af2bd303ba596e92516a
         "progress": 3
       },
       {
@@ -71,10 +83,16 @@
         "project_id": 1,
         "name": "brainstorming",
         "dueDate": "2014-02-14",
+        "duration": 5,
         "notes": "",
         "parent": 1,
+<<<<<<< HEAD
         "done": true,
         "members": ["john","tyler","mark"],
+=======
+        "done": 0,
+        "members": [1,2,3],
+>>>>>>> fdeb064c22fa757cc219af2bd303ba596e92516a
         "progress": 3
       },
       {
@@ -82,10 +100,16 @@
         "project_id": 1,
         "name": "finish design sketch",
         "dueDate": "2014-02-14",
+        "duration": 5,
         "notes": "",
         "parent": 1,
+<<<<<<< HEAD
         "done": true,
         "members": ["mark"],
+=======
+        "done": 0,
+        "members": [3],
+>>>>>>> fdeb064c22fa757cc219af2bd303ba596e92516a
         "progress": 3
       },
       {
@@ -93,9 +117,10 @@
         "project_id": 1,
         "name": "implement login page",
         "dueDate": "2014-02-14",
+        "duration": 5,
         "notes": "",
         "parent": 2,
-        "done": false,
+        "done": 0,
         "members": ["john"],
         "progress": 3
       }

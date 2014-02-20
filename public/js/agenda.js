@@ -28,16 +28,7 @@ function initializePage() {
 		document.location.href='/projects/' + id;
 	});
 
-	$(".subtask_checkbox").click(function(e) {
-		e.stopPropagation();
-
-		var subtask = $("#subtask" + this.id);
-		if(this.checked) {
-			subtask.css("text-decoration", "line-through");
-		} else {
-			subtask.css("text-decoration", "none");
-		}
-	});
+	$(".subtask_line").click(toggleSubtask);
 
 	$("#task-box-button").click(function(e) {
 		e.preventDefault();
@@ -69,6 +60,25 @@ function initializePage() {
 		}
 	});
 
+}
 
+function toggleSubtask(e) {
+	e.stopPropagation();
 
+	var subtask = $("#subtask" + this.id);
+	var checkbox = $("#checkbox" + this.id);
+	if(!checkbox.prop('checked')) {
+		subtask.css("text-decoration", "line-through");
+		checkbox.prop('checked', true);
+		$.get("/subtasks/" + this.id + "/1", callback)
+	} else {
+		subtask.css("text-decoration", "none");
+		checkbox.prop('checked', false);
+		$.get("/subtasks/" + this.id + "/0", callback)
+	}
+}
+
+function callback(response) {
+	console.log("response");
+	console.log(response);
 }

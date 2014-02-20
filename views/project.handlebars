@@ -46,14 +46,15 @@
           <span class="notes-title">checklist</span>
           <table class="subtask_table">
           {{#each subtasks}}
-            <tr>
+            <tr class="subtask_line" id="{{id}}">
               {{#if done}}
-                <td><input class="subtask_checkbox" type="checkbox" id="{{id}}" checked></td>
+                <td><input type="checkbox" id="checkbox{{id}}" checked></td>
                 <td id="subtask{{id}}" style="text-decoration: line-through">{{name}}</td>
               {{else}}
-                <td><input class="subtask_checkbox" type="checkbox" id="{{id}}"></td>
+                <td><input type="checkbox" id="checkbox{{id}}"></td>
                 <td id="subtask{{id}}">{{name}}</td>
               {{/if}}
+              <td class="subtask_duration">[{{duration}} hours]</td>
             </tr>
           {{/each}}
           </table>
@@ -98,9 +99,10 @@
           <span class="notes-title">subtasks</span>
           <table class="subtask_table">
           {{#each subtasks}}
-            <tr>
-              <td><input class="subtask_checkbox" type="checkbox" id="{{id}}" checked></td>
-              <td id="subtask{{id}}" style="text-decoration: line-through">{{name}}</td>
+            <tr class="subtask_line" id="{{id}}">
+              <td><input type="checkbox" id="checkbox{{id}}" checked></td>
+              <td id="subtask{{id}}" style="text-decoration: line-through">{{name}}</td>    
+              <td class="subtask_duration">[{{duration}} hours]</td>
             </tr>
           {{/each}}
           </table>

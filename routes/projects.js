@@ -96,6 +96,52 @@ exports.editProject = function(req, res) { 
 	res.render('saveProject', object);
  }
 
+exports.updateSubtask = function(req, res) {
+	var subtask_id = req.params.subtaskId;
+	var bool = req.params.bool;
+	var task_id;
+	for (var i=0; i<data["tasks"].length; i++) {
+	  	if (data["tasks"][i]["id"] == subtask_id) {
+	  		console.log("change " + data["tasks"][i]["name"] + " to " + bool);
+	  		data["tasks"][i]["done"] = parseInt(bool);
+	  		task_id = data["tasks"][i]["parent"];
+	  		break;
+        }
+    }
+
+    var percent = updateTask(task_id, bool, data);
+	var obj = [bool, percent];
+	res.json(obj);
+}
+
+function updateTask(task_id, bool, data) {
+	var num = 0;
+	var denom = 0;
+
+	for (var i=0; i<data["tasks"].length; i++) {
+	  	if (data["tasks"][i]["parent"] == task_id) {
+	  		console.log("denom += " + data["tasks"][i]["duration"]);
+	  		denom += data["tasks"][i]["duration"];
+	  		console.log(data["tasks"][i]["name"] + " done ? " + data["tasks"][i]["done"]);
+	  		console.log(data["tasks"][i]["done"]);
+	  		if(data["tasks"][i]["done"] == 1) {
+	  			console.log("num += " + data["tasks"][i]["duration"]);
+	  			num += data["tasks"][i]["duration"];
+	  		}
+        }
+    }
+
+    for (var i=0; i<data["tasks"].length; i++) {
+	  	if (data["tasks"][i]["id"] == task_id) {
+	  		console.log("task done ?  " + (num == denom));
+	  		data["tasks"][i]["done"] = (num == denom);
+        }
+    }
+
+    var data = [num, denom];
+    return data;
+}
+
 exports.saveProject = function(req, res) {
 	var id = req.params.projectId; 
 	var edit = id ? true : false;
