@@ -29,6 +29,7 @@ function initializePage() {
 	});
 
 	$(".subtask_line").click(toggleSubtask);
+	$(".task-name").click(toggleSubtask);
 
 	$("#task-box-button").click(function(e) {
 		e.preventDefault();

@@ -37,7 +37,7 @@
     <div id="task-box">
       {{#each tasks}}
       <div class="todo-card task" id="task{{id}}">
-        <span class="project-name">{{project}}</span>
+        <span class="type-name">task</span>
         <p class="task-name">{{name}}</p>
         <p class="duedate">due by {{dueDate}}</p>
         <span class="progress_line" id="progress_line{{id}}">{{progress}}% complete</span><a class="task-button" id="{{project_id}}/tasks/{{id}}">View task &raquo;</a>
@@ -71,7 +71,7 @@
     <div id="meeting-box">
       {{#each meetings}}
       <div class="todo-card meeting" id="meeting{{id}}">
-        <span class="project-name">{{project}}</span><span class="type-name">meeting</span>
+        <span class="type-name">meeting</span>
         <p class="task-name">{{name}}</p>
         <span class="duedate">{{datetime}}</span>
         <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
@@ -91,7 +91,6 @@
     <div id="completed-box">
       {{#each completed_tasks}}
       <div class="todo-card completed" id="task{{id}}">
-        <span class="project-name">{{project}}</span><span class="type-name">task</span>
         <p class="task-name">{{name}}</p>
         <p class="duedate">due by {{dueDate}}</p>
         <span class="progress_line" id="progress_line{{id}}">{{progress}}% complete</span><a class="task-button" id="{{project_id}}/tasks/{{id}}">View task &raquo;</a>
