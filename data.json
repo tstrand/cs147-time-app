@@ -52,13 +52,8 @@
         "duration": -1,
         "notes": "prototying stage",
         "parent": -1,
-<<<<<<< HEAD
-        "done": true,
-        "members": ["john","tyler","mark"],
-=======
         "done": 0,
-        "members": [1, 2, 3],
->>>>>>> fdeb064c22fa757cc219af2bd303ba596e92516a
+        "members": ["john","tyler","mark"],
         "progress": 3
       },
       {
@@ -69,13 +64,8 @@
         "duration": 5,
         "notes": "A much shorter note",
         "parent": -1,
-<<<<<<< HEAD
-        "done": false,
-        "members": ["john","tyler","mark"],
-=======
         "done": 0,
-        "members": [1, 2, 3],
->>>>>>> fdeb064c22fa757cc219af2bd303ba596e92516a
+        "members": ["john","tyler","mark"],
         "progress": 3
       },
       {
@@ -86,13 +76,8 @@
         "duration": 5,
         "notes": "",
         "parent": 1,
-<<<<<<< HEAD
-        "done": true,
-        "members": ["john","tyler","mark"],
-=======
         "done": 0,
-        "members": [1,2,3],
->>>>>>> fdeb064c22fa757cc219af2bd303ba596e92516a
+        "members": ["john","tyler","mark"],
         "progress": 3
       },
       {
@@ -103,13 +88,8 @@
         "duration": 5,
         "notes": "",
         "parent": 1,
-<<<<<<< HEAD
-        "done": true,
-        "members": ["mark"],
-=======
         "done": 0,
-        "members": [3],
->>>>>>> fdeb064c22fa757cc219af2bd303ba596e92516a
+        "members": ["mark"],
         "progress": 3
       },
       {
