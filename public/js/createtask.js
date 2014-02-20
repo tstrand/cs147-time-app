@@ -87,7 +87,7 @@ function populateForEdit() {
 			})
 		})(i);
 	}
-	numItem = counter;
+	if (counter) numItem = counter;
 
 	/* for meeting */
 	$("#meeting-hour").val($("#hour").val());
@@ -98,7 +98,6 @@ function populateForEdit() {
 	$(".attendee_checkbox").each(function() {
 		if (membersList.indexOf($(this).next().text()) != -1) {
 			this.checked = true;
-			console.log(this);
 		}
 	})
 }

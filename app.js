@@ -14,6 +14,7 @@ var projects = require('./routes/projects');
 var agenda = require('./routes/agenda');
 var createtask = require('./routes/createTask');
 var auth = require('./routes/auth');
+var api = require('./routes/api');
 
 // Example route
 // var user = require('./routes/user');
@@ -61,6 +62,10 @@ app.post('/create/meeting', auth.checkAuth, createtask.createMeeting);
 app.post('/create/task', auth.checkAuth, createtask.createTask);
 app.get('/edit/meeting/:projectId/:id', auth.checkAuth, createtask.editMeeting);
 app.get('/edit/task/:projectId/:id', auth.checkAuth, createtask.editTask);
+
+/* api calls */
+app.get('/api/get_users', auth.checkAuth, api.getUsers);
+app.get('/api/valid/:username', auth.checkAuth, api.validUser);
 
 // Example route
 // app.get('/users', user.list);

@@ -10,6 +10,7 @@
 	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
 	<link href="/css/datepicker.css" rel="stylesheet">
 	<link href="/css/main.css" rel="stylesheet">
+  <link href="/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
 	<!-- this is a comment in HTML -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -57,15 +58,26 @@
   		</div>
   		<div class="form-group">
     		<label for="members">Members</label>
-        {{#if edit}}
-          <textarea class="form-control" id="members" name="members" rows="3" placeholder="Enter a list of members" required>{{members}}</textarea>
-        {{else}}
-          <textarea class="form-control" id="members" name="members" rows="3" placeholder="Enter a list of members" required></textarea>
-        {{/if}}
+        <div class="row">
+          <div class="col-xs-9">
+            <input type="text" class="form-control" id="members_input" name="members_input" placeholder="Enter username">
+          </div>
+          <div class="col-xs-1">
+            <a id="add_member_btn" class="btn btn-default btn-sm">Add</a>
+          </div>
+        </div>
+        <input type="hidden" id="members" name="members" value="{{members}}">
+        <div>
+          <ul id="members_list">
+            {{#each members}}
+              <li><span style="margin-right:10px">{{this}}</span><a class="remove_member" onclick="removeMember(this);">X</a></li>
+            {{/each}}
+          </ul>
+        </div>
   		</div>
 
-      <button type="submit" class="btn btn-info btn-lg right_button">Save</button>
-    	<button class="btn btn info btn-small right_button" type="button">Cancel</button>
+      <button type="submit" class="btn btn-info right_button">Save</button>
+    	<button class="btn btn-default right_button" type="button" onclick="window.history.back()">Cancel</button>
     	
 	</form>
 
@@ -74,6 +86,7 @@
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/bootstrap-datepicker.js"></script>
+  <script src="/js/jquery-ui-1.10.4.custom.min.js"></script>
 	<script src="/js/projects.js"></script>
 	<script>
 		$('.datepicker').datepicker();

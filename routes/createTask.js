@@ -153,7 +153,8 @@ exports.createTask = function(req, res) {
     "name": req.body.name,
     "notes": req.body.notes,
     "parent": -1,
-    "done": false,
+    "done": 0,
+    "duration": -1,
     "dueDate": req.body.duedate,
     "members": [req.session.username] //by default creator is the owner of that task
   }
@@ -162,20 +163,24 @@ exports.createTask = function(req, res) {
   // add subtasks
   var subtasks = [req.body.subtask1, req.body.subtask2, req.body.subtask3, req.body.subtask4, req.body.subtask5];
   var assignees = [req.body.assigned1,req.body.assigned2,req.body.assigned3,req.body.assigned4,req.body.assigned5];
+  var durations = [req.body.duration1,req.body.duration2,req.body.duration3,req.body.duration4,req.body.duration5];
   for (var i=0; i<5; i++) {
     if (subtasks[i] != "") {
       var members = []
       for (var j in assignees[i].split(",")) {
         members.push(assignees[i].split(",")[j].trim());
       }
+      var duration = 0;
+      if (parseInt(durations[i])) duration = parseInt(durations[i]);
       var newSubTask = {
         "id": Math.floor(Math.random() * 1000) + 10,
         "project_id": req.body.projectId,
         "name": subtasks[i],
         "notes": "",
         "parent": id,
-        "done": false,
+        "done": 0,
         "dueDate": req.body.duedate,
+        "duration": duration,
         "members": members
       }
       data["tasks"].push(newSubTask);

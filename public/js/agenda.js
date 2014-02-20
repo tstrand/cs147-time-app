@@ -64,17 +64,26 @@ function initializePage() {
 
 function toggleSubtask(e) {
 	e.stopPropagation();
-
 	var subtask = $("#subtask" + this.id);
 	var checkbox = $("#checkbox" + this.id);
-	if(!checkbox.prop('checked')) {
-		subtask.css("text-decoration", "line-through");
-		checkbox.prop('checked', true);
-		$.get("/subtasks/" + this.id + "/1", callback)
+	if ($(e.target).is("input")) {
+		if(checkbox.prop('checked')) {
+			subtask.css("text-decoration", "line-through");
+			$.get("/subtasks/" + this.id + "/1", callback)
+		} else {
+			subtask.css("text-decoration", "none");
+			$.get("/subtasks/" + this.id + "/0", callback)
+		}
 	} else {
-		subtask.css("text-decoration", "none");
-		checkbox.prop('checked', false);
-		$.get("/subtasks/" + this.id + "/0", callback)
+		if(!checkbox.prop('checked')) {
+			subtask.css("text-decoration", "line-through");
+			checkbox.prop('checked', true);
+			$.get("/subtasks/" + this.id + "/1", callback)
+		} else {
+			subtask.css("text-decoration", "none");
+			checkbox.prop('checked', false);
+			$.get("/subtasks/" + this.id + "/0", callback)
+		}
 	}
 }
 

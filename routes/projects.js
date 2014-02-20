@@ -79,6 +79,7 @@ exports.viewProjects = function(req, res) { 
 
 exports.createProject = function(req, res) {
 	data["pageName"] = "Create Project";
+	data["username"] = req.session.username;
 	res.render('saveProject', data);
 }
 
