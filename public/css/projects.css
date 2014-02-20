@@ -72,3 +72,9 @@
 	float: left;
 	width: 70%;
 }
+
+.subtask_duration {
+	padding-left: 15px;
+	font-style: italic;
+	font-weight: 700;
+}
