@@ -79,6 +79,7 @@ exports.viewProjects = function(req, res) { 
 
 exports.createProject = function(req, res) {
 	data["pageName"] = "Create Project";
+	data["username"] = req.session.username;
 	res.render('saveProject', data);
 }
 
@@ -145,6 +146,8 @@ exports.saveProject = function(req, res) {
 	for (var i in req.query.members.split(",")) {
 		members.push(req.query.members.split(",")[i].trim());
 	}
+	// by default it adds the creator
+	if (members[0] == "") members = [req.session.username];
 	var project = {
 		"id": id,
 		"name": req.query.name,
