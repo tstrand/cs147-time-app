@@ -102,15 +102,13 @@ exports.updateSubtask = function(req, res) {
 	var task_id;
 	for (var i=0; i<data["tasks"].length; i++) {
 	  	if (data["tasks"][i]["id"] == subtask_id) {
-	  		console.log("change " + data["tasks"][i]["name"] + " to " + bool);
 	  		data["tasks"][i]["done"] = parseInt(bool);
 	  		task_id = data["tasks"][i]["parent"];
 	  		break;
         }
     }
-
     var percent = updateTask(task_id, bool, data);
-	var obj = [bool, percent];
+	var obj = [task_id, percent];
 	res.json(obj);
 }
 
@@ -120,12 +118,8 @@ function updateTask(task_id, bool, data) {
 
 	for (var i=0; i<data["tasks"].length; i++) {
 	  	if (data["tasks"][i]["parent"] == task_id) {
-	  		console.log("denom += " + data["tasks"][i]["duration"]);
 	  		denom += data["tasks"][i]["duration"];
-	  		console.log(data["tasks"][i]["name"] + " done ? " + data["tasks"][i]["done"]);
-	  		console.log(data["tasks"][i]["done"]);
 	  		if(data["tasks"][i]["done"] == 1) {
-	  			console.log("num += " + data["tasks"][i]["duration"]);
 	  			num += data["tasks"][i]["duration"];
 	  		}
         }
@@ -133,13 +127,12 @@ function updateTask(task_id, bool, data) {
 
     for (var i=0; i<data["tasks"].length; i++) {
 	  	if (data["tasks"][i]["id"] == task_id) {
-	  		console.log("task done ?  " + (num == denom));
 	  		data["tasks"][i]["done"] = (num == denom);
+	  		data["tasks"][i]["progress"] = (num * 100 / denom);
         }
     }
-
-    var data = [num, denom];
-    return data;
+ 
+    return (num * 100 / denom);
 }
 
 exports.saveProject = function(req, res) {

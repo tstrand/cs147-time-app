@@ -79,6 +79,14 @@ function toggleSubtask(e) {
 }
 
 function callback(response) {
-	console.log("response");
 	console.log(response);
+	var progress = $("#progress_line" + response[0]);
+	console.log(response[0]);
+	progress.html(response[1] + "% complete");
+	if(response[1] == 100) {
+		var task = $("#task" + response[0]);
+		var html = task.html();
+		task.fadeOut("slow");
+		console.log(html);
+	}
 }

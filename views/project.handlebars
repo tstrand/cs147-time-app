@@ -39,7 +39,8 @@
       <div class="todo-card task" id="task{{id}}">
         <span class="project-name">{{project}}</span>
         <p class="task-name">{{name}}</p>
-        <span class="duedate">due by {{dueDate}}</span><a class="task-button" id="{{project_id}}/tasks/{{id}}">View task &raquo;</a>
+        <p class="duedate">due by {{dueDate}}</p>
+        <span class="progress_line" id="progress_line{{id}}">{{progress}}% complete</span><a class="task-button" id="{{project_id}}/tasks/{{id}}">View task &raquo;</a>
         <div id="detailtask{{id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
@@ -90,7 +91,8 @@
       <div class="todo-card completed" id="task{{id}}">
         <span class="project-name">{{project}}</span><span class="type-name">task</span>
         <p class="task-name">{{name}}</p>
-        <span class="duedate">due by {{dueDate}}</span>
+        <p class="duedate">due by {{dueDate}}</p>
+        <span class="progress_line" id="progress_line{{id}}">{{progress}}% complete</span><a class="task-button" id="{{project_id}}/tasks/{{id}}">View task &raquo;</a>
         <div id="detailtask{{id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
