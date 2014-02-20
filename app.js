@@ -59,6 +59,8 @@ app.get('/create', auth.checkAuth, createtask.createTaskMeeting);
 app.get('/create/:projectId', auth.checkAuth, createtask.createTaskMeeting);
 app.post('/create/meeting', auth.checkAuth, createtask.createMeeting);
 app.post('/create/task', auth.checkAuth, createtask.createTask);
+app.get('/edit/meeting/:projectId/:id', auth.checkAuth, createtask.editMeeting);
+app.get('/edit/task/:projectId/:id', auth.checkAuth, createtask.editTask);
 
 // Example route
 // app.get('/users', user.list);

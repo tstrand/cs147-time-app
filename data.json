@@ -53,8 +53,8 @@
         "notes": "prototying stage",
         "parent": -1,
         "done": 0,
-        "members": [1, 2, 3],
         "progress": 0
+        "members": ["john","tyler","mark"],
       },
       {
         "id": 2,
@@ -65,8 +65,8 @@
         "notes": "A much shorter note",
         "parent": -1,
         "done": 0,
-        "members": [1, 2, 3],
         "progress": 0
+        "members": ["john","tyler","mark"],
       },
       {
         "id": 3,
@@ -77,8 +77,8 @@
         "notes": "",
         "parent": 1,
         "done": 0,
-        "members": [1,2,3],
         "progress": -1
+        "members": ["john","tyler","mark"],
       },
       {
         "id": 4,
@@ -89,8 +89,8 @@
         "notes": "",
         "parent": 1,
         "done": 0,
-        "members": [3],
         "progress": -1
+        "members": ["mark"],
       },
       {
         "id": 5,
