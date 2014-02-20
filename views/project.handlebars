@@ -11,6 +11,7 @@
 	<link href="/css/agenda.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
   <link href="/css/projects.css" rel="stylesheet"> 
+  <link href="/css/fonts.css" rel="stylesheet">
 	<!-- this is a comment in HTML -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -69,7 +70,7 @@
       <div class="todo-card meeting" id="meeting{{id}}">
         <span class="project-name">{{project}}</span><span class="type-name">meeting</span>
         <p class="task-name">{{name}}</p>
-        <span class="duedate">due by {{datetime}}</span>
+        <span class="duedate">{{datetime}}</span>
         <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
@@ -88,7 +89,7 @@
       <div class="todo-card completed" id="task{{id}}">
         <span class="project-name">{{project}}</span><span class="type-name">task</span>
         <p class="task-name">{{name}}</p>
-        <span class="duedate">{{dueDate}}</span>
+        <span class="duedate">due by {{dueDate}}</span>
         <div id="detailtask{{id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
