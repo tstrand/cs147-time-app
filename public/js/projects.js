@@ -46,6 +46,26 @@ function initializePage() {
 	$(".task-button").click(taskClick);
 	$(".subtask_line").click(toggleSubtask);
 
+	$("#description-button").click(function(e) {
+		e.preventDefault();
+		$("#project-description").toggle(400);
+		if ($("#description-button").html() == "collapse") {
+			$("#description-button").html("show");
+		} else {
+			$("#description-button").html("hide");
+		}
+	});
+
+	$("#task-box-button").click(function(e) {
+		e.preventDefault();
+		$("#task-box").toggle(400);
+		if ($("#task-box-button").html() == "collapse") {
+			$("#task-box-button").html("expand");
+		} else {
+			$("#task-box-button").html("collapse");
+		}
+	});
+
 	$("#task-box-button").click(function(e) {
 		e.preventDefault();
 		$("#task-box").toggle(400);

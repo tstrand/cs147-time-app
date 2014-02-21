@@ -68,3 +68,14 @@
 	font-weight:300;
 	text-decoration: underline;
 }
+
+.member{
+	font-size:13px;
+	font-weight:300;
+	text-decoration: underline;
+	margin-left: 10px;
+}
+
+.summary{
+	margin-left:10px;
+}
