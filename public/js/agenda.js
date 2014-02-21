@@ -9,27 +9,11 @@ $(document).ready(function() {
  * Function that is called when the document is ready.
  */
 function initializePage() {
-	$(".todo-card").click(function(e) {
-		e.preventDefault();
-		console.log(this.id);
-
-		$("#detail" + this.id).toggle(400);
-	});
-
-	$(".detail-button").click(function (e) {
-		e.stopPropagation();
-		var id = $(this).attr('id');
-		document.location.href='/projects/' + id;
-	});
-
-	$(".task-button").click(function (e) {
-		e.stopPropagation();
-		var id = $(this).attr('id');
-		document.location.href='/projects/' + id;
-	});
-
-	$(".subtask_line").click(toggleSubtask);
-	$(".task-name").click(toggleSubtask);
+	
+	$(".todo-card").click(cardClick);
+	$(".detail-button").click(detailClick);
+	$(".task-button").click(taskClick);
+	$(".task-name").click(toggleSubtaskAgenda);
 
 	$("#task-box-button").click(function(e) {
 		e.preventDefault();
@@ -63,6 +47,23 @@ function initializePage() {
 
 }
 
+function cardClick(e) {
+	e.preventDefault();
+	$("#detail" + this.id).toggle(400);
+}
+
+function detailClick(e) {
+	e.stopPropagation();
+	var id = $(this).attr('id');
+	document.location.href='/projects/' + id;
+}
+
+function taskClick(e) {
+	e.stopPropagation();
+	var id = $(this).attr('id');
+	document.location.href='/projects/' + id;
+}
+
 function toggleSubtask(e) {
 	e.stopPropagation();
 	var subtask = $("#subtask" + this.id);
@@ -88,15 +89,41 @@ function toggleSubtask(e) {
 	}
 }
 
-function callback(response) {
-	console.log(response);
-	var progress = $("#progress_line" + response[0]);
-	console.log(response[0]);
-	progress.html(response[1] + "% complete");
-	if(response[1] == 100) {
-		var task = $("#task" + response[0]);
-		var html = task.html();
-		task.fadeOut("slow");
-		console.log(html);
+function toggleSubtaskAgenda(e) {
+	e.stopPropagation();
+	var subtask = $("#subtask" + this.id);
+	var checkbox = $("#checkbox" + this.id);
+	if ($(e.target).is("input")) {
+		if(checkbox.prop('checked')) {
+			subtask.css("text-decoration", "line-through");
+			$.get("/subtasks/" + this.id + "/1", callbackAgenda)
+		} else {
+			subtask.css("text-decoration", "none");
+			$.get("/subtasks/" + this.id + "/0", callbackAgenda)
+		}
+	} else {
+		if(!checkbox.prop('checked')) {
+			subtask.css("text-decoration", "line-through");
+			checkbox.prop('checked', true);
+			$.get("/subtasks/" + this.id + "/1", callbackAgenda)
+		} else {
+			subtask.css("text-decoration", "none");
+			checkbox.prop('checked', false);
+			$.get("/subtasks/" + this.id + "/0", callbackAgenda)
+		}
 	}
 }
+
+function callbackAgenda(response) {
+	var subtask_id = response[3];
+	var bool = response[2];
+	if(bool == 1) {
+		var subtask = $("#task" + subtask_id);
+		var html = "<div class='todo-card completed' id='task" + subtask_id + "''>";
+		html += subtask.html();
+		html += "</div>";
+		subtask.fadeOut("slow");
+		//$(html).prependTo("#completed-box");
+	}
+}
+

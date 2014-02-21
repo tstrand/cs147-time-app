@@ -109,7 +109,7 @@ exports.updateSubtask = function(req, res) {
         }
     }
     var percent = updateTask(task_id, bool, data);
-	var obj = [task_id, percent];
+	var obj = [task_id, percent, bool, subtask_id];
 	res.json(obj);
 }
 
