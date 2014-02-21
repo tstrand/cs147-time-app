@@ -57,10 +57,14 @@
 }
 
 .subtask_duration{
-	font-weight:100;
+	font-weight:300;
 	font-size: 13px;
+	font-style: italic;
 }
 
-.subtask_line{
-	
+.subtask_member{
+	text-align: center;
+	font-size:13px;
+	font-weight:300;
+	text-decoration: underline;
 }

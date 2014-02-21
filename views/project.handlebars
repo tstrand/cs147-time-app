@@ -58,6 +58,11 @@
               {{/if}}
               <td class="subtask_duration">{{duration}} hours</td>
             </tr>
+            <tr class="subtask_line" id="{{id}}">
+              <td></td>
+              <td></td>
+              <td class="subtask_member">{{members}}</td>
+            </tr>
           {{/each}}
           </table>
           <a class="task-button" href="/edit/task/{{project_id}}/{{id}}">edit</a>
