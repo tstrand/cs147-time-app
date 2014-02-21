@@ -119,11 +119,18 @@ function callbackAgenda(response) {
 	var bool = response[2];
 	if(bool == 1) {
 		var subtask = $("#task" + subtask_id);
-		var html = "<div class='todo-card completed' id='task" + subtask_id + "''>";
-		html += subtask.html();
-		html += "</div>";
-		subtask.fadeOut("slow");
-		//$(html).prependTo("#completed-box");
+		subtask.fadeOut("slow", function () {
+			$(subtask).removeClass("task");
+			$(subtask).addClass("completed");
+			$(subtask).prependTo("#completed-box").fadeIn("slow");
+		});
+	} else {
+		var subtask = $("#task" + subtask_id);
+		subtask.fadeOut("slow", function () {
+			$(subtask).removeClass("completed");
+			$(subtask).addClass("task");
+			$(subtask).prependTo("#task-box").fadeIn("slow");
+		});
 	}
 }
 

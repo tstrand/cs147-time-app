@@ -120,16 +120,24 @@ function toggleSubtask(e) {
 }
 
 function callback(response) {
+	console.log("callback");
 	var task_id = response[0];
 	var progress = $("#progress_line" + task_id);
 	progress.html(response[1] + "% complete");
 	if(response[1] == 100) {
 		var task = $("#task" + task_id);
-		var html = "<div class='todo-card completed' id='task" + task_id + "''>";
-		html += task.html();
-		html += "</div>";
-		task.fadeOut("slow");
-		//$(html).prependTo("#completed-box");
+		task.fadeOut("slow", function () {
+			$(task).removeClass("task");
+			$(task).addClass("completed");
+			$(task).prependTo("#completed-box").fadeIn("slow");
+		});
+	} else {
+		var task = $("#task" + task_id);
+		task.fadeOut("slow", function () {
+			$(task).removeClass("completed");
+			$(task).addClass("task");
+			$(task).prependTo("#task-box").fadeIn("slow");
+		});
 	}
 }
 
