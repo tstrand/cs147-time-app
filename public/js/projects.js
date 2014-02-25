@@ -20,9 +20,11 @@ function initializePage() {
 		toggleProject(id);
 	});
 	$.get("/api/get_users", function (result) {
-		$("#members_input").autocomplete({
-			source: result,
-		});
+		if ($("#members_input").length) {
+			$("#members_input").autocomplete({
+				source: result,
+			});
+		}
 	});
 
 	$("#add_member_btn").click(function (e) {

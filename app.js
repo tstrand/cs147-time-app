@@ -8,6 +8,7 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
 var partials = require('express-partials');
+var mongoose = require('mongoose');
 
 var index = require('./routes/index');
 var projects = require('./routes/projects');
@@ -16,6 +17,10 @@ var createtask = require('./routes/createTask');
 var auth = require('./routes/auth');
 var api = require('./routes/api');
 
+var local_database_name = 'cs147project';
+var local_database_uri  = 'mongodb://localhost/' + local_database_name
+var database_uri = process.env.MONGOLAB_URI || local_database_uri
+mongoose.connect(database_uri);
 // Example route
 // var user = require('./routes/user');
 
