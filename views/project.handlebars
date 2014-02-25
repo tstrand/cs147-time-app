@@ -17,7 +17,7 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.caom/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->        
 </head>
@@ -52,7 +52,7 @@
         <span class="type-name">task</span>
         <p class="task-name">{{name}}</p>
         <p class="duedate">due by {{dueDate}}</p>
-        <span class="progress_line" id="progress_line{{id}}">{{progress}}% complete</span><a class="task-button" id="{{project_id}}/tasks/{{id}}">View task &raquo;</a>
+        <span class="progress_line" id="progress_line{{id}}">{{progress}}% complete</span><!-- <a class="task-button" id="{{project_id}}/tasks/{{id}}">View task &raquo;</a> -->
         <div id="detailtask{{id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
@@ -132,6 +132,10 @@
     
     <br/>
     <br/>
+
+    {{#if task_id}}
+    <div class="hidden_anchor" id="{{task_id}}"></div>
+    {{/if}}
 	</div>
 
 	<!--<script src="https://code.jquery.com/jquery.js"></script>-->

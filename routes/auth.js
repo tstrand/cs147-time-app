@@ -17,7 +17,7 @@ exports.userLogin = function(req, res) {
   function afterQuery(err, user) {
     if (err) console.log(err);
     console.log(user);
-    if (user && user[0]["password"] == post.password) {
+    if (user.length && user[0]["password"] == post.password) {
       req.session.user_id = post.username;
       req.session.username = post.username;
       res.redirect('/');

@@ -3,7 +3,6 @@ var Mongoose = require('mongoose');
 
 
 
-
 var UserSchema = new Mongoose.Schema({
 	"username": String,
 	"name": String,
@@ -12,7 +11,7 @@ var UserSchema = new Mongoose.Schema({
 
 var ProjectSchema = new Mongoose.Schema({
   // fields are defined here
-  "title": String,
+  "name": String,
   "dueDate": Date,
   "description": String,
   "members": Array

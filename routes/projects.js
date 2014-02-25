@@ -1,47 +1,67 @@
 var data = require('../data.json');
+var models = require('../models');
 
 exports.viewProjects = function(req, res) { 
+	var mydata = {}
+	models.Projects.find({"members":req.session.username}).sort("dueDate").exec(afterQuery);
+
+	function afterQuery(err, projects) {
+		console.log(projects);
+		mydata["pageName"] = "My Projects";
+		mydata["projects"] = projects;
+		res.render('projects', mydata);
+	}
+};
+
+exports.viewProject = function(req, res) {
+	console.log("in");
 	var projectId = req.params.projectId; 
-	if(projectId) {
-		var object;
-		for(var i = 0; i < data["projects"].length; i++) {
-			if(projectId == data["projects"][i]["id"]) {
-				object = data["projects"][i];
-				break;
+	var object;
+	var hasProject = false;
+	var hasMeeting = false;
+	var hasTask = false;
+
+	models.Projects.find({"_id":projectId}).exec(gotProject);
+
+	function gotProject(err, project) {
+		object = project[0];
+		object["pageName"] = object["name"];
+		hasProject = true;
+		models.Meetings.find({"project_id":projectId}).sort("datetime").exec(gotMeeting);
+	}
+
+	function gotMeeting(err, meetings) {
+		object["meetings"] = meetings;
+		hasMeeting = true;
+		console.log("got meeting");
+		models.Tasks.find({"project_id":projectId}).sort("dueDate").exec(gotTasks);
+	}
+
+	function gotTasks(err, tasks) {
+		object["tasks"] = [];
+		object["completed_tasks"] = [];
+		console.log(tasks);
+		for (var i=0; i<tasks.length; i++) {
+			if (tasks[i]["parent_id"] == -1) {
+				if (tasks[i]["done"]) {
+					object["completed_tasks"].push(tasks[i]);
+				} else {
+					object["tasks"].push(tasks[i]);
+				}
 			}
 		}
-		object["pageName"] = object["name"];
-		// filter tasks and meetings
-		object["tasks"] = [];
-		object["meetings"] = [];
-		object["completed_tasks"] = [];
-		for (var i=0; i<data["tasks"].length; i++) {
-	  		if (data["tasks"][i]["project_id"] == projectId && data["tasks"][i]["parent"] == -1) { 
-        		if(data["tasks"][i]["done"]) {
-        			object["completed_tasks"].push(data["tasks"][i]);
-        		} else {
-        			object["tasks"].push(data["tasks"][i]);
-        		}
-        	}
-	  	}
-	  	for (var i=0; i<data["meetings"].length; i++) {
-	    	if (data["meetings"][i]["project_id"] == projectId) {
-	    		object["meetings"].push(data["meetings"][i]);
+		// add subtasks to each task
+		for (var i=0; i<object["tasks"].length; i++) {
+	  		var subtasks = [];
+	  		// select all subtasks whose parent is task id
+	  		var taskId = object["tasks"][i]["id"];
+	  		for (var j=0; j<tasks.length; j++) {
+	    		if (tasks[j]["parent_id"] == taskId) {
+	      			subtasks.push(tasks[j]);
+	    		}
 	  		}
-	  	}
-
-    	// add subtasks to each task
-    	for (var i=0; i<object["tasks"].length; i++) {
-      		var subtasks = [];
-      		// select all subtasks whose parent is task id
-      		var taskId = object["tasks"][i]["id"];
-      		for (var j=0; j<data["tasks"].length; j++) {
-        		if (data["tasks"][j]["parent"] == taskId) {
-          			subtasks.push(data["tasks"][j]);
-        		}
-      		}
-      		object["tasks"][i]["subtasks"] = subtasks;
-    	}
+	  		object["tasks"][i]["subtasks"] = subtasks;
+		}
 
 	    // add subtasks to each completed task
 	    for (var i=0; i<object["completed_tasks"].length; i++) {
@@ -49,33 +69,79 @@ exports.viewProjects = function(req, res) { 
 	      	// select all subtasks whose parent is task id
 	      	var taskId = object["completed_tasks"][i]["id"];
 	      	console.log(taskId);
-	      	for (var j=0; j<data["tasks"].length; j++) {
-	      		if (data["tasks"][j]["parent"] == taskId) {
-	          		subtasks.push(data["tasks"][j]);
+	      	for (var j=0; j<tasks.length; j++) {
+	      		if (tasks[j]["parent"] == taskId) {
+	          		subtasks.push(tasks[j]);
 	        	}
 	      	}
 	      	object["completed_tasks"][i]["subtasks"] = subtasks;
 	    }
-
+	    hasTask = true;
+	    console.log("got task");
+	    object["task_id"] = req.params.taskId; 
+	    console.log(object);
 		res.render('project', object);
-	} else {
-		// just show user's projects
-		var mydata = {}
-		mydata["projects"] = [];
-		for (var i=0; i<data["projects"].length; i++) {
-		    for (var j=0; j<data["projects"][i]["members"].length; j++) {
-			    if (req.session.user_id == data["projects"][i]["members"][j] ||
-			        req.session.username == data["projects"][i]["members"][j]) {
-			        mydata["projects"].push(data["projects"][i]);
-			        break;
-			    }
-			}
-		}
-
-		mydata["pageName"] = "My Projects";
-		res.render('projects', mydata);
 	}
-};
+
+/*
+	for(var i = 0; i < data["projects"].length; i++) {
+		if(projectId == data["projects"][i]["id"]) {
+			object = data["projects"][i];
+			break;
+		}
+	}
+	object["pageName"] = object["name"];
+	// filter tasks and meetings
+	object["tasks"] = [];
+	object["meetings"] = [];
+	object["completed_tasks"] = [];
+	for (var i=0; i<data["tasks"].length; i++) {
+  		if (data["tasks"][i]["project_id"] == projectId && data["tasks"][i]["parent"] == -1) { 
+    		if(data["tasks"][i]["done"]) {
+    			object["completed_tasks"].push(data["tasks"][i]);
+    		} else {
+    			object["tasks"].push(data["tasks"][i]);
+    		}
+    	}
+  	}
+  	for (var i=0; i<data["meetings"].length; i++) {
+    	if (data["meetings"][i]["project_id"] == projectId) {
+    		object["meetings"].push(data["meetings"][i]);
+  		}
+  	}
+
+	// add subtasks to each task
+	for (var i=0; i<object["tasks"].length; i++) {
+  		var subtasks = [];
+  		// select all subtasks whose parent is task id
+  		var taskId = object["tasks"][i]["id"];
+  		for (var j=0; j<data["tasks"].length; j++) {
+    		if (data["tasks"][j]["parent"] == taskId) {
+      			subtasks.push(data["tasks"][j]);
+    		}
+  		}
+  		object["tasks"][i]["subtasks"] = subtasks;
+	}
+
+    // add subtasks to each completed task
+    for (var i=0; i<object["completed_tasks"].length; i++) {
+    	var subtasks = [];
+      	// select all subtasks whose parent is task id
+      	var taskId = object["completed_tasks"][i]["id"];
+      	console.log(taskId);
+      	for (var j=0; j<data["tasks"].length; j++) {
+      		if (data["tasks"][j]["parent"] == taskId) {
+          		subtasks.push(data["tasks"][j]);
+        	}
+      	}
+      	object["completed_tasks"][i]["subtasks"] = subtasks;
+    }
+
+    object["task_id"] = req.params.taskId; 
+    console.log(req.params.taskId);
+	res.render('project', object);
+	*/
+}
 
 exports.createProject = function(req, res) {
 	data["pageName"] = "Create Project";

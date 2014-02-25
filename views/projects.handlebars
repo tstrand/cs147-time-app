@@ -28,9 +28,9 @@
 
     <div class="projects">
       {{#each projects}}
-        <a id="{{id}}" class="thumbnail project">
+        <div id="{{id}}" class="thumbnail project">
           <h3 class="project_title">{{name}}</h3>
-          <div class="duedate_title">Due Date</div><span class="duedate_text">{{dueDate}}</span><div id="{{id}}" class="detail-button">view project &raquo;</div>
+          <div class="duedate_title">Due Date</div><span class="duedate_text">{{dueDate}}</span><div class="detail-button"><a id="{{id}}" href="/projects/{{_id}}">view project &raquo;</a></div>
           <div class="more_info" id="{{id}}">
             <div class="description" id="{{id}}">
               <div class="description_title">Description</div>
@@ -41,7 +41,7 @@
               <div class="members_text">{{members}}</div>
             </div>
           </div>
-        </a>
+        </div>
       {{/each}}
     </div>
     <br/>

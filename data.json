@@ -9,7 +9,7 @@
     {
 			"name": "project #2",
 			"description": "This is our main project in cs147 this quarter",
-			"dueDate": "Feb 14, 2014",
+			"dueDate": "Feb 16, 2014",
 			"members" : ["john","tyler","mark"]
 		}
 	],
@@ -27,29 +27,16 @@
       },
       {
         "project_id": 1,
-        "name": "meat on the bones",
-        "dueDate": "Feb 14, 2014",
-        "duration": 5,
-        "notes": "A much shorter note",
-        "parent_id": -1,
-        "done": 0,
-        "progress": 0,
-        "members": ["john","tyler","mark"]
-      },
-      {
-        "id": 3,
-        "project_id": 1,
         "name": "brainstorming",
         "dueDate": "Feb 14, 2014",
         "duration": 5,
         "notes": "",
-        "parent_id_id": 1,
+        "parent_id": 1,
         "done": 0,
         "progress": -1,
         "members": ["john","tyler","mark"]
       },
       {
-        "id": 4,
         "project_id": 1,
         "name": "finish design sketch",
         "dueDate": "Feb 14, 2014",
@@ -59,18 +46,6 @@
         "done": 0,
         "progress": -1,
         "members": ["mark"]
-      },
-      {
-        "id": 5,
-        "project_id": 1,
-        "name": "implement login page",
-        "dueDate": "Feb 14, 2014",
-        "duration": 5,
-        "notes": "",
-        "parent_id": 2,
-        "done": 0,
-        "progress": -1,
-        "members": ["john"]
       }
   	],
   	"meetings":[
