@@ -28,9 +28,6 @@
 	width: 20%;
 }
 
-.duedate_text {
-}
-
 .more_info {
 	display: none;
 	text-align: left;
@@ -81,4 +78,8 @@
 
 .progress_line {
 	
+}
+
+#project-description {
+	padding: 5px;
 }

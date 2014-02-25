@@ -50,6 +50,10 @@
      margin-left:15px;
 }
 
+.no_margin {
+     margin: 0px;
+}
+
 body {
      padding-top: 40px;
 }

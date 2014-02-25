@@ -11,37 +11,36 @@ $(document).ready(function() {
 function initializePage() {
 	
 	$(".todo-card").click(cardClick);
-	$(".detail-button").click(detailClick);
-	$(".task-button").click(taskClick);
+	$(".link-button").click(linkClick);
 	$(".task-name").click(toggleSubtaskAgenda);
 
-	$("#task-box-button").click(function(e) {
-		e.preventDefault();
-		$("#task-box").toggle(400);
-		if ($("#task-box-button").html() == "collapse") {
-			$("#task-box-button").html("expand");
-		} else {
-			$("#task-box-button").html("collapse");
-		}
-	});
+	// $("#task-box-button").click(function(e) {
+	// 	e.preventDefault();
+	// 	$("#task-box").toggle(400);
+	// 	if ($("#task-box-button").html() == "collapse") {
+	// 		$("#task-box-button").html("expand");
+	// 	} else {
+	// 		$("#task-box-button").html("collapse");
+	// 	}
+	// });
 
-	$("#meeting-box-button").click(function(e) {
-		e.preventDefault();
-		$("#meeting-box").toggle(400);
-		if ($("#meeting-box-button").html() == "collapse") {
-			$("#meeting-box-button").html("expand");
-		} else {
-			$("#meeting-box-button").html("collapse");
-		}
-	});
+	// $("#meeting-box-button").click(function(e) {
+	// 	e.preventDefault();
+	// 	$("#meeting-box").toggle(400);
+	// 	if ($("#meeting-box-button").html() == "collapse") {
+	// 		$("#meeting-box-button").html("expand");
+	// 	} else {
+	// 		$("#meeting-box-button").html("collapse");
+	// 	}
+	// });
 
 	$("#completed-box-button").click(function(e) {
 		e.preventDefault();
 		$("#completed-box").toggle(400);
-		if ($("#completed-box-button").html() == "collapse") {
-			$("#completed-box-button").html("expand");
+		if ($("#completed-box-button").html() == "hide") {
+			$("#completed-box-button").html("show");
 		} else {
-			$("#completed-box-button").html("collapse");
+			$("#completed-box-button").html("hide");
 		}
 	});
 
@@ -52,16 +51,10 @@ function cardClick(e) {
 	$("#detail" + this.id).toggle(400);
 }
 
-function detailClick(e) {
+function linkClick(e) {
 	e.stopPropagation();
 	var id = $(this).attr('id');
-	document.location.href='/projects/' + id;
-}
-
-function taskClick(e) {
-	e.stopPropagation();
-	var id = $(this).attr('id');
-	document.location.href='/projects/' + id;
+	document.location.href = id;
 }
 
 function toggleSubtask(e) {
