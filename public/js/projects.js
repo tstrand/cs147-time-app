@@ -46,6 +46,26 @@ function initializePage() {
 	$(".task-button").click(taskClick);
 	$(".subtask_line").click(toggleSubtask);
 
+	$("#description-button").click(function(e) {
+		e.preventDefault();
+		$("#project-description").toggle(400);
+		if ($("#description-button").html() == "collapse") {
+			$("#description-button").html("show");
+		} else {
+			$("#description-button").html("hide");
+		}
+	});
+
+	$("#task-box-button").click(function(e) {
+		e.preventDefault();
+		$("#task-box").toggle(400);
+		if ($("#task-box-button").html() == "collapse") {
+			$("#task-box-button").html("expand");
+		} else {
+			$("#task-box-button").html("collapse");
+		}
+	});
+
 	$("#task-box-button").click(function(e) {
 		e.preventDefault();
 		$("#task-box").toggle(400);
@@ -120,16 +140,24 @@ function toggleSubtask(e) {
 }
 
 function callback(response) {
+	console.log("callback");
 	var task_id = response[0];
 	var progress = $("#progress_line" + task_id);
 	progress.html(response[1] + "% complete");
 	if(response[1] == 100) {
 		var task = $("#task" + task_id);
-		var html = "<div class='todo-card completed' id='task" + task_id + "''>";
-		html += task.html();
-		html += "</div>";
-		task.fadeOut("slow");
-		//$(html).prependTo("#completed-box");
+		task.fadeOut("slow", function () {
+			$(task).removeClass("task");
+			$(task).addClass("completed");
+			$(task).prependTo("#completed-box").fadeIn("slow");
+		});
+	} else {
+		var task = $("#task" + task_id);
+		task.fadeOut("slow", function () {
+			$(task).removeClass("completed");
+			$(task).addClass("task");
+			$(task).prependTo("#task-box").fadeIn("slow");
+		});
 	}
 }
 
