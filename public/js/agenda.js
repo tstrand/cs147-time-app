@@ -119,18 +119,17 @@ function callbackAgenda(response) {
 	var bool = response[2];
 	if(bool == 1) {
 		var subtask = $("#task" + subtask_id);
-		subtask.fadeOut("slow", function () {
-			$(subtask).removeClass("task");
-			$(subtask).addClass("completed");
-			$(subtask).prependTo("#completed-box").fadeIn("slow");
-		});
+		// subtask.fadeOut("slow", function () {
+		// 	$(subtask).removeClass("task");
+		// 	$(subtask).addClass("completed");
+		// 	$(subtask).prependTo("#completed-box").fadeIn("slow");
+		// });
+		$(subtask).removeClass("task");
+		$(subtask).addClass("completed");
 	} else {
 		var subtask = $("#task" + subtask_id);
-		subtask.fadeOut("slow", function () {
-			$(subtask).removeClass("completed");
-			$(subtask).addClass("task");
-			$(subtask).prependTo("#task-box").fadeIn("slow");
-		});
+		$(subtask).removeClass("completed");
+		$(subtask).addClass("task");
 	}
 }
 

@@ -1,127 +1,180 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html>
 <head>
-    <title>HCI Project</title>  
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/css/main.css" rel="stylesheet">
-    <link href="/css/index.css" rel="stylesheet">
-    <!-- this is a comment in HTML -->
+  <title>My Agenda</title>
+  <!-- no zooming on mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Bootstrap -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/css/agenda.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/fonts.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->        
+      <![endif]-->
 </head>
-
 <body>
-    <div class="container">
-        <!-- h1 through h6 are headers. The higher the number, the smaller the header -->
-        <!-- p means paragraph -->
-        {{#if user_id}}
-          <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-link">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                </button>
-              </div>
+  <!-- this is a comment in HTML -->
+  <div class="container">
+    <!-- h1 through h6 are headers. The higher the number, the smaller the header -->
+    <!-- p means paragraph -->
+   
+    {{#if user_id}}
+    
+    {{>navbar}}
 
-              <div class="collapse navbar-collapse" id="collapse-link">
-                <ul class="nav navbar-nav navbar-right">
-                  <li><a href="/">Home</a></li>                  
-                  <li><a href="/projects">My Projects</a></li>
-                  <li><a href="/agenda">My Agenda</a></li>
-                  <li><a href="/projects/create">Create Project</a></li>
-                  <li><a href="/logout">Logout</a></li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-        {{/if}}
-
-
-        <div class="jumbotron" style="margin-top:20px;">
-            <h1>Our Time App</h1>
-            <p>by Mark, John, and Tyler</p>
+    <h3 class="page-header">Hi, {{username}}! Check out your agenda below</h3>
+    <span class="type-title">my checklist</span>
+    <a id="task-box-button" class="collapse-button">collapse</a>
+    <div id="task-box">
+      {{#each tasks}}
+      {{#unless done}}
+      <div class="todo-card task" id="task{{id}}">
+        <span class="type-name">subtask</span>
+        <p class="task-name" id="{{id}}"><input class="subtask_checkbox" type="checkbox" id="checkbox{{id}}"><span id="subtask{{id}}">{{name}}</span></p>
+        <p class="duedate">due by {{dueDate}}</p>
+        <p class="duration">estimated duration: {{duration}} hours</p>
+        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+          <span class="notes-title">part of task</span>
+          <p class="notes-text">{{parent_name}}
+            <!--<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a>-->
+          </p>
+          <span class="notes-title">project</span>
+          <p class="notes-text">{{project_name}}<a class="detail-button" id="{{project_id}}/{{parent}}">View full task &raquo;</a></p>
+          {{#if notes}}
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          {{/if}}
         </div>
-
-        {{#if user_id}}
-        <div id="main_page">
-            <a href="projects" class="btn btn-default btn-lg btn-block" style="margin-bottom:10px;">My Projects</a>
-            <a href="agenda" class="btn btn-default btn-lg btn-block" style="margin-bottom:10px;">My Agenda</a>
-            <a href="/projects/create" class="btn btn-default btn-lg btn-block" style="margin-bottom:10px;">Create New Project</a>
-		    </div>
-
-
-        {{else}}
-        <div id="sign_in_page">
-          <p>id is "john" and password is "1234"</p>
-          <form class="form-horizontal" role="form" method="post" action="/login">
-            <div class="form-group">
-              <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
-              <div class="col-sm-10">
-                <input name="username" type="text" class="form-control" id="inputEmail3" placeholder="Username">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-              <div class="col-sm-10">
-                <input name="password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Sign in</button>
-              </div>
-            </div>
-          </form>
-          <p>New user? <a id="sign-up-button">Click here</a> to sign up</p>
-        </div>
-
-        <div id="sign_up_page" style="display:none;">
-          <form class="form-horizontal" role="form" method="post" action="/create_user">   
-            <div class="form-group">
-              <label for="inputName" class="col-sm-2 control-label">Full Name</label>
-              <div class="col-sm-10">
-                <input name="fullname" type="text" class="form-control" id="inputEmail3" placeholder="Full Name" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
-              <div class="col-sm-10">
-                <input name="username" type="text" class="form-control" id="inputEmail3" placeholder="Username" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-              <div class="col-sm-10">
-                <input name="password" type="password" class="form-control" id="inputPassword3" placeholder="Password" required> 
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Create</button>
-              </div>
-            </div>
-          </form>
-          <p><a id="sign-in-button">Click here</a> to log in</p>
-        </div>
-        {{/if}}
-
+      </div>
+      {{/unless}}
+      {{/each}}
     </div>
 
-    <!--<script src="https://code.jquery.com/jquery.js"></script>-->
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/index.js"></script>
+    <br>
+    
+    <span class="type-title">my meetings</span>
+    <a id="meeting-box-button" class="collapse-button">collapse</a>
+    <div id="meeting-box">
+      {{#each meetings}}
+      <div class="todo-card meeting" id="meeting{{id}}">
+        <span class="type-name">meeting</span>
+        <p class="task-name">{{name}}</p>
+        <span class="duedate">{{datetime}}</span><a class="detail-button" id="{{project_id}}">View project &raquo;</a>
+        <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
+          <span class="notes-title">project</span>
+          <p class="notes-text">{{project_name}}</p>
+          <span class="notes-title">attendees</span>
+          <p class="notes-text">{{members}}</p>
+          {{#if notes}}
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          {{/if}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+    <br>
+    <span class="type-title">completed</span>
+    <a id="completed-box-button" class="collapse-button">collapse</a>
+    <div id="completed-box">
+      {{#each tasks}}
+      {{#if done}}
+      <div class="todo-card completed" id="task{{id}}">
+        <p class="task-name" id="{{id}}"><input class="subtask_checkbox" type="checkbox" id="checkbox{{id}}" checked><span id="subtask{{id}}" style="text-decoration: line-through">{{name}}</span></p>
+        <p class="duedate">due by {{dueDate}}</p>
+        <p class="duration">estimated duration: {{duration}} hours</p>
+        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+          <span class="notes-title">part of task</span>
+          <p class="notes-text">{{parent_name}}
+            <!--<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a>-->
+          </p>
+          <span class="notes-title">project</span>
+          <p class="notes-text">{{project_name}}<a class="detail-button" id="{{project_id}}/{{parent}}">View full task &raquo;</a></p>
+          {{#if notes}}
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          {{/if}}
+        </div>
+      </div>
+      {{/if}}
+      {{/each}}
+    </div>
+
+    {{else}}
+
+    <div class="jumbotron" style="margin-top:20px;">
+      <h1>Our Time App</h1>
+      <p>by Mark, John, and Tyler</p>
+    </div> 
+
+    <div id="sign_in_page">
+      <p>id is "john" and password is "1234"</p>
+      <form class="form-horizontal" role="form" method="post" action="/login">
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+          <div class="col-sm-10">
+            <input name="username" type="text" class="form-control" id="inputEmail3" placeholder="Username">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+          <div class="col-sm-10">
+            <input name="password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Sign in</button>
+          </div>
+        </div>
+      </form>
+      <p>New user? <a id="sign-up-button">Click here</a> to sign up</p>
+    </div>
+
+    <div id="sign_up_page" style="display:none;">
+      <form class="form-horizontal" role="form" method="post" action="/create_user">   
+        <div class="form-group">
+          <label for="inputName" class="col-sm-2 control-label">Full Name</label>
+          <div class="col-sm-10">
+            <input name="fullname" type="text" class="form-control" id="inputEmail3" placeholder="Full Name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+          <div class="col-sm-10">
+            <input name="username" type="text" class="form-control" id="inputEmail3" placeholder="Username" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+          <div class="col-sm-10">
+            <input name="password" type="password" class="form-control" id="inputPassword3" placeholder="Password" required> 
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Create</button>
+          </div>
+        </div>
+      </form>
+      <p><a id="sign-in-button">Click here</a> to log in</p>
+    </div>
+    {{/if}}
+  </div>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!--<script src="https://code.jquery.com/jquery.js"></script>-->
+  <script src="/js/jquery.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/agenda.js"></script>
+
 </body>
 </html>

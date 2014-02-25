@@ -95,11 +95,21 @@ function initializePage() {
 			$("#completed-box-button").html("collapse");
 		}
 	});
+
+	var anchor = $(".hidden_anchor");
+	console.log(anchor);
+	if(anchor) {
+		var task = $('#task' + anchor.attr('id'));
+		$("#detailtask" + anchor.attr('id')).toggle(400);
+		$("html, body").animate({ scrollTop: task.offset().bottom}, 500);
+		task.css("border", "2px solid red");
+	}
 }
 
 function cardClick(e) {
 	e.preventDefault();
 	$("#detail" + this.id).toggle(400);
+	// this.css("border", "none");
 }
 
 function detailClick(e) {
@@ -146,18 +156,12 @@ function callback(response) {
 	progress.html(response[1] + "% complete");
 	if(response[1] == 100) {
 		var task = $("#task" + task_id);
-		task.fadeOut("slow", function () {
-			$(task).removeClass("task");
-			$(task).addClass("completed");
-			$(task).prependTo("#completed-box").fadeIn("slow");
-		});
+		$(task).removeClass("task");
+		$(task).addClass("completed");
 	} else {
 		var task = $("#task" + task_id);
-		task.fadeOut("slow", function () {
-			$(task).removeClass("completed");
-			$(task).addClass("task");
-			$(task).prependTo("#task-box").fadeIn("slow");
-		});
+		$(task).removeClass("completed");
+		$(task).addClass("task");
 	}
 }
 

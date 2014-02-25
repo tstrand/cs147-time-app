@@ -11,7 +11,7 @@ var partials = require('express-partials');
 
 var index = require('./routes/index');
 var projects = require('./routes/projects');
-var agenda = require('./routes/agenda');
+// var agenda = require('./routes/agenda');
 var createtask = require('./routes/createTask');
 var auth = require('./routes/auth');
 var api = require('./routes/api');
@@ -43,16 +43,17 @@ if ('development' == app.get('env')) {
 }
 
 // Add routes here
-app.get('/', index.view);
+app.get('/', index.viewAgenda);
 app.post('/login', auth.userLogin);
 app.get('/logout', auth.userLogout);
 app.post('/create_user', auth.createUser);     
 app.get('/projects', auth.checkAuth, projects.viewProjects);
-app.get('/agenda', auth.checkAuth, agenda.viewAgenda);
+//app.get('/agenda', auth.checkAuth, agenda.viewAgenda);
 app.get('/projects/create', auth.checkAuth, projects.createProject);
 app.get('/projects/save', auth.checkAuth, projects.saveProject);
 app.get('/projects/save/:projectId', auth.checkAuth, projects.saveProject);
-app.get('/projects/:projectId', auth.checkAuth, projects.viewProjects);
+app.get('/projects/:projectId', auth.checkAuth, projects.viewProject);
+app.get('/projects/:projectId/:taskId', auth.checkAuth, projects.viewProject);
 app.get('/projects/:projectId/tasks/:taskId', auth.checkAuth, createtask.viewTask);
 app.get('/subtasks/:subtaskId/:bool', auth.checkAuth, projects.updateSubtask);
 app.get('/projects/edit/:projectId', auth.checkAuth, projects.editProject);
