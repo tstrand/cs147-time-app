@@ -1,5 +1,23 @@
 var models = require('../models');
 
+/* helper method */
+function formatDateString(list, type) {
+  //var list = lists.toObject();
+  var newList = [];
+  for (var i=0; i<list.length; i++) {
+    newList.push(list[i].toObject());
+    if (type == "projects" || type == "tasks") {
+      console.log(list[i]["dueDate"].toDateString());
+      newList[i]["dueDate"] = list[i]["dueDate"].toDateString();
+    } else {
+      newList[i]["datetime"] = list[i]["datetime"].toDateString() + " " + 
+                   list[i]["datetime"].toTimeString().split(" ")[0];
+    }
+  }
+  console.log(newList);
+  return newList;
+}
+
 exports.viewAgenda = function(req, res) { 
   if (!req.session.user_id) {
     res.render('index', {});
@@ -12,6 +30,7 @@ exports.viewAgenda = function(req, res) { 
     models.Meetings.find().sort("datetime").exec(gotMeeting);
 
     function gotMeeting(err, meetings) {
+      meetings = formatDateString(meetings, "meetings");
       object["meetings"] = [];
       for (var i=0; i<meetings.length; i++) {
         for (var j=0; j<meetings[i]["members"].length; j++) {
@@ -25,6 +44,7 @@ exports.viewAgenda = function(req, res) { 
     }
 
     function gotTasks(err, tasks) {
+      tasks = formatDateString(tasks, "tasks");
       object["tasks"] = [];
       object["completed_tasks"] = [];
       for (var i=0; i<tasks.length; i++) {

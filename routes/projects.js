@@ -1,6 +1,24 @@
 //var data = require('../data.json');
 var models = require('../models');
 
+/* helper method */
+function formatDateString(list, type) {
+	//var list = lists.toObject();
+	var newList = [];
+	for (var i=0; i<list.length; i++) {
+		newList.push(list[i].toObject());
+		if (type == "projects" || type == "tasks") {
+			console.log(list[i]["dueDate"].toDateString());
+			newList[i]["dueDate"] = list[i]["dueDate"].toDateString();
+		} else {
+			newList[i]["datetime"] = list[i]["datetime"].toDateString() + " " + 
+									 list[i]["datetime"].toTimeString().split(" ")[0];
+		}
+	}
+	console.log(newList);
+	return newList;
+}
+
 exports.viewProjects = function(req, res) { 
 	var mydata = {}
 	models.Projects.find({"members":req.session.username}).sort("dueDate").exec(afterQuery);
@@ -8,7 +26,7 @@ exports.viewProjects = function(req, res) { 
 	function afterQuery(err, projects) {
 		console.log(projects);
 		mydata["pageName"] = "My Projects";
-		mydata["projects"] = projects;
+		mydata["projects"] = formatDateString(projects, "projects");
 		res.render('projects', mydata);
 	}
 };
@@ -17,9 +35,6 @@ exports.viewProject = function(req, res) {
 	console.log("in");
 	var projectId = req.params.projectId; 
 	var object;
-	var hasProject = false;
-	var hasMeeting = false;
-	var hasTask = false;
 
 	models.Projects.find({"_id":projectId}).exec(gotProject);
 
@@ -31,13 +46,14 @@ exports.viewProject = function(req, res) {
 	}
 
 	function gotMeeting(err, meetings) {
-		object["meetings"] = meetings;
+		object["meetings"] = formatDateString(meetings,"meetings");
 		hasMeeting = true;
 		console.log("got meeting");
 		models.Tasks.find({"project_id":projectId}).sort("dueDate").exec(gotTasks);
 	}
 
 	function gotTasks(err, tasks) {
+		tasks = formatDateString(tasks, "tasks");
 		object["tasks"] = [];
 		object["completed_tasks"] = [];
 		for (var i=0; i<tasks.length; i++) {
