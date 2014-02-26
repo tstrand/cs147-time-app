@@ -40,7 +40,6 @@ exports.viewProject = function(req, res) {
 	function gotTasks(err, tasks) {
 		object["tasks"] = [];
 		object["completed_tasks"] = [];
-		console.log(tasks);
 		for (var i=0; i<tasks.length; i++) {
 			if (tasks[i]["parent_id"] == -1) {
 				if (tasks[i]["done"]) {
@@ -115,7 +114,7 @@ exports.updateSubtask = function(req, res) {
 	models.Tasks.find({
 		"_id":subtask_id
 	}).exec(afterFindingSubtask);
-	
+
     function afterFindingSubtask(err, subtask) {
     	if (err) console.log(err);
     	else {

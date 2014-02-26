@@ -28,7 +28,6 @@ exports.editTask = function(req, res) {
 
   function gotProject(err,project) {
     task["project_members"] = project[0]["members"];
-    console.log(project[0]["members"]);
     // get all the subtasks
     models.Tasks.find({"parent_id":id}).exec(gotSubtasks);
   }
@@ -38,7 +37,6 @@ exports.editTask = function(req, res) {
     var itemNames = ["item1", "item2", "item3", "item4", "item5"];
     for (var i=0; i<subtasks.length; i++) {
       task[itemNames[i]] = subtasks[i];
-      console.log(task);
     }
     task["taskedit"] = true;
     task["projectId"] = projectId;
@@ -56,7 +54,6 @@ exports.editMeeting = function(req, res) {
     meeting = m[0];
     models.Projects.find({"_id":projectId}).exec(function(err,project) {
       meeting["project_members"] = project[0]["members"];
-      console.log(meeting);
       var date = meeting["datetime"].toString().split(" ")[1] + " " +
         meeting["datetime"].toString().split(" ")[2] + " " + 
         meeting["datetime"].toString().split(" ")[3];
@@ -66,7 +63,6 @@ exports.editMeeting = function(req, res) {
       meeting["min"] = time.split(":")[1];
       meeting["meetingedit"] = true;
       meeting["projectId"] = projectId;
-      console.log(meeting);
       res.render('createTask', meeting);
     });
   });
@@ -104,55 +100,89 @@ exports.createMeeting = function(req, res) {
 }
 
 exports.createTask = function(req, res) {
-  var id = Math.floor(Math.random() * 1000) + 10;
-  if (req.body.id) {
-    /* remove old tasks and subtasks */
-    for (var i=data["tasks"].length-1; i>=0; i--) {
-      if (data["tasks"][i]["id"] == parseInt(req.body.id) || 
-          data["tasks"][i]["parent"] == parseInt(req.body.id)) {
-        data["tasks"].splice(i,1);
-      }
-    }
-    id = req.body.id;
-  }
   var newTask = {
-    "id": id,
     "project_id": req.body.projectId,
     "name": req.body.name,
     "notes": req.body.notes,
-    "parent": -1,
+    "parent_id": -1,
     "done": 0,
-    "duration": -1,
+    "duration": 0,
     "dueDate": req.body.duedate,
     "members": [req.session.username] //by default creator is the owner of that task
   }
-  data["tasks"].push(newTask);
 
-  // add subtasks
-  var subtasks = [req.body.subtask1, req.body.subtask2, req.body.subtask3, req.body.subtask4, req.body.subtask5];
-  var assignees = [req.body.assigned1,req.body.assigned2,req.body.assigned3,req.body.assigned4,req.body.assigned5];
-  var durations = [req.body.duration1,req.body.duration2,req.body.duration3,req.body.duration4,req.body.duration5];
-  for (var i=0; i<5; i++) {
-    if (subtasks[i] != "") {
-      var members = []
-      for (var j in assignees[i].split(",")) {
-        members.push(assignees[i].split(",")[j].trim());
+  if (req.body.id) {
+    models.Tasks.find({"_id":req.body.id}).remove(function (err) {
+      models.Tasks.find({"parent_id":req.body.id}).remove(function (err) {
+        newTask["_id"] = req.body.id;
+          models.Tasks(newTask).save(function(err,task) {
+          console.log(task);
+          // add subtasks
+          var subtasks = [req.body.subtask1, req.body.subtask2, req.body.subtask3, req.body.subtask4, req.body.subtask5];
+          var assignees = [req.body.assigned1,req.body.assigned2,req.body.assigned3,req.body.assigned4,req.body.assigned5];
+          var durations = [req.body.duration1,req.body.duration2,req.body.duration3,req.body.duration4,req.body.duration5];
+          for (var i=0; i<5; i++) {
+            if (subtasks[i] != "") {
+              var members = []
+              for (var j in assignees[i].split(",")) {
+                members.push(assignees[i].split(",")[j].trim());
+              }
+              var duration = 0;
+              if (parseInt(durations[i])) duration = parseInt(durations[i]);
+              var newSubTask = {
+                "project_id": req.body.projectId,
+                "name": subtasks[i],
+                "notes": "",
+                "parent_id": task._id,
+                "done": 0,
+                "dueDate": req.body.duedate,
+                "duration": duration,
+                "members": members
+              }
+              models.Tasks(newSubTask).save(function(err,t) {
+                console.log("subtask");
+                console.log(t);
+              });
+            }
+          }
+          res.redirect('/projects/' + req.body.projectId);
+        });
+      });
+    });
+
+  } else {
+
+    //data["tasks"].push(newTask);
+    models.Tasks(newTask).save(function(err,task) {
+      console.log(task);
+      // add subtasks
+      var subtasks = [req.body.subtask1, req.body.subtask2, req.body.subtask3, req.body.subtask4, req.body.subtask5];
+      var assignees = [req.body.assigned1,req.body.assigned2,req.body.assigned3,req.body.assigned4,req.body.assigned5];
+      var durations = [req.body.duration1,req.body.duration2,req.body.duration3,req.body.duration4,req.body.duration5];
+      for (var i=0; i<5; i++) {
+        if (subtasks[i] != "") {
+          var members = []
+          for (var j in assignees[i].split(",")) {
+            members.push(assignees[i].split(",")[j].trim());
+          }
+          var duration = 0;
+          if (parseInt(durations[i])) duration = parseInt(durations[i]);
+          var newSubTask = {
+            "project_id": req.body.projectId,
+            "name": subtasks[i],
+            "notes": "",
+            "parent_id": task._id,
+            "done": 0,
+            "dueDate": req.body.duedate,
+            "duration": duration,
+            "members": members
+          }
+          models.Tasks(newSubTask).save(function(err,t) {
+            if (err) console.log(err);
+          });
+        }
       }
-      var duration = 0;
-      if (parseInt(durations[i])) duration = parseInt(durations[i]);
-      var newSubTask = {
-        "id": Math.floor(Math.random() * 1000) + 10,
-        "project_id": req.body.projectId,
-        "name": subtasks[i],
-        "notes": "",
-        "parent": id,
-        "done": 0,
-        "dueDate": req.body.duedate,
-        "duration": duration,
-        "members": members
-      }
-      data["tasks"].push(newSubTask);
-    }
+      res.redirect('/projects/' + req.body.projectId);
+    });
   }
-  res.redirect('/projects/' + req.body.projectId);
 }
