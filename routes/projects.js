@@ -115,14 +115,7 @@ exports.updateSubtask = function(req, res) {
 	models.Tasks.find({
 		"_id":subtask_id
 	}).exec(afterFindingSubtask);
-	/*
-	for (var i=0; i<data["tasks"].length; i++) {
-	  	if (data["tasks"][i]["id"] == subtask_id) {
-	  		data["tasks"][i]["done"] = parseInt(bool);
-	  		task_id = data["tasks"][i]["parent"];
-	  		break;
-        }
-    }*/
+	
     function afterFindingSubtask(err, subtask) {
     	if (err) console.log(err);
     	else {
@@ -155,35 +148,8 @@ exports.updateSubtask = function(req, res) {
     			});
     		});
     }
-    /*
-    var percent = updateTask(task_id, bool, data);
-	var obj = [task_id, percent, bool, subtask_id];
-	res.json(obj);*/
 }
-/*
-function updateTask(task_id, bool, data) {
-	var num = 0;
-	var denom = 0;
 
-	for (var i=0; i<data["tasks"].length; i++) {
-	  	if (data["tasks"][i]["parent"] == task_id) {
-	  		denom += data["tasks"][i]["duration"];
-	  		if(data["tasks"][i]["done"] == 1) {
-	  			num += data["tasks"][i]["duration"];
-	  		}
-        }
-    }
-
-    for (var i=0; i<data["tasks"].length; i++) {
-	  	if (data["tasks"][i]["id"] == task_id) {
-	  		data["tasks"][i]["done"] = (num == denom);
-	  		data["tasks"][i]["progress"] = (num * 100 / denom);
-        }
-    }
- 
-    return (num * 100 / denom);
-}
-*/
 exports.saveProject = function(req, res) {
 	console.log("")
 	var id = req.params.projectId; 

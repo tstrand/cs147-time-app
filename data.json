@@ -18,7 +18,7 @@
         "project_id": 1,
         "name": "Prototyping",
         "dueDate": "Feb 6, 2014",
-        "duration": -1,
+        "duration": 2,
         "notes": "prototying stage",
         "parent_id": -1,
         "done": 0,
