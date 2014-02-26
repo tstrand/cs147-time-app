@@ -1,4 +1,4 @@
-var data = require('../data.json');
+//var data = require('../data.json');
 var models = require('../models');
 
 exports.viewProjects = function(req, res) { 
@@ -54,7 +54,7 @@ exports.viewProject = function(req, res) {
 		for (var i=0; i<object["tasks"].length; i++) {
 	  		var subtasks = [];
 	  		// select all subtasks whose parent is task id
-	  		var taskId = object["tasks"][i]["id"];
+	  		var taskId = object["tasks"][i]["_id"];
 	  		for (var j=0; j<tasks.length; j++) {
 	    		if (tasks[j]["parent_id"] == taskId) {
 	      			subtasks.push(tasks[j]);
@@ -67,10 +67,10 @@ exports.viewProject = function(req, res) {
 	    for (var i=0; i<object["completed_tasks"].length; i++) {
 	    	var subtasks = [];
 	      	// select all subtasks whose parent is task id
-	      	var taskId = object["completed_tasks"][i]["id"];
+	      	var taskId = object["completed_tasks"][i]["_id"];
 	      	console.log(taskId);
 	      	for (var j=0; j<tasks.length; j++) {
-	      		if (tasks[j]["parent"] == taskId) {
+	      		if (tasks[j]["parent_id"] == taskId) {
 	          		subtasks.push(tasks[j]);
 	        	}
 	      	}
@@ -82,103 +82,85 @@ exports.viewProject = function(req, res) {
 	    console.log(object);
 		res.render('project', object);
 	}
-
-/*
-	for(var i = 0; i < data["projects"].length; i++) {
-		if(projectId == data["projects"][i]["id"]) {
-			object = data["projects"][i];
-			break;
-		}
-	}
-	object["pageName"] = object["name"];
-	// filter tasks and meetings
-	object["tasks"] = [];
-	object["meetings"] = [];
-	object["completed_tasks"] = [];
-	for (var i=0; i<data["tasks"].length; i++) {
-  		if (data["tasks"][i]["project_id"] == projectId && data["tasks"][i]["parent"] == -1) { 
-    		if(data["tasks"][i]["done"]) {
-    			object["completed_tasks"].push(data["tasks"][i]);
-    		} else {
-    			object["tasks"].push(data["tasks"][i]);
-    		}
-    	}
-  	}
-  	for (var i=0; i<data["meetings"].length; i++) {
-    	if (data["meetings"][i]["project_id"] == projectId) {
-    		object["meetings"].push(data["meetings"][i]);
-  		}
-  	}
-
-	// add subtasks to each task
-	for (var i=0; i<object["tasks"].length; i++) {
-  		var subtasks = [];
-  		// select all subtasks whose parent is task id
-  		var taskId = object["tasks"][i]["id"];
-  		for (var j=0; j<data["tasks"].length; j++) {
-    		if (data["tasks"][j]["parent"] == taskId) {
-      			subtasks.push(data["tasks"][j]);
-    		}
-  		}
-  		object["tasks"][i]["subtasks"] = subtasks;
-	}
-
-    // add subtasks to each completed task
-    for (var i=0; i<object["completed_tasks"].length; i++) {
-    	var subtasks = [];
-      	// select all subtasks whose parent is task id
-      	var taskId = object["completed_tasks"][i]["id"];
-      	console.log(taskId);
-      	for (var j=0; j<data["tasks"].length; j++) {
-      		if (data["tasks"][j]["parent"] == taskId) {
-          		subtasks.push(data["tasks"][j]);
-        	}
-      	}
-      	object["completed_tasks"][i]["subtasks"] = subtasks;
-    }
-
-    object["task_id"] = req.params.taskId; 
-    console.log(req.params.taskId);
-	res.render('project', object);
-	*/
 }
 
 exports.createProject = function(req, res) {
+	data = {};
 	data["pageName"] = "Create Project";
 	data["username"] = req.session.username;
 	res.render('saveProject', data);
 }
 
-exports.editProject = function(req, res) {    
+exports.editProject = function(req, res) {   
+	console.log("EIDITNG PROJECT"); 
 	var id = req.params.projectId; 
-	var object = [];
-	for(var i = 0; i < data["projects"].length; i++) {
-		if(data["projects"][i]["id"] == id) {
-			object = data["projects"][i];
-			break;
+	models.Projects.find({"_id":id}).exec(function (err, project) {
+		console.log(project);
+		if (project.length) {
+			var object = project[0];
+			object["pageName"] = "Edit Project";
+			object["edit"] = true;
+			res.render('saveProject', object);
+		} else {
+			res.redirect("/");
 		}
-	}
-	object["pageName"] = "Edit Project";
-	object["edit"] = true;
-	res.render('saveProject', object);
+	});
  }
 
 exports.updateSubtask = function(req, res) {
 	var subtask_id = req.params.subtaskId;
 	var bool = req.params.bool;
 	var task_id;
+
+	models.Tasks.find({
+		"_id":subtask_id
+	}).exec(afterFindingSubtask);
+	/*
 	for (var i=0; i<data["tasks"].length; i++) {
 	  	if (data["tasks"][i]["id"] == subtask_id) {
 	  		data["tasks"][i]["done"] = parseInt(bool);
 	  		task_id = data["tasks"][i]["parent"];
 	  		break;
         }
+    }*/
+    function afterFindingSubtask(err, subtask) {
+    	if (err) console.log(err);
+    	else {
+    		console.log(subtask[0].parent_id);
+    		subtask[0].done = parseInt(bool);
+    		var parent_id = subtask[0].parent_id;
+    		subtask[0].save(function(err) {
+    			models.Tasks.find({"parent_id":parent_id}).exec(updateRest);
+    		});
+    	}
     }
+
+    function updateRest(err, subtasks) {
+    	console.log("UPDATEREST");
+
+    	var num = 0;
+    	var denom = 0;
+    	for (var i=0; i<subtasks.length; i++) {
+    		denom += subtasks[i]["duration"];
+    		if (subtasks[i]["done"]) num += subtasks[i]["duration"];
+    	}
+
+    	models.Tasks.find({"_id": subtasks[0].parent_id})
+    		.exec(function(err,task) {
+    			if (num == denom) task[0]["done"] = 1;
+    			else task[0]["done"] = 0;
+    			task[0]["progress"] = (num * 100 / denom);
+    			task[0].save(function(err) {
+    				res.json([task[0]._id, (num * 100) / denom, bool, subtask_id]);
+    			});
+    		});
+    }
+    /*
     var percent = updateTask(task_id, bool, data);
 	var obj = [task_id, percent, bool, subtask_id];
-	res.json(obj);
+	res.json(obj);*/
 }
-
+/*
 function updateTask(task_id, bool, data) {
 	var num = 0;
 	var denom = 0;
@@ -201,11 +183,12 @@ function updateTask(task_id, bool, data) {
  
     return (num * 100 / denom);
 }
-
+*/
 exports.saveProject = function(req, res) {
+	console.log("")
 	var id = req.params.projectId; 
 	var edit = id ? true : false;
-	if(!edit) var id = Math.floor(Math.random() * 1000) + 10;
+	//if(!edit) var id = Math.floor(Math.random() * 1000) + 10;
 
 	// now member is an array of username
 	var members = []
@@ -215,21 +198,26 @@ exports.saveProject = function(req, res) {
 	// by default it adds the creator
 	if (members[0] == "") members = [req.session.username];
 	var project = {
-		"id": id,
 		"name": req.query.name,
-		"dueDate": req.query.duedate,
+		"dueDate": new Date(req.query.duedate),
 		"description": 	req.query.description,
 		"members": members	
 	};
 	if(edit) {
-		for(var i = 0; i < data["projects"].length; i++) {
-			if(data["projects"][i]["id"] == id) {
-				data["projects"][i] = project;
-				break;
-			}
-		}
+		project["_id"] = id;
+		console.log("EDITING");
+		console.log(project);
+		models.Projects.find({"_id":id}).remove(function(err) {
+			models.Projects(project).save(function (err,project) {
+				res.redirect('/projects/' + id);
+			});
+		});
 	} else {
-		data["projects"].push(project);
+		models.Projects(project).save(function (err, project) {
+			console.log("CREATE");
+			console.log(project);
+			var pid = project._id;
+			res.redirect('/projects/' + pid);
+		});
 	}
-	res.redirect('/projects/' + id);
  }

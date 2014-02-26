@@ -1,4 +1,5 @@
 var data = require('../data.json');
+var models = require('../models');
 
 exports.viewAgenda = function(req, res) { 
   if (!req.session.user_id) {

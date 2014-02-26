@@ -29,8 +29,8 @@
     <h3 class="page-header">
       {{pageName}}
       <!-- <a href="/projects/delete/{{id}}" class="header_edit">delete</a> -->
-      <a href="/projects/edit/{{id}}" class="header_edit">edit</a>
-      <a href="/create/{{id}}" class="header_edit">+task/meeting</a>
+      <a href="/project/edit/{{_id}}" class="header_edit">edit</a>
+      <a href="/create/{{_id}}" class="header_edit">+task/meeting</a>
     </h3>
 
 
@@ -48,35 +48,35 @@
     <a id="task-box-button" class="collapse-button">collapse</a>
     <div id="task-box">
       {{#each tasks}}
-      <div class="todo-card task" id="task{{id}}">
+      <div class="todo-card task" id="task{{_id}}">
         <span class="type-name">task</span>
         <p class="task-name">{{name}}</p>
         <p class="duedate">due by {{dueDate}}</p>
-        <span class="progress_line" id="progress_line{{id}}">{{progress}}% complete</span><!-- <a class="task-button" id="{{project_id}}/tasks/{{id}}">View task &raquo;</a> -->
-        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+        <span class="progress_line" id="progress_line{{_id}}">{{progress}}% complete</span><!-- <a class="task-button" id="{{project_id}}/tasks/{{id}}">View task &raquo;</a> -->
+        <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
           <span class="notes-title">checklist</span>
           <table class="subtask_table">
           {{#each subtasks}}
-            <tr class="subtask_line" id="{{id}}">
+            <tr class="subtask_line" id="{{_id}}">
               {{#if done}}
-                <td><input type="checkbox" id="checkbox{{id}}" checked></td>
-                <td id="subtask{{id}}" style="text-decoration: line-through">{{name}}</td>
+                <td><input type="checkbox" id="checkbox{{_id}}" checked></td>
+                <td id="subtask{{_id}}" style="text-decoration: line-through">{{name}}</td>
               {{else}}
-                <td><input type="checkbox" id="checkbox{{id}}"></td>
-                <td id="subtask{{id}}">{{name}}</td>
+                <td><input type="checkbox" id="checkbox{{_id}}"></td>
+                <td id="subtask{{_id}}">{{name}}</td>
               {{/if}}
               <td class="subtask_duration">{{duration}} hours</td>
             </tr>
-            <tr class="subtask_line" id="{{id}}">
+            <tr class="subtask_line" id="{{_id}}">
               <td></td>
               <td></td>
               <td class="subtask_member">{{members}}</td>
             </tr>
           {{/each}}
           </table>
-          <a class="task-button" href="/edit/task/{{project_id}}/{{id}}">edit</a>
+          <a class="task-button" href="/edit/task/{{project_id}}/{{_id}}">edit</a>
         </div>
       </div>
       {{/each}}
@@ -87,16 +87,16 @@
     <a id="meeting-box-button" class="collapse-button">collapse</a>
     <div id="meeting-box">
       {{#each meetings}}
-      <div class="todo-card meeting" id="meeting{{id}}">
+      <div class="todo-card meeting" id="meeting{{_id}}">
         <span class="type-name">meeting</span>
         <p class="task-name">{{name}}</p>
         <span class="duedate">{{datetime}}</span>
-        <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
+        <div id="detailmeeting{{_id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
           <span class="notes-title">attendees</span>
           <p class="notes-text">{{members}}</p>
-          <a class="task-button" href="/edit/meeting/{{project_id}}/{{id}}">edit</a>
+          <a class="task-button" href="/edit/meeting/{{project_id}}/{{_id}}">edit</a>
         </div>
       </div>
       {{/each}}
@@ -107,24 +107,24 @@
     <a id="completed-box-button" class="collapse-button">collapse</a>
     <div id="completed-box">
       {{#each completed_tasks}}
-      <div class="todo-card completed" id="task{{id}}">
+      <div class="todo-card completed" id="task{{_id}}">
         <p class="task-name">{{name}}</p>
         <p class="duedate">due by {{dueDate}}</p>
-        <span class="progress_line" id="progress_line{{id}}">{{progress}}% complete</span><a class="task-button" id="{{project_id}}/tasks/{{id}}">View task &raquo;</a>
-        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+        <span class="progress_line" id="progress_line{{_id}}">{{progress}}% complete</span><a class="task-button" id="{{project_id}}/tasks/{{_id}}">View task &raquo;</a>
+        <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
           <span class="notes-title">subtasks</span>
           <table class="subtask_table">
           {{#each subtasks}}
-            <tr class="subtask_line" id="{{id}}">
-              <td><input type="checkbox" id="checkbox{{id}}" checked></td>
-              <td id="subtask{{id}}" style="text-decoration: line-through">{{name}}</td>    
+            <tr class="subtask_line" id="{{_id}}">
+              <td><input type="checkbox" id="checkbox{{_id}}" checked></td>
+              <td id="subtask{{_id}}" style="text-decoration: line-through">{{name}}</td>    
               <td class="subtask_duration">[{{duration}} hours]</td>
             </tr>
           {{/each}}
           </table>
-          <a class="task-button" href="/edit/task/{{project_id}}/{{id}}">edit</a>
+          <a class="task-button" href="/edit/task/{{project_id}}/{{_id}}">edit</a>
         </div>
       </div>
       {{/each}}

@@ -61,7 +61,7 @@ app.get('/projects/:projectId', auth.checkAuth, projects.viewProject);
 app.get('/projects/:projectId/:taskId', auth.checkAuth, projects.viewProject);
 app.get('/projects/:projectId/tasks/:taskId', auth.checkAuth, createtask.viewTask);
 app.get('/subtasks/:subtaskId/:bool', auth.checkAuth, projects.updateSubtask);
-app.get('/projects/edit/:projectId', auth.checkAuth, projects.editProject);
+app.get('/project/edit/:projectId', auth.checkAuth, projects.editProject);
 //app.get('/projects/delete/:projectId', auth.checkAuth, projects.deleteProject);
 app.get('/create', auth.checkAuth, createtask.createTaskMeeting);
 app.get('/create/:projectId', auth.checkAuth, createtask.createTaskMeeting);

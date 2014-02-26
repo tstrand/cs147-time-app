@@ -34,18 +34,18 @@
     <div id="task-box">
       {{#each tasks}}
       {{#unless done}}
-      <div class="todo-card task" id="task{{id}}">
+      <div class="todo-card task" id="task{{_id}}">
         <span class="type-name">subtask</span>
-        <p class="task-name" id="{{id}}"><input class="subtask_checkbox" type="checkbox" id="checkbox{{id}}"><span id="subtask{{id}}">{{name}}</span></p>
+        <p class="task-name" id="{{_id}}"><input class="subtask_checkbox" type="checkbox" id="checkbox{{_id}}"><span id="subtask{{_id}}">{{name}}</span></p>
         <p class="duedate">due by {{dueDate}}</p>
         <p class="duration">estimated duration: {{duration}} hours</p>
-        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+        <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
           <span class="notes-title">part of task</span>
           <p class="notes-text">{{parent_name}}
             <!--<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a>-->
           </p>
           <span class="notes-title">project</span>
-          <p class="notes-text">{{project_name}}<a class="detail-button" id="{{project_id}}/{{parent}}">View full task &raquo;</a></p>
+          <p class="notes-text">{{project_name}}<a class="detail-button" id="{{project_id}}/{{parent_id}}">View full task &raquo;</a></p>
           {{#if notes}}
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
