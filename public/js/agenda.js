@@ -9,11 +9,22 @@ $(document).ready(function() {
  * Function that is called when the document is ready.
  */
 function initializePage() {
-	
+	$("#sign-up-button").click(function() {
+    	$("#sign_in_page").toggle();
+    	$("#sign_up_page").toggle();
+    	console.log("hihi");
+  	});
+
+  	$("#sign-in-button").click(function() {
+    	$("#sign_in_page").toggle();
+    	$("#sign_up_page").toggle();
+    	console.log("hihi");
+  	});
+
 	$(".todo-card").click(cardClick);
 	$(".link-button").click(linkClick);
-	$(".task-name").click(toggleSubtaskAgenda);
-
+	$(".subtask-wrapper").click(toggleSubtaskAgenda);
+	$(".btn-primary").click(linkClick);
 	// $("#task-box-button").click(function(e) {
 	// 	e.preventDefault();
 	// 	$("#task-box").toggle(400);
@@ -57,35 +68,11 @@ function linkClick(e) {
 	document.location.href = id;
 }
 
-function toggleSubtask(e) {
-	e.stopPropagation();
-	var subtask = $("#subtask" + this.id);
-	var checkbox = $("#checkbox" + this.id);
-	if ($(e.target).is("input")) {
-		if(checkbox.prop('checked')) {
-			subtask.css("text-decoration", "line-through");
-			$.get("/subtasks/" + this.id + "/1", callback)
-		} else {
-			subtask.css("text-decoration", "none");
-			$.get("/subtasks/" + this.id + "/0", callback)
-		}
-	} else {
-		if(!checkbox.prop('checked')) {
-			subtask.css("text-decoration", "line-through");
-			checkbox.prop('checked', true);
-			$.get("/subtasks/" + this.id + "/1", callback)
-		} else {
-			subtask.css("text-decoration", "none");
-			checkbox.prop('checked', false);
-			$.get("/subtasks/" + this.id + "/0", callback)
-		}
-	}
-}
-
 function toggleSubtaskAgenda(e) {
 	e.stopPropagation();
-	var subtask = $("#subtask" + this.id);
-	var checkbox = $("#checkbox" + this.id);
+	var subtask = $("#subtask-name" + this.id);
+	var checkbox = $("#subtask-checkbox" + this.id);
+	console.log("hello");
 	if ($(e.target).is("input")) {
 		if(checkbox.prop('checked')) {
 			subtask.css("text-decoration", "line-through");
@@ -95,6 +82,7 @@ function toggleSubtaskAgenda(e) {
 			$.get("/subtasks/" + this.id + "/0", callbackAgenda)
 		}
 	} else {
+		console.log(checkbox);
 		if(!checkbox.prop('checked')) {
 			subtask.css("text-decoration", "line-through");
 			checkbox.prop('checked', true);

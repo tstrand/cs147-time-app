@@ -10,13 +10,17 @@ exports.viewAgenda = function(req, res) { 
   mydata = {};
   mydata["tasks"] = [];
   mydata["meetings"] = [];
-  mydata["completedSubtasks"] = []
+  mydata["completed_tasks"] = [];
   for (var i=0; i<data["tasks"].length; i++) {
     for (var j=0; j<data["tasks"][i]["members"].length; j++) {
       if ((req.session.user_id == data["tasks"][i]["members"][j] ||
           req.session.username == data["tasks"][i]["members"][j]) &&
           data["tasks"][i]["parent"] != -1) {
-        mydata["tasks"].push(data["tasks"][i]);
+        if(data["tasks"][i]["done"]) {
+          mydata["completed_tasks"].push(data["tasks"][i]);
+        } else {
+          mydata["tasks"].push(data["tasks"][i]);
+        }
         break;
       }
     }
@@ -25,6 +29,11 @@ exports.viewAgenda = function(req, res) { 
     for (var j=0; j<data["meetings"][i]["members"].length; j++) {
       if (req.session.user_id == data["meetings"][i]["members"][j] ||
           req.session.username == data["meetings"][i]["members"][j]) {
+        var cur = new Date().getTimezoneOffset() * -1;
+        console.log(cur);
+        if(cur > data["meetings"][i]["datetime"]) { 
+          data["meetings"][i]["datetime"] = 0;
+        }
         mydata["meetings"].push(data["meetings"][i]);
         break;
       }
@@ -44,6 +53,22 @@ exports.viewAgenda = function(req, res) { 
     for (var j=0; j<data["projects"].length; j++) {
       if (data["projects"][j]["id"] == mydata["tasks"][i]["project_id"]) {
         mydata["tasks"][i]["project_name"] = data["projects"][j]["name"];
+      }
+    }
+  }
+
+  for (var i=0; i<mydata["completed_tasks"].length; i++) {
+    // getting parent task
+    for (var j=0; j<data["tasks"].length; j++) {
+      if (data["tasks"][j]["id"] == mydata["completed_tasks"][i]["parent"]) {
+        mydata["completed_tasks"][i]["parent_name"] = data["tasks"][j]["name"];
+        break;
+      }
+    }
+    //getting project name
+    for (var j=0; j<data["projects"].length; j++) {
+      if (data["projects"][j]["id"] == mydata["completed_tasks"][i]["project_id"]) {
+        mydata["completed_tasks"][i]["project_name"] = data["projects"][j]["name"];
       }
     }
   }

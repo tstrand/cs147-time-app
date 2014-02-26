@@ -54,6 +54,10 @@
      margin: 0px;
 }
 
+.empty_info {
+     text-align: center;
+}
+
 body {
      padding-top: 40px;
 }

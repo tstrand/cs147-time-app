@@ -28,9 +28,10 @@
 
     <div class="projects">
       {{#each projects}}
-        <a id="{{id}}" class="thumbnail project">
-          <h3 class="project_title">{{name}}</h3>
-          <div class="duedate_title">Due Date</div><span class="duedate_text">{{dueDate}}</span><div id="{{id}}" class="detail-button">view project &raquo;</div>
+        <div id="{{id}}" class="project">
+          <h4 class="project_title" id="/projects/{{id}}">{{name}}</h4>
+          <div class="duedate_title">Due Date</div><span class="duedate_text">{{dueDate}}</span>
+          <div id="{{id}}" class="detail-button">see details &raquo;</div>
           <div class="more_info" id="{{id}}">
             <div class="description" id="{{id}}">
               <div class="description_title">Description</div>
@@ -41,7 +42,12 @@
               <div class="members_text">{{members}}</div>
             </div>
           </div>
-        </a>
+        </div>
+      {{else}}
+        <div class="empty_info">
+          <h5>Welcome to your Projects Page. Try creating a new project to get started.</h5>
+          <button type="button" class="btn btn-lg btn-primary" id="/projects/create">Create Project</button>
+        </div>
       {{/each}}
     </div>
     <br/>

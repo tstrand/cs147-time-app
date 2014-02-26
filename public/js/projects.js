@@ -9,7 +9,7 @@ $(document).ready(function() {
  * Function that is called when the document is ready.
  */
 function initializePage() {
-	$(".project").click(function (e) {
+	$(".detail-button").click(function (e) {
 		e.preventDefault();
 		var id = $(this).attr('id');
 		toggleProject(id);
@@ -39,7 +39,9 @@ function initializePage() {
 	$(".todo-card").click(cardClick);
 	$(".link-button").click(linkClick);
 	$(".subtask_line").click(toggleSubtask);
-
+	$(".project_title").click(linkClick);
+	$(".btn-primary").click(linkClick);
+	
 	$("#description-button").click(function(e) {
 		e.preventDefault();
 		$("#project-description").toggle(400);
