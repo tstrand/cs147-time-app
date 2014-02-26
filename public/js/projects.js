@@ -10,11 +10,6 @@ $(document).ready(function() {
  */
 function initializePage() {
 	$(".detail-button").click(function (e) {
-		e.stopPropagation();
-		var id = $(this).attr('id');
-		document.location.href='/projects/' + id;
-	});
-	$(".project").click(function (e) {
 		e.preventDefault();
 		var id = $(this).attr('id');
 		toggleProject(id);
@@ -44,14 +39,15 @@ function initializePage() {
 	});
 
 	$(".todo-card").click(cardClick);
-	$(".detail-button").click(detailClick);
-	$(".task-button").click(taskClick);
+	$(".link-button").click(linkClick);
 	$(".subtask_line").click(toggleSubtask);
-
+	$(".project_title").click(linkClick);
+	$(".btn-primary").click(linkClick);
+	
 	$("#description-button").click(function(e) {
 		e.preventDefault();
 		$("#project-description").toggle(400);
-		if ($("#description-button").html() == "collapse") {
+		if ($("#description-button").html() == "hide") {
 			$("#description-button").html("show");
 		} else {
 			$("#description-button").html("hide");
@@ -68,33 +64,13 @@ function initializePage() {
 		}
 	});
 
-	$("#task-box-button").click(function(e) {
-		e.preventDefault();
-		$("#task-box").toggle(400);
-		if ($("#task-box-button").html() == "collapse") {
-			$("#task-box-button").html("expand");
-		} else {
-			$("#task-box-button").html("collapse");
-		}
-	});
-
-	$("#meeting-box-button").click(function(e) {
-		e.preventDefault();
-		$("#meeting-box").toggle(400);
-		if ($("#meeting-box-button").html() == "collapse") {
-			$("#meeting-box-button").html("expand");
-		} else {
-			$("#meeting-box-button").html("collapse");
-		}
-	});
-
 	$("#completed-box-button").click(function(e) {
 		e.preventDefault();
 		$("#completed-box").toggle(400);
-		if ($("#completed-box-button").html() == "collapse") {
-			$("#completed-box-button").html("expand");
+		if ($("#completed-box-button").html() == "hide") {
+			$("#completed-box-button").html("show");
 		} else {
-			$("#completed-box-button").html("collapse");
+			$("#completed-box-button").html("hide");
 		}
 	});
 
@@ -114,16 +90,10 @@ function cardClick(e) {
 	// this.css("border", "none");
 }
 
-function detailClick(e) {
+function linkClick(e) {
 	e.stopPropagation();
 	var id = $(this).attr('id');
-	document.location.href='/projects/' + id;
-}
-
-function taskClick(e) {
-	e.stopPropagation();
-	var id = $(this).attr('id');
-	document.location.href='/projects/' + id;
+	document.location.href = id;
 }
 
 function toggleSubtask(e) {

@@ -30,43 +30,48 @@
 
     <h3 class="page-header">Hi, {{username}}! Check out your agenda below</h3>
     <span class="type-title">my checklist</span>
-    <a id="task-box-button" class="collapse-button">collapse</a>
+    <!-- <a id="task-box-button" class="collapse-button">collapse</a> -->
     <div id="task-box">
       {{#each tasks}}
-      {{#unless done}}
-      <div class="todo-card task" id="task{{_id}}">
-        <span class="type-name">subtask</span>
-        <p class="task-name" id="{{_id}}"><input class="subtask_checkbox" type="checkbox" id="checkbox{{_id}}"><span id="subtask{{_id}}">{{name}}</span></p>
-        <p class="duedate">due by {{dueDate}}</p>
-        <p class="duration">estimated duration: {{duration}} hours</p>
-        <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
+      <div class="todo-card task" id="task{{id}}">
+        <span class="due_date">{{dueDate}}</span>
+        <span class="subtask-wrapper" id="{{id}}"><input class="subtask-checkbox" type="checkbox" id="subtask-checkbox{{id}}"><span class="subtask-name" id="subtask-name{{id}}">{{name}}</span></span><br/>
+        <a class="detail-button">details &raquo;</a>
+        <p class="duration">time to complete: {{duration}} hours</p>
+        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+          <a class="link-button" id="/projects/{{project_id}}/{{parent}}">View full task &raquo;</a>
           <span class="notes-title">part of task</span>
           <p class="notes-text">{{parent_name}}
             <!--<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a>-->
           </p>
           <span class="notes-title">project</span>
-          <p class="notes-text">{{project_name}}<a class="detail-button" id="{{project_id}}/{{parent_id}}">View full task &raquo;</a></p>
+          <p class="notes-text">{{project_name}}</p>
           {{#if notes}}
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
           {{/if}}
         </div>
       </div>
-      {{/unless}}
+      {{else}}
+        <div class="empty_info">
+          <h5>Wahoo! No tasks to work on. Check out your projects page to see if there's anything you missed</h5>
+          <button type="button" class="btn btn-lg btn-primary" id="/projects">Go To Projects</button>
+        </div>
       {{/each}}
     </div>
 
     <br>
     
     <span class="type-title">my meetings</span>
-    <a id="meeting-box-button" class="collapse-button">collapse</a>
+    <!-- <a id="meeting-box-button" class="collapse-button">collapse</a> -->
     <div id="meeting-box">
       {{#each meetings}}
       <div class="todo-card meeting" id="meeting{{id}}">
-        <span class="type-name">meeting</span>
-        <p class="task-name">{{name}}</p>
-        <span class="duedate">{{datetime}}</span><a class="detail-button" id="{{project_id}}">View project &raquo;</a>
+        <p class="meeting-name">{{name}}</p>
+        <span class="duedate">{{datetime}}</span>
+        <a class="detail-button">details &raquo;</a>
         <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
+          <a class="link-button" id="/projects/{{project_id}}">View project &raquo;</a>
           <span class="notes-title">project</span>
           <p class="notes-text">{{project_name}}</p>
           <span class="notes-title">attendees</span>
@@ -77,33 +82,58 @@
           {{/if}}
         </div>
       </div>
+      {{else}}
+        <div class="empty_info">
+          <h5>No upcoming meetings! Check out your Projects Page to see if there's anything you should schedule</h5>
+          <button type="button" class="btn btn-lg btn-primary" id="/projects">Go To Projects</button>
+        </div>
       {{/each}}
     </div>
 
     <br>
     <span class="type-title">completed</span>
-    <a id="completed-box-button" class="collapse-button">collapse</a>
+    <a id="completed-box-button" class="collapse-button">hide</a>
     <div id="completed-box">
-      {{#each tasks}}
-      {{#if done}}
+      {{#each completed_tasks}}
       <div class="todo-card completed" id="task{{id}}">
-        <p class="task-name" id="{{id}}"><input class="subtask_checkbox" type="checkbox" id="checkbox{{id}}" checked><span id="subtask{{id}}" style="text-decoration: line-through">{{name}}</span></p>
-        <p class="duedate">due by {{dueDate}}</p>
-        <p class="duration">estimated duration: {{duration}} hours</p>
+        <span class="due_date">{{dueDate}}</span>
+        <span class="subtask-wrapper" id="{{id}}"><input class="subtask-checkbox" type="checkbox" id="subtask-checkbox{{id}}" checked><span class="subtask-name" id="subtask-name{{id}}" style="text-decoration: line-through;">{{name}}</span></span><br/>
+        <a class="detail-button">details &raquo;</a>
+        <p class="duration">time to complete: {{duration}} hours</p>
         <div id="detailtask{{id}}" class="notes-field" style="display:none;">
+          <a class="link-button" id="/projects/{{project_id}}/{{parent}}">View full task &raquo;</a>
           <span class="notes-title">part of task</span>
           <p class="notes-text">{{parent_name}}
             <!--<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a>-->
           </p>
           <span class="notes-title">project</span>
-          <p class="notes-text">{{project_name}}<a class="detail-button" id="{{project_id}}/{{parent}}">View full task &raquo;</a></p>
+          <p class="notes-text">{{project_name}}></p>
           {{#if notes}}
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
           {{/if}}
         </div>
       </div>
-      {{/if}}
+      {{/each}}
+      {{#each meetings}}
+      {{#unless datetime}}
+      <div class="todo-card meeting" id="meeting{{id}}">
+        <p class="meeting-name">{{name}}</p>
+        <span class="duedate">{{datetime}}</span>
+        <a class="detail-button">details &raquo;</a>
+        <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
+          <a class="link-button" id="/projects/{{project_id}}">View project &raquo;</a>
+          <span class="notes-title">project</span>
+          <p class="notes-text">{{project_name}}</p>
+          <span class="notes-title">attendees</span>
+          <p class="notes-text">{{members}}</p>
+          {{#if notes}}
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          {{/if}}
+        </div>
+      </div>
+      {{/unless}}
       {{/each}}
     </div>
 

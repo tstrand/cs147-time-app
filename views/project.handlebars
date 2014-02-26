@@ -34,25 +34,17 @@
     </h3>
 
 
-    <a id="description-button" class="collapse-button">show</a>
-    <span class="type-title">Project Info</span>
-    <div id="project-description"  style="display:none">
-      <span class="notes-title">Description</span>
-      <div class = "summary">{{description}}</div>
-      <span class="notes-title">Members</span>
-      <div class = "member">{{members}}</div>
-    </div>
     <br/>
 
     <span class="type-title">tasks</span>
-    <a id="task-box-button" class="collapse-button">collapse</a>
+<!--     <a id="task-box-button" class="collapse-button">collapse</a> -->
     <div id="task-box">
       {{#each tasks}}
       <div class="todo-card task" id="task{{_id}}">
-        <span class="type-name">task</span>
+        <span class="due_date">{{dueDate}}</span>
         <p class="task-name">{{name}}</p>
-        <p class="duedate">due by {{dueDate}}</p>
-        <span class="progress_line" id="progress_line{{_id}}">{{progress}}% complete</span><!-- <a class="task-button" id="{{project_id}}/tasks/{{id}}">View task &raquo;</a> -->
+        <a class="detail-button">details &raquo;</a>
+        <p class="progress_line no_margin" id="progress_line{{_id}}">{{progress}}% complete</p>
         <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
@@ -63,54 +55,66 @@
               {{#if done}}
                 <td><input type="checkbox" id="checkbox{{_id}}" checked></td>
                 <td id="subtask{{_id}}" style="text-decoration: line-through">{{name}}</td>
+                <td class="subtask_duration">[{{duration}} hours]</td>
+            </tr>
               {{else}}
                 <td><input type="checkbox" id="checkbox{{_id}}"></td>
                 <td id="subtask{{_id}}">{{name}}</td>
+                <td class="subtask_duration">[{{duration}} hours]</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtask_member">waiting on {{members}}</td>
+            </tr>
               {{/if}}
-              <td class="subtask_duration">{{duration}} hours</td>
-            </tr>
-            <tr class="subtask_line" id="{{_id}}">
-              <td></td>
-              <td></td>
-              <td class="subtask_member">{{members}}</td>
-            </tr>
           {{/each}}
           </table>
-          <a class="task-button" href="/edit/task/{{project_id}}/{{_id}}">edit</a>
+          <a class="link-button" id="/edit/task/{{project_id}}/{{_id}}">edit task</a>
         </div>
       </div>
+      {{else}}
+        <div class="empty_info">
+          <h5>No tasks yet...try creating one!</h5>
+          <button type="button" class="btn btn-lg btn-primary" id="/create/{{id}}">Create Task</button>
+        </div>
       {{/each}}
     </div>
 
     <br>
     <span class="type-title">meetings</span>
-    <a id="meeting-box-button" class="collapse-button">collapse</a>
+<!--     <a id="meeting-box-button" class="collapse-button">collapse</a> -->
     <div id="meeting-box">
       {{#each meetings}}
       <div class="todo-card meeting" id="meeting{{_id}}">
-        <span class="type-name">meeting</span>
         <p class="task-name">{{name}}</p>
-        <span class="duedate">{{datetime}}</span>
+        <a class="detail-button">details &raquo;</a>
+        <p class="duedate">{{datetime}}</p>
         <div id="detailmeeting{{_id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
           <span class="notes-title">attendees</span>
           <p class="notes-text">{{members}}</p>
-          <a class="task-button" href="/edit/meeting/{{project_id}}/{{_id}}">edit</a>
+          <a class="link-button" id="/edit/meeting/{{project_id}}/{{_id}}">edit</a>
         </div>
       </div>
+      {{else}}
+        <div class="empty_info">
+          <h5>No meetings yet...try creating one!</h5>
+          <button type="button" class="btn btn-lg btn-primary" id="/create/{{id}}">Create Meeting</button>
+        </div>
       {{/each}}
     </div>
 
     <br>
     <span class="type-title">completed</span>
-    <a id="completed-box-button" class="collapse-button">collapse</a>
+    <a id="completed-box-button" class="collapse-button">hide</a>
     <div id="completed-box">
       {{#each completed_tasks}}
       <div class="todo-card completed" id="task{{_id}}">
+        <span class="due_date">{{dueDate}}</span>
         <p class="task-name">{{name}}</p>
-        <p class="duedate">due by {{dueDate}}</p>
-        <span class="progress_line" id="progress_line{{_id}}">{{progress}}% complete</span><a class="task-button" id="{{project_id}}/tasks/{{_id}}">View task &raquo;</a>
+        <a class="detail-button">details &raquo;</a>
+        <p class="progress_line no_margin" id="progress_line{{_id}}">{{progress}}% complete</p>
         <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
           <span class="notes-title">notes</span>
           <p class="notes-text">{{notes}}</p>
@@ -124,10 +128,20 @@
             </tr>
           {{/each}}
           </table>
-          <a class="task-button" href="/edit/task/{{project_id}}/{{_id}}">edit</a>
+          <a class="link-button" id="/edit/task/{{project_id}}/{{_id}}">edit</a>
         </div>
       </div>
       {{/each}}
+    </div>
+
+    <br/>
+    <!-- <a id="description-button" class="collapse-button">show</a> -->
+    <span class="type-title">Project Info</span>
+    <div id="project-description">
+      <span class="notes-title">Description</span>
+      <div class = "summary">{{description}}</div>
+      <span class="notes-title">Members</span>
+      <div class = "member">{{members}}</div>
     </div>
     
     <br/>

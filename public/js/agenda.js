@@ -9,39 +9,49 @@ $(document).ready(function() {
  * Function that is called when the document is ready.
  */
 function initializePage() {
-	
+	$("#sign-up-button").click(function() {
+    	$("#sign_in_page").toggle();
+    	$("#sign_up_page").toggle();
+    	console.log("hihi");
+  	});
+
+  	$("#sign-in-button").click(function() {
+    	$("#sign_in_page").toggle();
+    	$("#sign_up_page").toggle();
+    	console.log("hihi");
+  	});
+
 	$(".todo-card").click(cardClick);
-	$(".detail-button").click(detailClick);
-	$(".task-button").click(taskClick);
-	$(".task-name").click(toggleSubtaskAgenda);
+	$(".link-button").click(linkClick);
+	$(".subtask-wrapper").click(toggleSubtaskAgenda);
+	$(".btn-primary").click(linkClick);
+	// $("#task-box-button").click(function(e) {
+	// 	e.preventDefault();
+	// 	$("#task-box").toggle(400);
+	// 	if ($("#task-box-button").html() == "collapse") {
+	// 		$("#task-box-button").html("expand");
+	// 	} else {
+	// 		$("#task-box-button").html("collapse");
+	// 	}
+	// });
 
-	$("#task-box-button").click(function(e) {
-		e.preventDefault();
-		$("#task-box").toggle(400);
-		if ($("#task-box-button").html() == "collapse") {
-			$("#task-box-button").html("expand");
-		} else {
-			$("#task-box-button").html("collapse");
-		}
-	});
-
-	$("#meeting-box-button").click(function(e) {
-		e.preventDefault();
-		$("#meeting-box").toggle(400);
-		if ($("#meeting-box-button").html() == "collapse") {
-			$("#meeting-box-button").html("expand");
-		} else {
-			$("#meeting-box-button").html("collapse");
-		}
-	});
+	// $("#meeting-box-button").click(function(e) {
+	// 	e.preventDefault();
+	// 	$("#meeting-box").toggle(400);
+	// 	if ($("#meeting-box-button").html() == "collapse") {
+	// 		$("#meeting-box-button").html("expand");
+	// 	} else {
+	// 		$("#meeting-box-button").html("collapse");
+	// 	}
+	// });
 
 	$("#completed-box-button").click(function(e) {
 		e.preventDefault();
 		$("#completed-box").toggle(400);
-		if ($("#completed-box-button").html() == "collapse") {
-			$("#completed-box-button").html("expand");
+		if ($("#completed-box-button").html() == "hide") {
+			$("#completed-box-button").html("show");
 		} else {
-			$("#completed-box-button").html("collapse");
+			$("#completed-box-button").html("hide");
 		}
 	});
 
@@ -52,47 +62,17 @@ function cardClick(e) {
 	$("#detail" + this.id).toggle(400);
 }
 
-function detailClick(e) {
+function linkClick(e) {
 	e.stopPropagation();
 	var id = $(this).attr('id');
-	document.location.href='/projects/' + id;
-}
-
-function taskClick(e) {
-	e.stopPropagation();
-	var id = $(this).attr('id');
-	document.location.href='/projects/' + id;
-}
-
-function toggleSubtask(e) {
-	e.stopPropagation();
-	var subtask = $("#subtask" + this.id);
-	var checkbox = $("#checkbox" + this.id);
-	if ($(e.target).is("input")) {
-		if(checkbox.prop('checked')) {
-			subtask.css("text-decoration", "line-through");
-			$.get("/subtasks/" + this.id + "/1", callback)
-		} else {
-			subtask.css("text-decoration", "none");
-			$.get("/subtasks/" + this.id + "/0", callback)
-		}
-	} else {
-		if(!checkbox.prop('checked')) {
-			subtask.css("text-decoration", "line-through");
-			checkbox.prop('checked', true);
-			$.get("/subtasks/" + this.id + "/1", callback)
-		} else {
-			subtask.css("text-decoration", "none");
-			checkbox.prop('checked', false);
-			$.get("/subtasks/" + this.id + "/0", callback)
-		}
-	}
+	document.location.href = id;
 }
 
 function toggleSubtaskAgenda(e) {
 	e.stopPropagation();
-	var subtask = $("#subtask" + this.id);
-	var checkbox = $("#checkbox" + this.id);
+	var subtask = $("#subtask-name" + this.id);
+	var checkbox = $("#subtask-checkbox" + this.id);
+	console.log("hello");
 	if ($(e.target).is("input")) {
 		if(checkbox.prop('checked')) {
 			subtask.css("text-decoration", "line-through");
@@ -102,6 +82,7 @@ function toggleSubtaskAgenda(e) {
 			$.get("/subtasks/" + this.id + "/0", callbackAgenda)
 		}
 	} else {
+		console.log(checkbox);
 		if(!checkbox.prop('checked')) {
 			subtask.css("text-decoration", "line-through");
 			checkbox.prop('checked', true);

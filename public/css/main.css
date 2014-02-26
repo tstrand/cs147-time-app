@@ -50,6 +50,14 @@
      margin-left:15px;
 }
 
+.no_margin {
+     margin: 0px;
+}
+
+.empty_info {
+     text-align: center;
+}
+
 body {
      padding-top: 40px;
 }
