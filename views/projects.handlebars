@@ -28,16 +28,16 @@
 
     <div class="projects">
       {{#each projects}}
-        <div id="{{id}}" class="project">
-          <h4 class="project_title" id="/projects/{{id}}">{{name}}</h4>
+        <div id="{{_id}}" class="project">
+          <h4 class="project_title" id="/projects/{{_id}}">{{name}}</h4>
           <div class="duedate_title">Due Date</div><span class="duedate_text">{{dueDate}}</span>
-          <div id="{{id}}" class="detail-button">see details &raquo;</div>
-          <div class="more_info" id="{{id}}">
-            <div class="description" id="{{id}}">
+          <div id="{{_id}}" class="detail-button">see details &raquo;</div>
+          <div class="more_info" id="{{_id}}">
+            <div class="description" id="{{_id}}">
               <div class="description_title">Description</div>
               <div class="description_text">{{description}}</div>
             </div>
-            <div class="members" id="{{id}}">
+            <div class="members" id="{{_id}}">
               <div class="members_title">Members</div>
               <div class="members_text">{{members}}</div>
             </div>

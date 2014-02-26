@@ -15,9 +15,11 @@ function initializePage() {
 		toggleProject(id);
 	});
 	$.get("/api/get_users", function (result) {
-		$("#members_input").autocomplete({
-			source: result,
-		});
+		if ($("#members_input").length) {
+			$("#members_input").autocomplete({
+				source: result,
+			});
+		}
 	});
 
 	$("#add_member_btn").click(function (e) {
@@ -74,7 +76,7 @@ function initializePage() {
 
 	var anchor = $(".hidden_anchor");
 	console.log(anchor);
-	if(anchor) {
+	if(anchor.length) {
 		var task = $('#task' + anchor.attr('id'));
 		$("#detailtask" + anchor.attr('id')).toggle(400);
 		$("html, body").animate({ scrollTop: task.offset().bottom}, 500);

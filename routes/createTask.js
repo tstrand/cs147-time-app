@@ -1,111 +1,106 @@
 var data = require('../data.json');
+var models = require('../models');
+
 
 exports.createTaskMeeting = function(req, res) {
-  var projectId = req.params.projectId; 
+    var projectId = req.params.projectId; 
     if (!projectId) res.redirect('/projects');
+    console.log(projectId);
 
-    var object = {}
-    object["projectId"] = projectId;
-    for (var j=0; j<data["projects"].length; j++) {
-      if (data["projects"][j]["id"] == projectId) {
-        object["project_members"] = data["projects"][j]["members"];
-        break;
-      }
-    }
-    // boolean to tell that it's in create mode, note edit mode
-    object["create"] = true;
-  res.render('createTask', object);
+    models.Projects.find({"_id":projectId}).exec(function (err,project) {
+      var obj = {};
+      obj["projectId"] = projectId;
+      obj["project_members"] = project[0]["members"];
+      obj["create"] = true;
+      res.render('createTask',obj);
+    });
 }
 
 exports.editTask = function(req, res) {
   var projectId = req.params.projectId;
   var id = req.params.id;
-
-  // find task
   var task = {};
-  for (var i=0; i<data["tasks"].length; i++) {
-    if (data["tasks"][i]["id"] == id) {
-          task = data["tasks"][i]
-          break;
-      }       
+
+  models.Tasks.find({"_id":id}).exec(function (err,t) {
+    task = t[0];
+    models.Projects.find({"_id":projectId}).exec(gotProject);
+  });
+
+  function gotProject(err,project) {
+    task["project_members"] = project[0]["members"];
+    console.log(project[0]["members"]);
+    // get all the subtasks
+    models.Tasks.find({"parent_id":id}).exec(gotSubtasks);
   }
 
-  // find project for members
-  for (var j=0; j<data["projects"].length; j++) {
-        if (data["projects"][j]["id"] == projectId) {
-          task["project_members"] = data["projects"][j]["members"];
-          break;
-        }
-    }
-
-    // find subtasks for the task
+  function gotSubtasks(err,subtasks) {
     var checklists = [];
     var itemNames = ["item1", "item2", "item3", "item4", "item5"];
-    for (var i=0; i<data["tasks"].length; i++) {
-    if (data["tasks"][i]["parent"] == id) {
-          checklists.push(data["tasks"][i]);
-      }       
+    for (var i=0; i<subtasks.length; i++) {
+      task[itemNames[i]] = subtasks[i];
+      console.log(task);
+    }
+    task["taskedit"] = true;
+    task["projectId"] = projectId;
+    console.log(task);
+    res.render('createTask', task);
   }
-  for (var i=0; i<checklists.length; i++) {
-    task[itemNames[i]] = checklists[i];
-  }
-
-  task["taskedit"] = true;
-  task["projectId"] = projectId;
-  res.render('createTask', task);
 }
 
 exports.editMeeting = function(req, res) {
   var projectId = req.params.projectId;
   var id = req.params.id;
-
   var meeting = {};
-  //find meeting
-  for (var i=0; i<data["meetings"].length; i++) {
-    if (data["meetings"][i]["id"] == id) {
-      meeting = data["meetings"][i]
-      break;
-    }       
-  }
-  // find project for members
-  for (var j=0; j<data["projects"].length; j++) {
-    if (data["projects"][j]["id"] == projectId) {
-      meeting["project_members"] = data["projects"][j]["members"];
-      break;
-    }
-  }
-  var date = meeting["datetime"].split(" ")[0];
-  var time = meeting["datetime"].split(" ")[1];
-  meeting["date"] = date;
-  meeting["hour"] = time.split(":")[0];
-  meeting["min"] = time.split(":")[1];
-  meeting["meetingedit"] = true;
-  meeting["projectId"] = projectId;
-  res.render('createTask', meeting);
+
+  models.Meetings.find({"_id":id}).exec(function (err,m) {
+    meeting = m[0];
+    models.Projects.find({"_id":projectId}).exec(function(err,project) {
+      meeting["project_members"] = project[0]["members"];
+      console.log(meeting);
+      var date = meeting["datetime"].toString().split(" ")[1] + " " +
+        meeting["datetime"].toString().split(" ")[2] + " " + 
+        meeting["datetime"].toString().split(" ")[3];
+      var time = meeting["datetime"].toString().split(" ")[4];
+      meeting["date"] = date;
+      meeting["hour"] = time.split(":")[0];
+      meeting["min"] = time.split(":")[1];
+      meeting["meetingedit"] = true;
+      meeting["projectId"] = projectId;
+      console.log(meeting);
+      res.render('createTask', meeting);
+    });
+  });
+
 }
 
 exports.createMeeting = function(req, res) {
-  if (req.body.id) {
-    for (var i=data["meetings"].length-1; i>=0; i--) {
-      if (data["meetings"][i]["id"] == parseInt(req.body.id)) {
-        data["meetings"].splice(i,1);
-      }
-    }
-  }
   var members = []
   for (var i in req.body.attendees.split(",")) {
     members.push(req.body.attendees.split(",")[i].trim());
   }
   var newMeeting = {
-    "id": Math.floor(Math.random() * 1000) + 10,
     "project_id": req.body.projectId,
     "name": req.body.name,
     "notes": req.body.notes,
     "datetime": req.body.duedate + " " + req.body.hour + ":" + req.body.min,
     "members": members
   }
-  data["meetings"].push(newMeeting);
-  res.redirect('/projects/' + req.body.projectId);
+  if (req.body.id) {
+    console.log("EDIT");
+    //EDIT
+    newMeeting["_id"] = req.body.id;
+    models.Meetings.find({"_id":req.body.id}).remove(function (err) {
+      models.Meetings(newMeeting).save(function (err) {
+        res.redirect('/projects/' + req.body.projectId);
+      });
+    });
+  } else {
+    console.log("CREATIng");
+    console.log(newMeeting);
+    models.Meetings(newMeeting).save(function (err) {
+      res.redirect('/projects/' + req.body.projectId);
+    });
+  }
 }
 
 exports.createTask = function(req, res) {

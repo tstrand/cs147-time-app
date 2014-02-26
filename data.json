@@ -1,143 +1,81 @@
 {
 	"projects": [
 		{
-			"id": 1,
 			"name": "CS147 project",
 			"description": "This is our main project in cs147 this quarter",
-			"dueDate": "2/14/2014",
+			"dueDate": "Feb 14, 2014",
 			"members" : ["john","tyler","mark"]
 		},
-		{
-			"id": 2,
-			"name": "Example Project",
+    {
+			"name": "project #2",
 			"description": "This is our main project in cs147 this quarter",
-			"dueDate": "2/14/2014",
+			"dueDate": "Feb 16, 2014",
 			"members" : ["john","tyler","mark"]
-		},
-		{
-			"id": 3,
-			"name": "Example Project",
-			"description": "This is our main project in cs147 this quarter",
-			"dueDate": "2/14/2014",
-			"members" : [1,2,3]
-		},
-		{
-			"id": 4,
-			"name": "Example Project",
-			"description": "This is our main project in cs147 this quarter",
-			"dueDate": "2/14/2014",	
-			"members" : [1,2,3]
-		},
-		{
-			"id": 5,
-			"name": "Example Project",
-			"description": "This is our main project in cs147 this quarter",
-			"dueDate": "2/14/2014",	
-			"members" : [1,2,3]
-		},
-		{
-			"id": 6,
-			"name": "Example Project",
-			"description": "This is our main project in cs147 this quarter",
-			"dueDate": "2/14/2014",
-			"members" : [1,2,3]
 		}
 	],
 	"tasks":[
       {
-        "id": 1,
         "project_id": 1,
         "name": "Prototyping",
-        "dueDate": "2014-02-6",
-        "duration": -1,
+        "dueDate": "Feb 6, 2014",
+        "duration": 2,
         "notes": "prototying stage",
-        "parent": -1,
+        "parent_id": -1,
         "done": 0,
         "progress": 0,
         "members": ["john","tyler","mark"]
       },
       {
-        "id": 2,
-        "project_id": 1,
-        "name": "meat on the bones",
-        "dueDate": "2014-02-14",
-        "duration": 5,
-        "notes": "A much shorter note",
-        "parent": -1,
-        "done": 0,
-        "progress": 0,
-        "members": ["john","tyler","mark"]
-      },
-      {
-        "id": 3,
         "project_id": 1,
         "name": "brainstorming",
-        "dueDate": "2014-02-14",
+        "dueDate": "Feb 14, 2014",
         "duration": 5,
         "notes": "",
-        "parent": 1,
+        "parent_id": 1,
         "done": 0,
         "progress": -1,
         "members": ["john","tyler","mark"]
       },
       {
-        "id": 4,
         "project_id": 1,
         "name": "finish design sketch",
-        "dueDate": "2014-02-14",
+        "dueDate": "Feb 14, 2014",
         "duration": 5,
         "notes": "",
-        "parent": 1,
+        "parent_id": 1,
         "done": 0,
         "progress": -1,
         "members": ["mark"]
-      },
-      {
-        "id": 5,
-        "project_id": 1,
-        "name": "implement login page",
-        "dueDate": "2014-02-14",
-        "duration": 5,
-        "notes": "",
-        "parent": 2,
-        "done": 0,
-        "progress": -1,
-        "members": ["john"]
       }
   	],
   	"meetings":[
       {
-        "id": 1,
         "project_id": 1,
         "name": "Meeting 1 tyler and john",
-        "datetime": "2014-02-13 07:00:00",
+        "datetime": "Feb 13, 2014 07:00:00",
         "notes": "A much shorter note",
         "members": ["tyler","john"]
       },
       {
-        "id": 2,
         "project_id": 1,
         "name": "Meeting 2 only with tyler and mark",
-        "datetime": "2014-02-13 07:00:00",
+        "datetime": "Feb 13, 2014 07:00:00",
         "notes": "A much shorter note",
         "members": ["tyler","john"]
       }
   	],
   	"users": [
 		{
-			"id": 1,
 			"name": "Tyler Strand",
 			"username": "tyler",
 			"password": "pass"
 		},
 		{
-			"id": 2,
 			"name": "John Han",
 			"username": "john",
 			"password": "1234"
 		},
 		{
-			"id": 3,
 			"name": "Mark Kwon",
 			"username": "mark",
 			"password": "mark"
