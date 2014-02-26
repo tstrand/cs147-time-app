@@ -28,16 +28,19 @@ exports.viewAgenda = function(req, res) { 
       object["tasks"] = [];
       object["completed_tasks"] = [];
       for (var i=0; i<tasks.length; i++) {
-        for(var j=0; j<tasks[i]["members"]; j++) {
-          if (req.session.username == tasks[i]["members"][j] && tasks[i]["parent_id"] == -1) {
+        for(var j=0; j<tasks[i]["members"].length; j++) {
+          console.log(tasks[i]["parent_id"] != -1);
+          if (req.session.username == tasks[i]["members"][j] && tasks[i]["parent_id"] != -1) {
             if (tasks[i]["done"]) {
               object["completed_tasks"].push(tasks[i]);
             } else {
               object["tasks"].push(tasks[i]);
             }
+            console.log(tasks[i]);
           }
         }
       }
+
       for (var i=0; i<object["tasks"].length; i++) {
         // getting parent task
         for (var j=0; j<tasks.length; j++) {
@@ -47,6 +50,7 @@ exports.viewAgenda = function(req, res) { 
           }
         }
       }
+
       for (var i=0; i<object["completed_tasks"].length; i++) {
         // getting parent task
         for (var j=0; j<tasks.length; j++) {
