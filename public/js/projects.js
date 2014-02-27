@@ -78,9 +78,11 @@ function initializePage() {
 	console.log(anchor);
 	if(anchor.length) {
 		var task = $('#task' + anchor.attr('id'));
-		$("#detailtask" + anchor.attr('id')).toggle(400);
-		$("html, body").animate({ scrollTop: task.offset().bottom}, 500);
-		task.css("border", "2px solid red");
+		$("#detailtask" + anchor.attr('id')).toggle(300);
+		setTimeout(function() {
+			$("html, body").animate({ scrollTop: (task.offset().top - 55)}, 500);
+		}, 300);
+		task.css("border", "2px solid orange");
 	}
 }
 

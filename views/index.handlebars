@@ -33,13 +33,13 @@
     <!-- <a id="task-box-button" class="collapse-button">collapse</a> -->
     <div id="task-box">
       {{#each tasks}}
-      <div class="todo-card subtask" id="task{{id}}">
+      <div class="todo-card subtask" id="task{{_id}}">
         <span class="due_date">{{dueDate}}</span>
-        <span class="subtask-wrapper" id="{{id}}"><input class="subtask-checkbox" type="checkbox" id="subtask-checkbox{{id}}"><span class="subtask-name" id="subtask-name{{id}}">{{name}}</span></span><br/>
+        <span class="subtask-wrapper" id="{{_id}}"><input class="subtask-checkbox" type="checkbox" id="subtask-checkbox{{_id}}"><span class="subtask-name" id="subtask-name{{_id}}">{{name}}</span></span><br/>
         <a class="detail-button">details &raquo;</a>
         <p class="duration">time to complete: {{duration}} hours</p>
-        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
-          <a class="link-button" id="/projects/{{project_id}}/{{parent}}">View full task &raquo;</a>
+        <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
+          <a class="link-button" id="/projects/{{project_id}}/{{parent_id}}">View full task &raquo;</a>
           <span class="notes-title">part of task</span>
           <p class="notes-text">{{parent_name}}
             <!--<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a>-->
@@ -66,11 +66,11 @@
     <!-- <a id="meeting-box-button" class="collapse-button">collapse</a> -->
     <div id="meeting-box">
       {{#each meetings}}
-      <div class="todo-card meeting" id="meeting{{id}}">
+      <div class="todo-card meeting" id="meeting{{_id}}">
         <p class="meeting-name">{{name}}</p>
         <span class="duedate">{{datetime}}</span>
         <a class="detail-button">details &raquo;</a>
-        <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
+        <div id="detailmeeting{{_id}}" class="notes-field" style="display:none;">
           <a class="link-button" id="/projects/{{project_id}}">View project &raquo;</a>
           <span class="notes-title">project</span>
           <p class="notes-text">{{project_name}}</p>
@@ -95,13 +95,13 @@
     <a id="completed-box-button" class="collapse-button">hide</a>
     <div id="completed-box">
       {{#each completed_tasks}}
-      <div class="todo-card completed" id="task{{id}}">
+      <div class="todo-card completed" id="task{{_id}}">
         <span class="due_date">{{dueDate}}</span>
-        <span class="subtask-wrapper" id="{{id}}"><input class="subtask-checkbox" type="checkbox" id="subtask-checkbox{{id}}" checked><span class="subtask-name" id="subtask-name{{id}}" style="text-decoration: line-through;">{{name}}</span></span><br/>
+        <span class="subtask-wrapper" id="{{_id}}"><input class="subtask-checkbox" type="checkbox" id="subtask-checkbox{{_id}}" checked><span class="subtask-name" id="subtask-name{{_id}}" style="text-decoration: line-through;">{{name}}</span></span><br/>
         <a class="detail-button">details &raquo;</a>
         <p class="duration">time to complete: {{duration}} hours</p>
-        <div id="detailtask{{id}}" class="notes-field" style="display:none;">
-          <a class="link-button" id="/projects/{{project_id}}/{{parent}}">View full task &raquo;</a>
+        <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
+          <a class="link-button" id="/projects/{{project_id}}/{{parent_id}}">View full task &raquo;</a>
           <span class="notes-title">part of task</span>
           <p class="notes-text">{{parent_name}}
             <!--<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a>-->
@@ -117,11 +117,11 @@
       {{/each}}
       {{#each meetings}}
       {{#unless datetime}}
-      <div class="todo-card meeting" id="meeting{{id}}">
+      <div class="todo-card meeting" id="meeting{{_id}}">
         <p class="meeting-name">{{name}}</p>
         <span class="duedate">{{datetime}}</span>
         <a class="detail-button">details &raquo;</a>
-        <div id="detailmeeting{{id}}" class="notes-field" style="display:none;">
+        <div id="detailmeeting{{_id}}" class="notes-field" style="display:none;">
           <a class="link-button" id="/projects/{{project_id}}">View project &raquo;</a>
           <span class="notes-title">project</span>
           <p class="notes-text">{{project_name}}</p>

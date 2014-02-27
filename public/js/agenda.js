@@ -105,12 +105,12 @@ function callbackAgenda(response) {
 		// 	$(subtask).addClass("completed");
 		// 	$(subtask).prependTo("#completed-box").fadeIn("slow");
 		// });
-		$(subtask).removeClass("task");
+		$(subtask).removeClass("subtask");
 		$(subtask).addClass("completed");
 	} else {
 		var subtask = $("#task" + subtask_id);
 		$(subtask).removeClass("completed");
-		$(subtask).addClass("task");
+		$(subtask).addClass("subtask");
 	}
 }
 
