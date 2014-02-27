@@ -127,6 +127,7 @@
           <button type="submit" class="btn btn-info">Create</button>
           {{else}}
           <button type="submit" class="btn btn-info">Save</button>
+          <button id="{{_id}}" style="float:right;" class="btn btn-danger delete-meeting-btn">Delete</button>
           {{/if}}
         </div>
       </form>
@@ -236,7 +237,8 @@
           {{#if create}}
           <button type="submit" class="btn btn-info">Create</button>
           {{else}}
-          <button type="submit" class="btn btn-info">Save</button>
+          <button type="submit" class="btn btn-info">Save</button>          
+          <button id="{{_id}}" style="float:right;" class="btn btn-danger delete-task-btn">Delete</button>
           {{/if}}
         </div>
       </form>

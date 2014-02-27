@@ -70,6 +70,9 @@ app.get('/edit/task/:projectId/:id', auth.checkAuth, createtask.editTask);
 /* api calls */
 app.get('/api/get_users', auth.checkAuth, api.getUsers);
 app.get('/api/valid/:username', auth.checkAuth, api.validUser);
+app.post('/delete/task', auth.checkAuth, api.deleteTask);
+app.post('/delete/meeting', auth.checkAuth, api.deleteMeeting);
+app.post('/delete/project', auth.checkAuth, api.deleteProject);
 
 // Example route
 // app.get('/users', user.list);

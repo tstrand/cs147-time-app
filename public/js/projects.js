@@ -82,6 +82,24 @@ function initializePage() {
 		$("html, body").animate({ scrollTop: task.offset().bottom}, 500);
 		task.css("border", "2px solid red");
 	}
+
+	// for delete project
+	$(".delete-project-btn").click(function(e) {
+		e.preventDefault();
+		var r = confirm("Are you sure?");
+		if (r == true) {
+			var data = {"id":this.id};
+			$.post("/delete/project", data).done(function (response) {
+				if (response["result"]) {
+					alert("Deleted!");
+					var cururl = document.URL;
+					var url = cururl.split("/");
+					var p_id = url[url.length - 2];
+					document.location.href = '/projects/';
+				}
+			});
+		} 
+	});
 }
 
 function cardClick(e) {
