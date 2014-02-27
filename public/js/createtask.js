@@ -69,7 +69,42 @@ function initializePage() {
 			usr_string = usr_string.slice(0, usr_string.length - 1);
 		}
 		$("#attendees").val(usr_string);
-	})
+	});
+	// for delete task
+	$(".delete-task-btn").click(function(e) {
+		e.preventDefault();
+		var r = confirm("Are you sure?");
+		if (r == true) {
+			console.log(this.id);
+			var data = {"id":this.id};
+			$.post("/delete/task", data).done(function (response) {
+				if (response["result"]) {
+					alert("Deleted!");
+					var cururl = document.URL;
+					var url = cururl.split("/");
+					var p_id = url[url.length - 2];
+					document.location.href = '/projects/' + p_id;
+				}
+			});
+		} 
+	});
+	// for delete meeting
+	$(".delete-meeting-btn").click(function(e) {
+		e.preventDefault();
+		var r = confirm("Are you sure?");
+		if (r == true) {
+			var data = {"id":this.id};
+			$.post("/delete/meeting", data).done(function (response) {
+				if (response["result"]) {
+					alert("Deleted!");
+					var cururl = document.URL;
+					var url = cururl.split("/");
+					var p_id = url[url.length - 2];
+					document.location.href = '/projects/' + p_id;
+				}
+			});
+		} 
+	});
 }
 
 function populateForEdit() {

@@ -21,7 +21,7 @@
     <![endif]-->        
 </head>
 
-<body>
+<body style="padding-bottom:30px">
 	<div class="container">
     {{>navbar}}
 
@@ -76,8 +76,11 @@
         </div>
   		</div>
 
-      <button type="submit" class="btn btn-info right_button">Save</button>
-    	<button class="btn btn-default right_button" type="button" onclick="window.history.back()">Cancel</button>
+      <button class="btn btn-default" type="button" onclick="window.history.back()">Cancel</button>
+      <button type="submit" class="btn btn-info">Save</button>
+      {{#if edit}}
+      <button id="{{_id}}" type="submit" class="btn btn-danger right_button delete-project-btn">Delete</button>
+      {{/if}}
     	
 	</form>
 

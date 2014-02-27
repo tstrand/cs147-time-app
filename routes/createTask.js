@@ -108,6 +108,7 @@ exports.createTask = function(req, res) {
     "done": 0,
     "duration": 0,
     "dueDate": req.body.duedate,
+    "progress": 0,
     "members": [req.session.username] //by default creator is the owner of that task
   }
 
