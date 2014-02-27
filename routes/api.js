@@ -1,19 +1,19 @@
-var data = require("../data.json");
+var models = require("../models");
 
 exports.getUsers = function(req, res) {
-	var usernames = [];
-	for (var i=0; i<data["users"].length; i++) {
-		usernames.push(data["users"][i]["username"]);
-	}
-	res.json(usernames);
+	models.Users.find().exec(function (err,users) {
+		var usernames = [];
+		for (var i=0; i<users.length; i++) {
+			usernames.push(users[i]["username"]);
+		}
+		res.json(usernames);
+	});
 }
 
 exports.validUser = function(req, res) {
 	var username = req.params.username;
-	var usernames = [];
-	for (var i=0; i<data["users"].length; i++) {
-		usernames.push(data["users"][i]["username"]);
-	}
-	if (usernames.indexOf(username) != -1) res.json({"result": 1});
-	else res.json({"result":0});
+	models.Users().find({"username":username}).exec(function (err, user) {
+		if (user.length) res.json({"result":1});
+		else res.json({"result":0});
+	});
 }
