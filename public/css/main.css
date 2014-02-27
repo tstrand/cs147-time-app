@@ -58,6 +58,11 @@
      text-align: center;
 }
 
+.form-control[readonly] {
+     cursor: text;
+     background-color: white;
+}
+
 body {
      padding-top: 40px;
 }
