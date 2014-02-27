@@ -33,7 +33,7 @@
     <!-- <a id="task-box-button" class="collapse-button">collapse</a> -->
     <div id="task-box">
       {{#each tasks}}
-      <div class="todo-card task" id="task{{id}}">
+      <div class="todo-card subtask" id="task{{id}}">
         <span class="due_date">{{dueDate}}</span>
         <span class="subtask-wrapper" id="{{id}}"><input class="subtask-checkbox" type="checkbox" id="subtask-checkbox{{id}}"><span class="subtask-name" id="subtask-name{{id}}">{{name}}</span></span><br/>
         <a class="detail-button">details &raquo;</a>
