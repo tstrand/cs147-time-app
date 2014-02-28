@@ -10,11 +10,23 @@
 }
 
 .project_title {
+	font-size: 20px;
+	font-weight: 500;
 	margin-top: 15px;
 	margin-bottom: 10px;
+	text-transform: uppercase;
 }
 
-.project_title:hover {
+.project_title_clickable {
+	font-size: 20px;
+	font-weight: 500;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+	color: blue;
+}
+
+.project_title:hover, .project_title_clickable:hover {
 	color: blue;
 	cursor: pointer;
 }

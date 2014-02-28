@@ -27,6 +27,20 @@ exports.viewProjects = function(req, res) { 
 		console.log(projects);
 		mydata["pageName"] = "My Projects";
 		mydata["projects"] = formatDateString(projects, "projects");
+		mydata["title_clickable"] = false;
+		res.render('projects', mydata);
+	}
+};
+
+exports.viewProjectsPage = function(req, res) { 
+	var mydata = {}
+	models.Projects.find({"members":req.session.username}).sort("dueDate").exec(afterQuery);
+
+	function afterQuery(err, projects) {
+		console.log(projects);
+		mydata["pageName"] = "My Projects";
+		mydata["projects"] = formatDateString(projects, "projects");
+		mydata["title_clickable"] = true;
 		res.render('projects', mydata);
 	}
 };
