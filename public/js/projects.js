@@ -42,6 +42,7 @@ function initializePage() {
 	$(".link-button").click(linkClick);
 	$(".subtask_line").click(toggleSubtask);
 	$(".project_title").click(linkClick);
+	$(".project_title_clickable").click(linkClick);
 	$(".btn-primary").click(linkClick);
 	
 	$("#description-button").click(function(e) {
