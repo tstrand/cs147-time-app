@@ -48,12 +48,11 @@
     {{else}}
 
     <div class="jumbotron" style="margin-top:20px;">
-      <h1>Our Time App</h1>
+      <h1>Complete</h1>
       <p>by Mark, John, and Tyler</p>
     </div> 
 
     <div id="sign_in_page">
-      <p>id is "john" and password is "1234"</p>
       <form class="form-horizontal" role="form" method="post" action="/login">
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
@@ -77,7 +76,18 @@
     </div>
 
     <div id="sign_up_page" style="display:none;">
+      <div class = "help-document">
+        <h3>[About]</h3>
+        <p>This application is developed to make the process of tracking the completion of group projects easier. Each project contains of tasks and meetings.</p>
+        <h4>[Tasks]</h4>
+        <p>Tasks are the major components of projects which are the lists of general items to be completed for the project to be finished. Each task has checklists which decomposes the task to smaller, doable segments and when all of the checklists for a task are completed, the task is completed, Each checklist item is assigned to members of the project and only the members assigned the item can check it as completed.</p>
+        <h4>[Meetings]</h4>
+        <p>Meetings are a way the members of the project can get together and check their progress face-to-face.</p>
+        <h4>[My Agenda]</h4>
+        <p>The first screen that appears when logging in is the My Agenda page, where all the checklists and meetings associated with the user appear. This way, the user can keep up with many projects without forgetting a responsibility.</p>
+      </div>
       <form class="form-horizontal" role="form" method="post" action="/create_user">   
+        <h3>Sign up</h3>
         <div class="form-group">
           <label for="inputName" class="col-sm-2 control-label">Full Name</label>
           <div class="col-sm-10">

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>About</title>
+  <!-- no zooming on mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Bootstrap -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/css/agenda.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/fonts.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+</head>
+<body>
+  <!-- this is a comment in HTML -->
+  <div class="container">
+    <!-- h1 through h6 are headers. The higher the number, the smaller the header -->
+    <!-- p means paragraph -->    
+    {{>navbar}}
+
+    <h3 class="page-header">Complete</h3>
+      <div class = "help-document">
+        <h3>[About]</h3>
+        <p>This application is developed to make the process of tracking the completion of group projects easier. Each project contains of tasks and meetings.</p>
+        <h4>[Tasks]</h4>
+        <p>Tasks are the major components of projects which are the lists of general items to be completed for the project to be finished. Each task has checklists which decomposes the task to smaller, doable segments and when all of the checklists for a task are completed, the task is completed, Each checklist item is assigned to members of the project and only the members assigned the item can check it as completed.</p>
+        <h4>[Meetings]</h4>
+        <p>Meetings are a way the members of the project can get together and check their progress face-to-face.</p>
+        <h4>[My Agenda]</h4>
+        <p>The first screen that appears when logging in is the My Agenda page, where all the checklists and meetings associated with the user appear. This way, the user can keep up with many projects without forgetting a responsibility.</p>
+      </div>
+  </div>
+        
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!--<script src="https://code.jquery.com/jquery.js"></script>-->
+  <script src="/js/jquery.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/agenda.js"></script>
+
+</body>
+</html>
