@@ -15,6 +15,7 @@ var projects = require('./routes/projects');
 var createtask = require('./routes/createTask');
 var auth = require('./routes/auth');
 var api = require('./routes/api');
+var about = require('./routes/about');
 
 var local_database_name = 'cs147project';
 var local_database_uri  = 'mongodb://localhost/' + local_database_name
@@ -50,7 +51,8 @@ if ('development' == app.get('env')) {
 app.get('/', index.viewAgenda);
 app.post('/login', auth.userLogin);
 app.get('/logout', auth.userLogout);
-app.post('/create_user', auth.createUser);     
+app.post('/create_user', auth.createUser);
+app.get('/about',auth.checkAuth,about.view);
 app.get('/projects', auth.checkAuth, projects.viewProjects);
 app.get('/projects_page', auth.checkAuth, projects.viewProjectsPage);
 app.get('/projects/create', auth.checkAuth, projects.createProject);
