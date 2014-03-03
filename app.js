@@ -48,11 +48,12 @@ if ('development' == app.get('env')) {
 
 // Add routes here
 app.get('/', index.viewAgenda);
+// for AB Test
+app.get('/ab_index', index.viewAlternateAgenda);
 app.post('/login', auth.userLogin);
 app.get('/logout', auth.userLogout);
 app.post('/create_user', auth.createUser);     
 app.get('/projects', auth.checkAuth, projects.viewProjects);
-app.get('/projects_page', auth.checkAuth, projects.viewProjectsPage);
 app.get('/projects/create', auth.checkAuth, projects.createProject);
 app.get('/projects/save', auth.checkAuth, projects.saveProject);
 app.get('/projects/save/:projectId', auth.checkAuth, projects.saveProject);
