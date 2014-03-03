@@ -24,7 +24,11 @@
   {{else}}
     <div class="empty_info">
       <h5>Wahoo! No tasks to work on. Check out your projects page to see if there's anything you missed</h5>
+      {{#if first_time}}
+      <button type="button" class="btn btn-lg btn-primary original-btn" id="/projects">Go To Projects</button>
+      {{else}}
       <button type="button" class="btn btn-lg btn-primary" id="/projects">Go To Projects</button>
+      {{/if}}
     </div>
   {{/each}}
 </div>
@@ -54,7 +58,11 @@
   {{else}}
     <div class="empty_info">
       <h5>No upcoming meetings! Check out your Projects Page to see if there's anything you should schedule</h5>
+      {{#if first_time}}
+      <button type="button" class="btn btn-lg btn-primary original-btn" id="/projects">Go To Projects</button>
+      {{else}}
       <button type="button" class="btn btn-lg btn-primary" id="/projects">Go To Projects</button>
+      {{/if}}
     </div>
   {{/each}}
 </div>

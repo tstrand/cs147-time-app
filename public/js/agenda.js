@@ -58,6 +58,15 @@ function initializePage() {
 		}
 	});
 
+	/* google analytics code */
+	$("#navbar-create-project").click(function(e) {
+		ga('send','event','navbar', 'navbar button');
+	});
+	$(".original-btn").click(function(e) {
+		ga('send','event','button','agenda page');
+		alert("hi");
+	});
+
 }
 
 function cardClick(e) {

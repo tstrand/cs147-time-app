@@ -20,6 +20,7 @@ exports.userLogin = function(req, res) {
     if (user.length && user[0]["password"] == post.password) {
       req.session.user_id = post.username;
       req.session.username = post.username;
+      req.session.first_time = false;
       res.redirect('/');
     } else {
       res.send('Bad user/pass');
@@ -43,6 +44,7 @@ exports.createUser = function(req, res) {
   newUser.save(function(err) {
     req.session.user_id = req.body.username;
     req.session.username = req.body.username;
+    req.session.first_time = true;
     res.redirect('/');
   });
 }

@@ -118,6 +118,7 @@ exports.viewAgenda = function(req, res) { 
       object["pageName"] = "My Agenda";
       object["user_id"] = req.session.user_id;
       object["username"] = req.session.username;
+      object["first_time"] = req.session.first_time;
       res.render('index', object);
     }
   }
@@ -230,6 +231,7 @@ exports.viewAlternateAgenda = function(req, res) { 
           object["completed_tasks"].length == 0) {
         object["hasNothing"] = true;
       }
+      object["first_time"] = req.session.first_time;
       res.render('index', object);
     }
   }
