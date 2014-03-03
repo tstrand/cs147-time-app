@@ -64,7 +64,6 @@ function initializePage() {
 	});
 	$(".original-btn").click(function(e) {
 		ga('send','event','button','agenda page');
-		alert("hi");
 	});
 
 }
