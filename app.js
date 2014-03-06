@@ -55,7 +55,7 @@ app.post('/login', auth.userLogin);
 app.get('/logout', auth.userLogout);
 app.post('/create_user', auth.createUser);
 app.get('/about',auth.checkAuth,about.view);
-app.get('/projects', auth.checkAuth, projects.viewProjects);
+app.get('/projects', auth.checkAuth, projects.viewProjectsPage);
 app.get('/projects/create', auth.checkAuth, projects.createProject);
 app.get('/projects/save', auth.checkAuth, projects.saveProject);
 app.get('/projects/save/:projectId', auth.checkAuth, projects.saveProject);

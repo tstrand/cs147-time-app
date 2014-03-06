@@ -119,6 +119,8 @@ exports.createProject = function(req, res) {
 	data = {};
 	data["pageName"] = "Create Project";
 	data["username"] = req.session.username;
+	// adding the creator as a member by default
+	data["members"] = [req.session.username];
 	res.render('saveProject', data);
 }
 
