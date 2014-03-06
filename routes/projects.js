@@ -191,7 +191,7 @@ exports.updateSubtask = function(req, res) {
     		.exec(function(err,task) {
     			if (num == denom) task[0]["done"] = 1;
     			else task[0]["done"] = 0;
-    			task[0]["progress"] = (num * 100 / denom);
+    			task[0]["progress"] = (num * 100 / denom).toFixed(0);
     			task[0].save(function(err) {
     				res.json([task[0]._id, (num * 100) / denom, bool, subtask_id]);
     			});

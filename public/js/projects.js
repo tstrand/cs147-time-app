@@ -76,7 +76,7 @@ function initializePage() {
 	});
 
 	var anchor = $(".hidden_anchor");
-	console.log(anchor);
+	//console.log(anchor);
 	if(anchor.length) {
 		var task = $('#task' + anchor.attr('id'));
 		$("#detailtask" + anchor.attr('id')).toggle(300);
@@ -106,6 +106,26 @@ function initializePage() {
 
 	// deal with checkboxes, can only checkoff yours
 	var username = $("#username").text();
+	$(".tasks").each(function(i,o) {
+		var checkbox = $(o).find("input")[0];
+		var n = $(o).next()[0];
+		var nn = $(n).children()[1];
+		var members = $(nn).text();
+		var names = members.split(" ");
+		names = names[names.length - 1];
+		console.log(names.split(","));
+		if (names.indexOf(username) == -1) {
+			if (!$(o).hasClass("completed_subtask")) {
+				//console.log(checkbox.id);
+				//$(checkbox).parent().parent().prepend("<td><a class='btn-default btn-sm' style='margin-right:5px'>mine</a></td>");
+				//$(checkbox).parent().remove();
+				$(checkbox).remove();
+			} else {
+				$(checkbox).remove();
+			}
+			
+		}
+	});
 }
 
 function cardClick(e) {
@@ -148,7 +168,7 @@ function toggleSubtask(e) {
 function callback(response) {
 	var task_id = response[0];
 	var progress = $("#progress_line" + task_id);
-	progress.html(response[1] + "% complete");
+	progress.html(response[1].toFixed(0) + "% complete");
 	if(response[1] == 100) {
 		var task = $("#task" + task_id);
 		$(task).removeClass("task");

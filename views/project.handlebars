@@ -129,7 +129,7 @@
           <span class="notes-title">subtasks</span>
           <table class="subtask_table">
           {{#each subtasks}}
-            <tr class="subtask_line tasks" id="{{_id}}">
+            <tr class="subtask_line tasks completed_subtask" id="{{_id}}">
               <td><input type="checkbox" id="checkbox{{_id}}" checked></td>
               <td id="subtask{{_id}}" style="text-decoration: line-through">{{name}}</td>    
               <td class="subtask_duration">[{{duration}} hours]</td>
