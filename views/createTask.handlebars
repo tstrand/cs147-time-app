@@ -34,26 +34,31 @@
           {{#if meetingedit}}
           <span class="navbar-brand" style="float:right;">Edit Meeting</span>
           {{else}}
-          <span class="navbar-brand" style="float:right;">Create Task/Meeting</span>
+            {{#if task}}
+              <span class="navbar-brand" style="float:right;">Create Task</span>
+            {{else}}
+              <span class="navbar-brand" style="float:right;">Create Meeting</span>
+            {{/if}}
           {{/if}}
         {{/if}}
       </div>
     </nav>
 
-    <div>
-      {{#if create}}
+    <div style="display: none;">
+      {{#if task}}
       <label class="radio-inline">
         <input type="radio" name="taskmeeting" id="taskRadio" value="task" checked>
         Task
       </label>
+      {{else}}
       <label class="radio-inline">
-        <input type="radio" name="taskmeeting" id="meetingRadio" value="meeting">
+        <input type="radio" name="taskmeeting" id="meetingRadio" value="meeting" checked>
         Meeting        
       </label>
       {{/if}}
     </div>
 
-    {{#if meetingedit}}
+    {{#if meeting}}
     <div id="createMeeting">
     {{else}}
     <div id="createMeeting" style="display:none;">
@@ -133,7 +138,7 @@
       </form>
     </div>
 
-    {{#if meetingedit}}
+    {{#if meeting}}
     <div id="createTask" style="display:none;">
     {{else}}
     <div id="createTask">

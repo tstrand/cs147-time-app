@@ -4,6 +4,7 @@ var models = require('../models');
 
 exports.createTaskMeeting = function(req, res) {
     var projectId = req.params.projectId; 
+    var task = req.params.task; 
     if (!projectId) res.redirect('/projects');
     console.log(projectId);
 
@@ -12,6 +13,12 @@ exports.createTaskMeeting = function(req, res) {
       obj["projectId"] = projectId;
       obj["project_members"] = project[0]["members"];
       obj["create"] = true;
+      if(task == "task") {
+        console.log(task);
+        obj["task"] = true;
+      } else {
+        obj["meeting"] = true;
+      }
       res.render('createTask',obj);
     });
 }
@@ -40,6 +47,7 @@ exports.editTask = function(req, res) {
     }
     task["taskedit"] = true;
     task["projectId"] = projectId;
+    task["task"] = true;
     console.log(task);
     res.render('createTask', task);
   }
@@ -63,6 +71,7 @@ exports.editMeeting = function(req, res) {
       meeting["min"] = time.split(":")[1];
       meeting["meetingedit"] = true;
       meeting["projectId"] = projectId;
+      meeting["meeting"] = true;
       res.render('createTask', meeting);
     });
   });
@@ -128,7 +137,7 @@ exports.createTask = function(req, res) {
               for (var j in assignees[i].split(",")) {
                 members.push(assignees[i].split(",")[j].trim());
               }
-              var duration = 1;
+              var duration = 0;
               if (parseInt(durations[i])) duration = parseInt(durations[i]);
               var newSubTask = {
                 "project_id": req.body.projectId,
