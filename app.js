@@ -65,7 +65,7 @@ app.get('/subtasks/:subtaskId/:bool', auth.checkAuth, projects.updateSubtask);
 app.get('/project/edit/:projectId', auth.checkAuth, projects.editProject);
 //app.get('/projects/delete/:projectId', auth.checkAuth, projects.deleteProject);
 app.get('/create', auth.checkAuth, createtask.createTaskMeeting);
-app.get('/create/:projectId', auth.checkAuth, createtask.createTaskMeeting);
+app.get('/create/:projectId/:task', auth.checkAuth, createtask.createTaskMeeting);
 app.post('/create/meeting', auth.checkAuth, createtask.createMeeting);
 app.post('/create/task', auth.checkAuth, createtask.createTask);
 app.get('/edit/meeting/:projectId/:id', auth.checkAuth, createtask.editMeeting);
