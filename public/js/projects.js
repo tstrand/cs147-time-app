@@ -143,7 +143,6 @@ function toggleSubtask(e) {
 }
 
 function callback(response) {
-	console.log("callback");
 	var task_id = response[0];
 	var progress = $("#progress_line" + task_id);
 	progress.html(response[1] + "% complete");
