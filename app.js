@@ -77,6 +77,7 @@ app.get('/api/valid/:username', auth.checkAuth, api.validUser);
 app.post('/delete/task', auth.checkAuth, api.deleteTask);
 app.post('/delete/meeting', auth.checkAuth, api.deleteMeeting);
 app.post('/delete/project', auth.checkAuth, api.deleteProject);
+app.post('/subtask/addMember', auth.checkAuth, projects.addMemberSubtask);
 
 // Example route
 // app.get('/users', user.list);

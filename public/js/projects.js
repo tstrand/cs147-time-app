@@ -115,15 +115,44 @@ function initializePage() {
 		names = names[names.length - 1];
 		console.log(names.split(","));
 		if (names.indexOf(username) == -1) {
+			$(o).unbind();
 			if (!$(o).hasClass("completed_subtask")) {
 				//console.log(checkbox.id);
-				//$(checkbox).parent().parent().prepend("<td><a class='btn-default btn-sm' style='margin-right:5px'>mine</a></td>");
-				//$(checkbox).parent().remove();
-				$(checkbox).remove();
+				$(checkbox).parent().parent().prepend("<td><a class='btn-default btn-sm " + 
+					checkbox.id + "' style='margin-right:5px'>mine</a></td>");
+				$(checkbox).parent().remove();
+				$("." + checkbox.id).click(function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					claimSubtask(checkbox.id);
+				});
+				//$(checkbox).remove();
 			} else {
 				$(checkbox).remove();
 			}
 			
+		}
+	});
+}
+
+function claimSubtask(id) {
+	var subtaskId = id.substring(8);
+	var username = $("#username").text();
+	var data = {};
+	data["subtaskId"] = subtaskId;
+	$.post("/subtask/addMember", data).done(function (response) {
+		if (response["result"] == "ok") {
+			$("." + id).parent().prepend("<input type='checkbox' id='" + id + "'>");
+			$("." + id).remove();
+			$("#" + id).parent().parent().click(toggleSubtask);
+			var a = $("#" + id).parent().parent().next()[0];
+			var member = $($(a).children()[1]).text();
+			if (member[member.length - 1] == " ") {
+				member += username;
+			} else {
+				member += "," + username;
+			}
+			$($(a).children()[1]).text(member);
 		}
 	});
 }
@@ -194,7 +223,6 @@ function formatMemberString() {
 	var usrString = "";
 	$("#members_list").children().each(function() {
 		usrString += $(this).find("span").text() + ",";
-		console.log($(this).find("span").text());
 	});
 	if (usrString[usrString.length - 1] == ",") {
 		usrString = usrString.slice(0, usrString.length - 1);

@@ -200,7 +200,6 @@ exports.updateSubtask = function(req, res) {
 }
 
 exports.saveProject = function(req, res) {
-	console.log("")
 	var id = req.params.projectId; 
 	var edit = id ? true : false;
 	//if(!edit) var id = Math.floor(Math.random() * 1000) + 10;
@@ -236,3 +235,28 @@ exports.saveProject = function(req, res) {
 		});
 	}
  }
+
+exports.addMemberSubtask = function(req, res) {
+	var id = req.body.subtaskId;
+
+	models.Tasks.find({
+		"_id":id
+	}).exec(afterFind);
+
+	function afterFind(err, subtask) {
+		if (err) console.log(err);
+		else {
+			console.log(subtask[0]);
+			if (subtask[0]["members"][0] == "") {
+				subtask[0]["members"] = [req.session.username];
+			} else {
+				subtask[0]["members"].push(req.session.username);
+
+			}
+			console.log(subtask[0]);
+			subtask[0].save(function(err) {
+				res.json({"result":"ok"});
+			});
+		}
+	}
+}

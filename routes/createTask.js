@@ -135,7 +135,9 @@ exports.createTask = function(req, res) {
             if (subtasks[i] != "") {
               var members = []
               for (var j in assignees[i].split(",")) {
-                members.push(assignees[i].split(",")[j].trim());
+                if (assignees[i].split(",")[j].trim()) {
+                  members.push(assignees[i].split(",")[j].trim());
+                }
               }
               var duration = 0;
               if (parseInt(durations[i])) duration = parseInt(durations[i]);
