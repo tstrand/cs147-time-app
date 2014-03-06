@@ -20,6 +20,7 @@ function formatDateString(list, type) {
 }
 
 exports.viewProjects = function(req, res) { 
+	req.session.first_time = false;
 	var mydata = {}
 	models.Projects.find({"members":req.session.username}).sort("dueDate").exec(afterQuery);
 
@@ -114,6 +115,7 @@ exports.viewProject = function(req, res) {
 }
 
 exports.createProject = function(req, res) {
+	req.session.frist_time = false;
 	data = {};
 	data["pageName"] = "Create Project";
 	data["username"] = req.session.username;

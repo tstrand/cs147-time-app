@@ -12,13 +12,16 @@ function initializePage() {
 	$("#sign-up-button").click(function() {
     	$("#sign_in_page").toggle();
     	$("#sign_up_page").toggle();
-    	console.log("hihi");
   	});
 
   	$("#sign-in-button").click(function() {
     	$("#sign_in_page").toggle();
     	$("#sign_up_page").toggle();
-    	console.log("hihi");
+  	});
+
+  	$("#sign-up-btn").click(function() {
+    	$("#sign_in_page").toggle();
+   		$("#sign_up_page").toggle();
   	});
 
 	$(".todo-card").click(cardClick);
@@ -53,6 +56,14 @@ function initializePage() {
 		} else {
 			$("#completed-box-button").html("hide");
 		}
+	});
+
+	/* google analytics code */
+	$("#navbar-create-project").click(function(e) {
+		ga('send','event','navbar', 'navbar button');
+	});
+	$(".original-btn").click(function(e) {
+		ga('send','event','button','agenda page');
 	});
 
 }

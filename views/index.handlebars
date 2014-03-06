@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+{{#if first_time}}
+  <!-- Google Analytics Content Experiment code -->
+<script>function utmx_section(){}function utmx(){}(function(){var
+  k='82880866-1',d=document,l=d.location,c=d.cookie;
+  if(l.search.indexOf('utm_expid='+k)>0)return;
+  function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+  indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+  length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+  '<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+  '://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+  '&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+  valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+  '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+  </script><script>utmx('url','A/B');</script>
+  <!-- End of Google Analytics Content Experiment code -->
+{{/if}}
   <title>My Agenda</title>
   <!-- no zooming on mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -26,127 +42,37 @@
    
     {{#if user_id}}
     
-    {{>navbar}}
+    {{>ABnavbar}}
+
+    {{#if alternative}}
+    <h3 class="page-header">Hi, {{username}}! Check out your agenda below</h3>
+      {{#if hasNothing}}
+        <div class="empty_info">
+          <h5>Your agenda is empty! Visit your Projects page to create a new project or manage an existing one!</h5>
+          {{#if first_time}}
+          <button type="button" class="btn btn-lg btn-primary btn-block original-btn" id="/projects">Visit My Projects Page</button>
+          {{else}}
+          <button type="button" class="btn btn-lg btn-primary btn-block">Visit My Projects Page</button>
+          {{/if}}
+        </div>
+      {{else}}
+        {{>agenda}}
+      {{/if}}
+
+    {{else}}
 
     <h3 class="page-header">Hi, {{username}}! Check out your agenda below</h3>
-    <span class="type-title">my checklist</span>
-    <!-- <a id="task-box-button" class="collapse-button">collapse</a> -->
-    <div id="task-box">
-      {{#each tasks}}
-      <div class="todo-card subtask" id="task{{_id}}">
-        <span class="due_date">{{dueDate}}</span>
-        <span class="subtask-wrapper" id="{{_id}}"><input class="subtask-checkbox" type="checkbox" id="subtask-checkbox{{_id}}"><span class="subtask-name" id="subtask-name{{_id}}">{{name}}</span></span><br/>
-        <a class="detail-button">details &raquo;</a>
-        <p class="duration">time to complete: {{duration}} hours</p>
-        <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
-          <a class="link-button" id="/projects/{{project_id}}/{{parent_id}}">View full task &raquo;</a>
-          <span class="notes-title">part of task</span>
-          <p class="notes-text">{{parent_name}}
-            <!--<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a>-->
-          </p>
-          <span class="notes-title">project</span>
-          <p class="notes-text">{{project_name}}</p>
-          {{#if notes}}
-          <span class="notes-title">notes</span>
-          <p class="notes-text">{{notes}}</p>
-          {{/if}}
-        </div>
-      </div>
-      {{else}}
-        <div class="empty_info">
-          <h5>Wahoo! No tasks to work on. Check out your projects page to see if there's anything you missed</h5>
-          <button type="button" class="btn btn-lg btn-primary" id="/projects">Go To Projects</button>
-        </div>
-      {{/each}}
-    </div>
-
-    <br>
-    
-    <span class="type-title">my meetings</span>
-    <!-- <a id="meeting-box-button" class="collapse-button">collapse</a> -->
-    <div id="meeting-box">
-      {{#each meetings}}
-      <div class="todo-card meeting" id="meeting{{_id}}">
-        <p class="meeting-name">{{name}}</p>
-        <span class="duedate">{{datetime}}</span>
-        <a class="detail-button">details &raquo;</a>
-        <div id="detailmeeting{{_id}}" class="notes-field" style="display:none;">
-          <a class="link-button" id="/projects/{{project_id}}">View project &raquo;</a>
-          <span class="notes-title">project</span>
-          <p class="notes-text">{{project_name}}</p>
-          <span class="notes-title">attendees</span>
-          <p class="notes-text">{{members}}</p>
-          {{#if notes}}
-          <span class="notes-title">notes</span>
-          <p class="notes-text">{{notes}}</p>
-          {{/if}}
-        </div>
-      </div>
-      {{else}}
-        <div class="empty_info">
-          <h5>No upcoming meetings! Check out your Projects Page to see if there's anything you should schedule</h5>
-          <button type="button" class="btn btn-lg btn-primary" id="/projects">Go To Projects</button>
-        </div>
-      {{/each}}
-    </div>
-
-    <br>
-    <span class="type-title">completed</span>
-    <a id="completed-box-button" class="collapse-button">hide</a>
-    <div id="completed-box">
-      {{#each completed_tasks}}
-      <div class="todo-card completed" id="task{{_id}}">
-        <span class="due_date">{{dueDate}}</span>
-        <span class="subtask-wrapper" id="{{_id}}"><input class="subtask-checkbox" type="checkbox" id="subtask-checkbox{{_id}}" checked><span class="subtask-name" id="subtask-name{{_id}}" style="text-decoration: line-through;">{{name}}</span></span><br/>
-        <a class="detail-button">details &raquo;</a>
-        <p class="duration">time to complete: {{duration}} hours</p>
-        <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
-          <a class="link-button" id="/projects/{{project_id}}/{{parent_id}}">View full task &raquo;</a>
-          <span class="notes-title">part of task</span>
-          <p class="notes-text">{{parent_name}}
-            <!--<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a>-->
-          </p>
-          <span class="notes-title">project</span>
-          <p class="notes-text">{{project_name}}></p>
-          {{#if notes}}
-          <span class="notes-title">notes</span>
-          <p class="notes-text">{{notes}}</p>
-          {{/if}}
-        </div>
-      </div>
-      {{/each}}
-      
-      {{#each meetings}}
-      {{#unless datetime}}
-      <div class="todo-card meeting" id="meeting{{_id}}">
-        <p class="meeting-name">{{name}}</p>
-        <span class="duedate">{{datetime}}</span>
-        <a class="detail-button">details &raquo;</a>
-        <div id="detailmeeting{{_id}}" class="notes-field" style="display:none;">
-          <a class="link-button" id="/projects/{{project_id}}">View project &raquo;</a>
-          <span class="notes-title">project</span>
-          <p class="notes-text">{{project_name}}</p>
-          <span class="notes-title">attendees</span>
-          <p class="notes-text">{{members}}</p>
-          {{#if notes}}
-          <span class="notes-title">notes</span>
-          <p class="notes-text">{{notes}}</p>
-          {{/if}}
-        </div>
-      </div>
-      {{/unless}}
-      {{/each}}
-    </div>
+    {{>agenda}}
+    {{/if}}
 
     {{else}}
 
     <div class="jumbotron" style="margin-top:20px;">
-      <h1>Our Time App</h1>
-      <p>by Mark, John, and Tyler</p>
+      <h1>Complete</h1>
+      <p>Manage your group projects with Complete!</p>
     </div> 
 
     <div id="sign_in_page">
-      <p>id is "john" and password is "1234"</p>
       <form class="form-horizontal" role="form" method="post" action="/login">
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
@@ -163,14 +89,25 @@
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-default">Sign in</button>
+            <a class="btn btn-warning" id="sign-up-btn" style="float:right">New User?</a>
           </div>
         </div>
       </form>
-      <p>New user? <a id="sign-up-button">Click here</a> to sign up</p>
     </div>
 
     <div id="sign_up_page" style="display:none;">
+      <div class = "help-document">
+        <h3>[About]</h3>
+        <p>This application is developed to make the process of tracking the completion of group projects easier. Each project contains of tasks and meetings.</p>
+        <h4>[Tasks]</h4>
+        <p>Tasks are the major components of projects which are the lists of general items to be completed for the project to be finished. Each task has checklists which decomposes the task to smaller, doable segments and when all of the checklists for a task are completed, the task is completed, Each checklist item is assigned to members of the project and only the members assigned the item can check it as completed.</p>
+        <h4>[Meetings]</h4>
+        <p>Meetings are a way the members of the project can get together and check their progress face-to-face.</p>
+        <h4>[My Agenda]</h4>
+        <p>The first screen that appears when logging in is the My Agenda page, where all the checklists and meetings associated with the user appear. This way, the user can keep up with many projects without forgetting a responsibility.</p>
+      </div>
       <form class="form-horizontal" role="form" method="post" action="/create_user">   
+        <h3>Sign up</h3>
         <div class="form-group">
           <label for="inputName" class="col-sm-2 control-label">Full Name</label>
           <div class="col-sm-10">
@@ -193,9 +130,10 @@
           <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-default">Create</button>
           </div>
+
         </div>
       </form>
-      <p><a id="sign-in-button">Click here</a> to log in</p>
+      <p><a id="sign-in-button">Click here</a> to go back to the log in page</p>
     </div>
     {{/if}}
   </div>
@@ -206,6 +144,18 @@
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/agenda.js"></script>
+  {{#if first_time}}
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+    ga('create', 'UA-48456936-2', 'cs147-complete.herokuapp.com');
+    //ga('create', 'UA-48456936-2', {'cookieDomain':'none'});
+    ga('send', 'pageview');
+
+  </script>
+  {{/if}}
 </body>
 </html>
