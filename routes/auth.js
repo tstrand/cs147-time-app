@@ -38,13 +38,13 @@ exports.userLogout = function(req, res) {
 exports.createUser = function(req, res) {
   var newUser = models.Users({
     "name": req.body.fullname,
-    "username": req.body.username.toLowerCase(),
+    "username": req.body.username.toLowerCase().trim(),
     "password": req.body.password,
   });
   console.log(req.body.username);
   newUser.save(function(err) {
     req.session.user_id = req.body.username;
-    req.session.username = req.body.username;
+    req.session.username = req.body.username.toLowerCase().trim();
     req.session.name = req.body.fullname;
     req.session.first_time = true;
     res.redirect('/');

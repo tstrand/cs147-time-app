@@ -103,6 +103,9 @@ function initializePage() {
 			});
 		} 
 	});
+
+	// deal with checkboxes, can only checkoff yours
+	var username = $("#username").text();
 }
 
 function cardClick(e) {

@@ -51,11 +51,15 @@
           <span class="notes-title">checklist</span>
           <table class="subtask_table">
           {{#each subtasks}}
-            <tr class="subtask_line" id="{{_id}}">
+            <tr class="subtask_line tasks" id="{{_id}}">
               {{#if done}}
                 <td><input type="checkbox" id="checkbox{{_id}}" checked></td>
                 <td id="subtask{{_id}}" style="text-decoration: line-through">{{name}}</td>
                 <td class="subtask_duration">[{{duration}} hours]</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtask_member">done by {{members}}</td>
             </tr>
               {{else}}
                 <td><input type="checkbox" id="checkbox{{_id}}"></td>
@@ -121,10 +125,14 @@
           <span class="notes-title">subtasks</span>
           <table class="subtask_table">
           {{#each subtasks}}
-            <tr class="subtask_line" id="{{_id}}">
+            <tr class="subtask_line tasks" id="{{_id}}">
               <td><input type="checkbox" id="checkbox{{_id}}" checked></td>
               <td id="subtask{{_id}}" style="text-decoration: line-through">{{name}}</td>    
               <td class="subtask_duration">[{{duration}} hours]</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtask_member">done by {{members}}</td>
             </tr>
           {{/each}}
           </table>
@@ -151,6 +159,8 @@
     <div class="hidden_anchor" id="{{task_id}}"></div>
     {{/if}}
 	</div>
+
+  <div id="username" style="display:none">{{username}}</div>
 
 	<!--<script src="https://code.jquery.com/jquery.js"></script>-->
   <script src="/js/jquery.js"></script>

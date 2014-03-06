@@ -47,7 +47,6 @@ exports.viewProjectsPage = function(req, res) { 
 };
 
 exports.viewProject = function(req, res) {
-	console.log("in");
 	var projectId = req.params.projectId; 
 	var object;
 
@@ -110,6 +109,7 @@ exports.viewProject = function(req, res) {
 	    console.log("got task");
 	    object["task_id"] = req.params.taskId; 
 	    console.log(object);
+	    object["username"] = req.session.username;
 		res.render('project', object);
 	}
 }
