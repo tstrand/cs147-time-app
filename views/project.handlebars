@@ -85,6 +85,7 @@
 <!--     <a id="meeting-box-button" class="collapse-button">collapse</a> -->
     <div id="meeting-box">
       {{#each meetings}}
+      {{#unless complete}}
       <div class="todo-card meeting" id="meeting{{_id}}">
         <p class="task-name">{{name}}</p>
         <a class="detail-button">details &raquo;</a>
@@ -97,6 +98,7 @@
           <a class="link-button" id="/edit/meeting/{{project_id}}/{{_id}}">edit</a>
         </div>
       </div>
+      {{/unless}}
       {{else}}
         <div class="empty_info">
           <h5>No meetings yet...try creating one!</h5>
@@ -131,6 +133,23 @@
           <a class="link-button" id="/edit/task/{{project_id}}/{{_id}}">edit</a>
         </div>
       </div>
+      {{/each}}
+
+      {{#each meetings}}
+      {{#if complete}}
+      <div class="todo-card completed" id="meeting{{_id}}">
+        <p class="task-name">{{name}}</p>
+        <a class="detail-button">details &raquo;</a>
+        <p class="duedate">{{datetime}}</p>
+        <div id="detailmeeting{{_id}}" class="notes-field" style="display:none;">
+          <span class="notes-title">notes</span>
+          <p class="notes-text">{{notes}}</p>
+          <span class="notes-title">attendees</span>
+          <p class="notes-text">{{members}}</p>
+          <a class="link-button" id="/edit/meeting/{{project_id}}/{{_id}}">edit</a>
+        </div>
+      </div>
+      {{/if}}
       {{/each}}
     </div>
 

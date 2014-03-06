@@ -9,12 +9,12 @@
     <p class="duration">time to complete: {{duration}} hours</p>
     <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
       <a class="link-button" id="/projects/{{project_id}}/{{parent_id}}">View full task &raquo;</a>
+      <span class="notes-title">project</span>
+      <p class="notes-text">{{project_name}}</p>
       <span class="notes-title">part of task</span>
       <p class="notes-text">{{parent_name}}
         <!--<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a>-->
       </p>
-      <span class="notes-title">project</span>
-      <p class="notes-text">{{project_name}}</p>
       {{#if notes}}
       <span class="notes-title">notes</span>
       <p class="notes-text">{{notes}}</p>
@@ -39,6 +39,7 @@
 <!-- <a id="meeting-box-button" class="collapse-button">collapse</a> -->
 <div id="meeting-box">
   {{#each meetings}}
+  {{#unless complete}}
   <div class="todo-card meeting" id="meeting{{_id}}">
     <p class="meeting-name">{{name}}</p>
     <span class="duedate">{{datetime}}</span>
@@ -55,6 +56,7 @@
       {{/if}}
     </div>
   </div>
+  {{/unless}}
   {{else}}
     <div class="empty_info">
       <h5>No upcoming meetings! Check out your Projects Page to see if there's anything you should schedule</h5>
@@ -79,12 +81,12 @@
     <p class="duration">time to complete: {{duration}} hours</p>
     <div id="detailtask{{_id}}" class="notes-field" style="display:none;">
       <a class="link-button" id="/projects/{{project_id}}/{{parent_id}}">View full task &raquo;</a>
+      <span class="notes-title">project</span>
+      <p class="notes-text">{{project_name}}></p>
       <span class="notes-title">part of task</span>
       <p class="notes-text">{{parent_name}}
         <!--<a class="task-button" id="{{project_id}}/tasks/{{parent}}">View task &raquo;</a>-->
       </p>
-      <span class="notes-title">project</span>
-      <p class="notes-text">{{project_name}}></p>
       {{#if notes}}
       <span class="notes-title">notes</span>
       <p class="notes-text">{{notes}}</p>
@@ -93,8 +95,8 @@
   </div>
   {{/each}}
   {{#each meetings}}
-  {{#unless datetime}}
-  <div class="todo-card meeting" id="meeting{{_id}}">
+  {{#if complete}}
+  <div class="todo-card completed" id="meeting{{_id}}">
     <p class="meeting-name">{{name}}</p>
     <span class="duedate">{{datetime}}</span>
     <a class="detail-button">details &raquo;</a>
@@ -110,6 +112,6 @@
       {{/if}}
     </div>
   </div>
-  {{/unless}}
+  {{/if}}
   {{/each}}
 </div>

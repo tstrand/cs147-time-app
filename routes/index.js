@@ -35,6 +35,18 @@ exports.viewAgenda = function(req, res) { 
       for (var i=0; i<meetings.length; i++) {
         for (var j=0; j<meetings[i]["members"].length; j++) {
           if (req.session.username == meetings[i]["members"][j]) {
+            var curr = new Date();
+            var date = new Date(meetings[i]["datetime"]);
+            if(curr.getTime() > date.getTime()) {
+              console.log("complete");
+              console.log(date.getTime());
+              meetings[i]["complete"] = true;
+            } else {
+              console.log("incomplete");
+              console.log(date.getTime());
+              console.log(curr.getTime());
+              meetings[i]["complete"] = false;
+            }
             object["meetings"].push(meetings[i]);
             break;
           }
