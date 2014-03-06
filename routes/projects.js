@@ -60,9 +60,25 @@ exports.viewProject = function(req, res) {
 	}
 
 	function gotMeeting(err, meetings) {
-		object["meetings"] = formatDateString(meetings,"meetings");
+		meetings = formatDateString(meetings,"meetings");
+		object["meetings"] = [];
 		hasMeeting = true;
 		console.log("got meeting");
+		for (var i=0; i<meetings.length; i++) {
+        	var curr = new Date();
+            var date = new Date(meetings[i]["datetime"]);
+            if(curr.getTime() > date.getTime()) {
+            	console.log("complete");
+            	console.log(date.getTime());
+            	meetings[i]["complete"] = true;
+            } else {
+            	console.log("incomplete");
+            	console.log(date.getTime());
+            	console.log(curr.getTime());
+            	meetings[i]["complete"] = false;
+            }
+            object["meetings"].push(meetings[i]);
+        }
 		models.Tasks.find({"project_id":projectId}).sort("dueDate").exec(gotTasks);
 	}
 
