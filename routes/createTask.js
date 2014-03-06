@@ -166,7 +166,7 @@ exports.createTask = function(req, res) {
           for (var j in assignees[i].split(",")) {
             members.push(assignees[i].split(",")[j].trim());
           }
-          var duration = 0;
+          var duration = 1;
           if (parseInt(durations[i])) duration = parseInt(durations[i]);
           var newSubTask = {
             "project_id": req.body.projectId,
