@@ -82,7 +82,7 @@
       {{else}}
         <div class="empty_info">
           <h5>No tasks yet...try creating one!</h5>
-          <button type="button" class="btn btn-lg btn-primary" id="/create/{{id}}">Create Task</button>
+          <button type="button" class="btn btn-lg btn-primary" id="/create/{{id}}/task">Create Task</button>
         </div>
       {{/each}}
     </div>
@@ -109,7 +109,7 @@
       {{else}}
         <div class="empty_info">
           <h5>No meetings yet...try creating one!</h5>
-          <button type="button" class="btn btn-lg btn-primary" id="/create/{{id}}">Create Meeting</button>
+          <button type="button" class="btn btn-lg btn-primary" id="/create/{{id}}/meeting">Create Meeting</button>
         </div>
       {{/each}}
     </div>
@@ -146,7 +146,7 @@
       </div>
       {{/each}}
 
-      {{#each meetings}}
+      {{#each completed_meetings}}
       {{#if complete}}
       <div class="todo-card completed" id="meeting{{_id}}">
         <p class="task-name">{{name}}</p>

@@ -62,6 +62,7 @@ exports.viewProject = function(req, res) {
 	function gotMeeting(err, meetings) {
 		meetings = formatDateString(meetings,"meetings");
 		object["meetings"] = [];
+		object["completed_meetings"] = []
 		hasMeeting = true;
 		console.log("got meeting");
 		for (var i=0; i<meetings.length; i++) {
@@ -71,13 +72,15 @@ exports.viewProject = function(req, res) {
             	console.log("complete");
             	console.log(date.getTime());
             	meetings[i]["complete"] = true;
+            	object["meetings"].push(meetings[i]);
             } else {
             	console.log("incomplete");
             	console.log(date.getTime());
             	console.log(curr.getTime());
             	meetings[i]["complete"] = false;
+            	object["completed_meetings"].push(meetings[i]);
             }
-            object["meetings"].push(meetings[i]);
+            
         }
 		models.Tasks.find({"project_id":projectId}).sort("dueDate").exec(gotTasks);
 	}
