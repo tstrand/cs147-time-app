@@ -72,13 +72,13 @@ exports.viewProject = function(req, res) {
             	console.log("complete");
             	console.log(date.getTime());
             	meetings[i]["complete"] = true;
-            	object["meetings"].push(meetings[i]);
+            	object["completed_meetings"].push(meetings[i]);
             } else {
             	console.log("incomplete");
             	console.log(date.getTime());
             	console.log(curr.getTime());
             	meetings[i]["complete"] = false;
-            	object["completed_meetings"].push(meetings[i]);
+            	object["meetings"].push(meetings[i]);
             }
             
         }
