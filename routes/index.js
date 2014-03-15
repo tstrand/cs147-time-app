@@ -14,7 +14,6 @@ function formatDateString(list, type) {
                    list[i]["datetime"].toTimeString().split(" ")[0];
     }
   }
-  console.log(newList);
   return newList;
 }
 
@@ -38,13 +37,8 @@ exports.viewAgenda = function(req, res) { 
             var curr = new Date();
             var date = new Date(meetings[i]["datetime"]);
             if(curr.getTime() > date.getTime()) {
-              console.log("complete");
-              console.log(date.getTime());
               meetings[i]["complete"] = true;
             } else {
-              console.log("incomplete");
-              console.log(date.getTime());
-              console.log(curr.getTime());
               meetings[i]["complete"] = false;
             }
             object["meetings"].push(meetings[i]);
@@ -68,7 +62,6 @@ exports.viewAgenda = function(req, res) { 
             } else {
               object["tasks"].push(tasks[i]);
             }
-            console.log(tasks[i]);
           }
         }
       }
@@ -76,7 +69,7 @@ exports.viewAgenda = function(req, res) { 
       for (var i=0; i<object["tasks"].length; i++) {
         // getting parent task
         for (var j=0; j<tasks.length; j++) {
-          if (tasks[j]["id"] == object["tasks"][i]["parent_id"]) {
+          if (tasks[j]["_id"] == object["tasks"][i]["parent_id"]) {
             object["tasks"][i]["parent_name"] = tasks[j]["name"];
             console.log(object["tasks"][i]);
             break;
@@ -87,7 +80,7 @@ exports.viewAgenda = function(req, res) { 
       for (var i=0; i<object["completed_tasks"].length; i++) {
         // getting parent task
         for (var j=0; j<tasks.length; j++) {
-          if (tasks[j]["id"] == object["completed_tasks"][i]["parent_id"]) {
+          if (tasks[j]["_id"] == object["completed_tasks"][i]["parent_id"]) {
             object["completed_tasks"][i]["parent_name"] = tasks[j]["name"];
             break;
           }
@@ -101,7 +94,7 @@ exports.viewAgenda = function(req, res) { 
       for (var i=0; i<object["tasks"].length; i++) {
         //getting project name
         for (var j=0; j<projects.length; j++) {
-          if (projects[j]["id"] == object["tasks"][i]["project_id"]) {
+          if (projects[j]["_id"] == object["tasks"][i]["project_id"]) {
             object["tasks"][i]["project_name"] = projects[j]["name"];
 
             break;
@@ -112,7 +105,7 @@ exports.viewAgenda = function(req, res) { 
       for (var i=0; i<object["completed_tasks"].length; i++) {
         //getting project name
         for (var j=0; j<projects.length; j++) {
-          if (projects[j]["id"] == object["completed_tasks"][i]["project_id"]) {
+          if (projects[j]["_id"] == object["completed_tasks"][i]["project_id"]) {
             object["completed_tasks"][i]["project_name"] = projects[j]["name"];
             break;
           }
@@ -122,7 +115,7 @@ exports.viewAgenda = function(req, res) { 
       for (var i=0; i<object["meetings"].length; i++) {
         //getting project name
         for (var j=0; j<projects.length; j++) {
-          if (projects[j]["id"] == object["meetings"][i]["project_id"]) {
+          if (projects[j]["_id"] == object["meetings"][i]["project_id"]) {
             object["meetings"][i]["project_name"] = projects[j]["name"];
             break;
           }
