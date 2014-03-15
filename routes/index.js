@@ -76,8 +76,9 @@ exports.viewAgenda = function(req, res) { 
       for (var i=0; i<object["tasks"].length; i++) {
         // getting parent task
         for (var j=0; j<tasks.length; j++) {
-          if (tasks[j]["id"] == object["tasks"][i]["parent"]) {
+          if (tasks[j]["id"] == object["tasks"][i]["parent_id"]) {
             object["tasks"][i]["parent_name"] = tasks[j]["name"];
+            console.log(object["tasks"][i]);
             break;
           }
         }
@@ -86,7 +87,7 @@ exports.viewAgenda = function(req, res) { 
       for (var i=0; i<object["completed_tasks"].length; i++) {
         // getting parent task
         for (var j=0; j<tasks.length; j++) {
-          if (tasks[j]["id"] == object["completed_tasks"][i]["parent"]) {
+          if (tasks[j]["id"] == object["completed_tasks"][i]["parent_id"]) {
             object["completed_tasks"][i]["parent_name"] = tasks[j]["name"];
             break;
           }
@@ -102,6 +103,7 @@ exports.viewAgenda = function(req, res) { 
         for (var j=0; j<projects.length; j++) {
           if (projects[j]["id"] == object["tasks"][i]["project_id"]) {
             object["tasks"][i]["project_name"] = projects[j]["name"];
+
             break;
           }
         }
